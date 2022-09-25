@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_register_image"
+        android:layout_width="141dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="204dp"
+        android:src="@drawable/image_register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_register_email"
+        style="@style/Theme.ToGather.EditText"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="@id/iv_register_image"
+        app:layout_constraintTop_toBottomOf="@id/iv_register_image" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ToGather</string>
+
+    <string name="login_email">이메일</string>
+    <string name="login_password">비밀번호</string>
+    <string name="login_login">로그인</string>
+    <string name="login_register">회원가입</string>
+    <string name="login_change_pw">비밀번호 변경</string>
+
+    <string name="menu_home">홈</string>
+    <string name="menu_chat">채팅</string>
+    <string name="menu_post">글쓰기</string>
+    <string name="menu_search">검색</string>
+    <string name="menu_mypage">나</string>
+    <string name="tag_flutter">Flutter</string>
+    <string name="tag_kotlin">Kotlin</string>
+    <string name="tag_java">Java</string>
+    <string name="tag_node_js">Node.Js</string>
+    <string name="tag_spring_boot">Spring\nBoot</string>
+    <string name="tag_react">React</string>
+    <string name="tag_swift">Swift</string>
+</resources>

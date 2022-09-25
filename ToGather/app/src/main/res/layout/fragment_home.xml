@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.HomeFragment">
+
+        <HorizontalScrollView
+            android:layout_width="418dp"
+            android:layout_height="118dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag1"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icon_flutter" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@string/tag_flutter"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag1"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag1"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag1" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag2"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag1">
+
+                    <ImageView
+                        android:id="@+id/iv_home_tag2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_kotlin" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@string/tag_kotlin"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag2"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag2"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag2" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag3"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag2">
+
+                    <ImageView
+                        android:id="@+id/iv_home_tag3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_java" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@string/tag_java"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag3"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag3"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag3" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag4"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag3">
+
+                    <ImageView
+                        android:id="@+id/iv_home_tag4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_node" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@string/tag_node_js"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag4"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag4"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag4" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag5"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag4">
+
+                    <ImageView
+                        android:id="@+id/iv_home_tag5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_spring" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@string/tag_spring_boot"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag5"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag5"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag5" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag6"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag5">
+
+                    <ImageView
+                        android:id="@+id/iv_home_tag6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_react" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@string/tag_react"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag6"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag6"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag6" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag7"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag6">
+
+                    <ImageView
+                        android:id="@+id/iv_home_tag7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_swift" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@string/tag_swift"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag7"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag7"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag7" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
