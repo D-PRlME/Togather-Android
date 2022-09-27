@@ -4,15 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="tagImage"
+            name="tagInfo"
             type="com.tmdhoon.togather.viewmodel.MainViewModel" />
-    </data>
-    
-    <data>
-        <variable
-            name="position"
-            type="" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +31,7 @@
                     android:id="@+id/cv_home_tag1"
                     style="@style/Theme.ToGather.CardView_Tag"
                     app:cardCornerRadius="12dp"
+                    android:layout_marginStart="32dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
@@ -48,15 +44,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:src="@{tagImage.tagResponse.body().tags.get(0).image_url" />
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(0).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_home_tag1"
                     style="@style/Theme.ToGather.TextView_Tag"
-                    android:text="@string/tag_flutter"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(0).name}"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_tag1"
                     app:layout_constraintStart_toStartOf="@id/cv_home_tag1"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_tag1" />
@@ -68,17 +69,29 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cv_home_tag1">
 
-                    <ImageView
-                        android:id="@+id/iv_home_tag2"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_kotlin" />
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(1).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_home_tag2"
                     style="@style/Theme.ToGather.TextView_Tag"
-                    android:text="@string/tag_kotlin"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(1).name}"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_tag2"
                     app:layout_constraintStart_toStartOf="@id/cv_home_tag2"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_tag2" />
@@ -90,17 +103,29 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cv_home_tag2">
 
-                    <ImageView
-                        android:id="@+id/iv_home_tag3"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_java" />
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(2).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_home_tag3"
                     style="@style/Theme.ToGather.TextView_Tag"
-                    android:text="@string/tag_java"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(2).name}"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_tag3"
                     app:layout_constraintStart_toStartOf="@id/cv_home_tag3"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_tag3" />
@@ -112,17 +137,29 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cv_home_tag3">
 
-                    <ImageView
-                        android:id="@+id/iv_home_tag4"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_node" />
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(3).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_home_tag4"
                     style="@style/Theme.ToGather.TextView_Tag"
-                    android:text="@string/tag_node_js"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(3).name}"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_tag4"
                     app:layout_constraintStart_toStartOf="@id/cv_home_tag4"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_tag4" />
@@ -134,18 +171,29 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cv_home_tag4">
 
-                    <ImageView
-                        android:id="@+id/iv_home_tag5"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_spring" />
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(4).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_home_tag5"
                     style="@style/Theme.ToGather.TextView_Tag"
-                    android:text="@string/tag_spring_boot"
-                    android:gravity="center"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(4).name}"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_tag5"
                     app:layout_constraintStart_toStartOf="@id/cv_home_tag5"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_tag5" />
@@ -157,17 +205,29 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cv_home_tag5">
 
-                    <ImageView
-                        android:id="@+id/iv_home_tag6"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_react" />
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(5).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_home_tag6"
                     style="@style/Theme.ToGather.TextView_Tag"
-                    android:text="@string/tag_react"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(5).name}"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_tag6"
                     app:layout_constraintStart_toStartOf="@id/cv_home_tag6"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_tag6" />
@@ -176,25 +236,139 @@
                     android:id="@+id/cv_home_tag7"
                     style="@style/Theme.ToGather.CardView_Tag"
                     app:cardCornerRadius="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cv_home_tag6">
 
-                    <ImageView
-                        android:id="@+id/iv_home_tag7"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_swift" />
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(6).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_home_tag7"
                     style="@style/Theme.ToGather.TextView_Tag"
-                    android:text="@string/tag_swift"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(6).name}"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_tag7"
                     app:layout_constraintStart_toStartOf="@id/cv_home_tag7"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_tag7" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag8"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag7">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(7).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_home_tag8"
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(7).name}"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag8"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag8"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag8" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag9"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag8">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(8).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_home_tag9"
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(8).name}"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag9"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag9"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag9" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_home_tag10"
+                    style="@style/Theme.ToGather.CardView_Tag"
+                    app:cardCornerRadius="12dp"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag9"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_home_tag10"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(9).image_url}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_home_tag10"
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:text="@{tagInfo.tagResponse.body().tags.get(9).name}"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_tag10"
+                    app:layout_constraintStart_toStartOf="@id/cv_home_tag10"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_tag10" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
