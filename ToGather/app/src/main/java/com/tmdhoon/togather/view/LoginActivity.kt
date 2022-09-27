@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ActivityLoginBinding
-import com.tmdhoon.togather.repository.Repository
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.util.IntentUtil
 import com.tmdhoon.togather.util.ToastUtil
@@ -27,10 +26,16 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.loginResponse.observe(this, Observer {
             if (it.isSuccessful) {
-                ToastUtil.print(applicationContext, "로그인에 성공하였습니다!")
+                ToastUtil.print(this, "로그인에 성공하였습니다!")
                 ACCESS_TOKEN = it.body()!!.access_token
                 IntentUtil.startIntent(this, MainActivity::class.java)
                 finish()
+            }else if(it.code() == 400){
+                ToastUtil.print(this, "아이디, 비밀번호를 확인해주세요!")
+            }else if(it.code() == 403){
+                ToastUtil.print(this, "비밀번호가 다릅니다!")
+            }else if(it.code() == 404){
+                ToastUtil.print(this, "존재하지 않는 회원입니다!")
             }
         })
 
