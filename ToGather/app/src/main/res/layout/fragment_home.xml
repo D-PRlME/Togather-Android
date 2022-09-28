@@ -16,6 +16,7 @@
         tools:context=".view.fragment.HomeFragment">
 
         <HorizontalScrollView
+            android:id="@+id/hv_home_scrollView"
             android:layout_width="418dp"
             android:layout_height="118dp"
             android:layout_marginTop="16dp"
@@ -24,14 +25,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_home_tag1"
                     style="@style/Theme.ToGather.CardView_Tag"
-                    app:cardCornerRadius="12dp"
                     android:layout_marginStart="32dp"
+                    app:cardCornerRadius="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
@@ -41,10 +42,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag1"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(0).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(0).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -75,10 +76,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag2"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(1).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(1).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -109,10 +110,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag3"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(2).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(2).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -143,10 +144,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag4"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(3).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(3).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -177,10 +178,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag5"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(4).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(4).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -211,10 +212,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag6"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(5).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(5).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -245,10 +246,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag7"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(6).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(6).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -279,10 +280,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag8"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(7).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(7).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -313,10 +314,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag9"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(8).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(8).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -337,11 +338,11 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_home_tag10"
                     style="@style/Theme.ToGather.CardView_Tag"
-                    app:cardCornerRadius="12dp"
                     android:layout_marginEnd="32dp"
+                    app:cardCornerRadius="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/cv_home_tag9"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cv_home_tag9">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -349,10 +350,10 @@
 
                         <ImageView
                             android:id="@+id/iv_home_tag10"
+                            loadImage="@{tagInfo.tagResponse.body().tags.get(9).image_url}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            loadImage="@{tagInfo.tagResponse.body().tags.get(9).image_url}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -373,6 +374,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hv_home_scrollView"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
