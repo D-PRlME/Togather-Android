@@ -39,4 +39,29 @@
         <item name="android:layout_marginTop">4dp</item>
     </style>
 
+    <style name="Theme.ToGather.TextView_Title">
+        <item name="android:layout_width">334dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.ToGather.CardView_Tag_Post">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:backgroundTint">@color/tag_background_gray</item>
+    </style>
+
+    <style name="Theme.ToGather.TextView_Tag_Post">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingHorizontal">12dp</item>
+    </style>
+
 </resources>
