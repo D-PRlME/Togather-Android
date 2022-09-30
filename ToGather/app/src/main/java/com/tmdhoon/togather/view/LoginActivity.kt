@@ -24,6 +24,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initLoginObserve()
+
+        initLoginButton()
+    }
+
+    private fun initLoginObserve() {
         loginViewModel.loginResponse.observe(this, Observer {
             if (it.isSuccessful) {
                 ToastUtil.print(this, "로그인에 성공하였습니다!")
@@ -38,8 +44,9 @@ class LoginActivity : AppCompatActivity() {
                 ToastUtil.print(this, "존재하지 않는 회원입니다!")
             }
         })
+    }
 
-
+    private fun initLoginButton() {
         binding.btLoginLogin.setOnClickListener {
             val email = binding.etLoginEmail.text.toString()
             val pw = binding.etLoginPw.text.toString()

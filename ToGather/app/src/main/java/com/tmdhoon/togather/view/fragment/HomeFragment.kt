@@ -1,8 +1,6 @@
 package com.tmdhoon.togather.view.fragment
 
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentHomeBinding
 import com.tmdhoon.togather.model.data.PostList
-import com.tmdhoon.togather.model.data.Test
-import com.tmdhoon.togather.model.response.MainResponse
-import com.tmdhoon.togather.network.ApiProvider
-import com.tmdhoon.togather.remote.MainAdapter
-import com.tmdhoon.togather.util.ACCESS_TOKEN
+import com.tmdhoon.togather.remoteimport.MainAdapter
 import com.tmdhoon.togather.viewmodel.MainViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -33,12 +24,16 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
 
-    private val arrayList : ArrayList<MainResponse> by lazy {
+    private val arrayList : ArrayList<PostList> by lazy {
         ArrayList()
     }
 
     private val mainViewModel : MainViewModel by lazy {
         MainViewModel()
+    }
+
+    private val mainAdapter : MainAdapter by lazy {
+        MainAdapter(arrayList)
     }
 
     override fun onCreateView(
@@ -48,17 +43,26 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
+        initRecyclerView()
+
         mainViewModel.tag()
         mainViewModel.get()
+
+        mainViewModel.mainResponse.observe(viewLifecycleOwner, Observer {
+            when(it.code()){
+                200 -> arrayList.addAll(listOf(it.body()!!))
+            }
+        })
 
         binding.tagInfo = mainViewModel
 
         binding.lifecycleOwner = this
 
-        binding.rvHomeRecyclerView.layoutManager = LinearLayoutManager(view?.context)
-
-        binding.rvHomeRecyclerView.adapter = MainAdapter(arrayList)
-
         return binding.root
+    }
+
+    private fun initRecyclerView() {
+        binding.rvHomeRecyclerView.layoutManager = LinearLayoutManager(view?.context)
+        binding.rvHomeRecyclerView.adapter = mainAdapter
     }
 }

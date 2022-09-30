@@ -27,6 +27,5 @@ interface ServerApi {
     @GET("posts")
     fun get(
         @Header("Authorization") accessToken: String
-    ) : Call<MainResponse>
-
+    ) : Call<PostList>
 }
