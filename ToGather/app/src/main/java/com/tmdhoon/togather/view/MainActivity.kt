@@ -2,13 +2,14 @@ package com.tmdhoon.togather.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ActivityMainBinding
-import com.tmdhoon.togather.view.fragment.ChatFragment
-import com.tmdhoon.togather.view.fragment.HomeFragment
-import com.tmdhoon.togather.view.fragment.MyPageFragment
-import com.tmdhoon.togather.view.fragment.SearchFragment
+import com.tmdhoon.togather.view.fragment.*
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initBottomNavigation()
+        initBottomNavigationPost()
+
+    }
+
+    private fun initBottomNavigationPost() {
+        binding.bnMainBottomNavigationPost.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.menu_post -> {
+                    val bottomSheetFragment = PostFragment()
+                    BottomSheetBehavior.STATE_EXPANDED
+                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                }
+            }
+            true
+        }
+    }
+
+    private fun initBottomNavigation() {
         binding.bnMainBottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {

@@ -10,8 +10,7 @@
         android:icon="@drawable/icon_chat_fragment"/>
     <item
         android:id="@+id/menu_post"
-        android:title="@string/menu_post"
-        android:icon="@drawable/icon_post_fragment"/>
+        android:title=""/>
     <item
         android:id="@+id/menu_search"
         android:title="@string/menu_search"

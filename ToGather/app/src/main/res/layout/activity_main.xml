@@ -30,5 +30,18 @@
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintEnd_toEndOf="parent"/>
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bn_main_bottomNavigation_post"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:menu="@menu/bottom_post"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="@color/all_background_focusOut"
+            android:background="@color/all_background_gray"
+            app:itemTextColor="@color/all_background_focusOut"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
