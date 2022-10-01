@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+       <variable
+           name="tagInfo"
+           type="com.tmdhoon.togather.model.response.data.Tags" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_list_tag_tag"
+            style="@style/Theme.ToGather.CardView_Tag"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_list_tag_tag"
+                android:layout_width="match_parent"
+                loadImage="@{tagInfo.image_url}"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_list_tag_title"
+            style="@style/Theme.ToGather.TextView_Title"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/medium"
+            android:textSize="20sp"
+            android:text="@{tagInfo.name}"
+            app:layout_constraintBottom_toBottomOf="@id/cv_list_tag_tag"
+            app:layout_constraintStart_toEndOf="@id/cv_list_tag_tag"
+            app:layout_constraintTop_toTopOf="@id/cv_list_tag_tag" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="30dp"
+            android:background="@color/all_stroke"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_list_tag_tag" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

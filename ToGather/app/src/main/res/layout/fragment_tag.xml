@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="844dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="844dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/img_tag_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="32dp"
+            android:src="@drawable/image_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_tag_all_tag"
+            style="@style/Theme.ToGather.TextView_Title"
+            android:text="@string/tag_all_tag"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_tag_close"/>
+
+        <EditText
+            android:id="@+id/et_tag_search"
+            style="@style/Theme.ToGather.EditText"
+            android:layout_marginTop="12dp"
+            android:hint="@string/tag_search"
+            app:layout_constraintStart_toStartOf="@id/tv_tag_all_tag"
+            app:layout_constraintTop_toBottomOf="@id/tv_tag_all_tag"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/icon_search_fragment"
+            app:layout_constraintTop_toTopOf="@id/et_tag_search"
+            app:layout_constraintBottom_toBottomOf="@id/et_tag_search"
+            app:layout_constraintEnd_toEndOf="@id/et_tag_search"/>
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tag_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
+            tools:listitem="@layout/item_tag_list"
+            app:layout_constraintStart_toStartOf="@id/et_tag_search"
+            app:layout_constraintEnd_toEndOf="@id/et_tag_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_tag_search"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
