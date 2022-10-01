@@ -4,9 +4,10 @@
     <style name="Theme.ToGather.EditText" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">358dp</item>
         <item name="android:layout_height">48dp</item>
-        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingLeft">12dp</item>
         <item name="android:fontFamily">@font/medium</item>
         <item name="android:background">@drawable/edittext_courner</item>
+        <item name="android:singleLine">true</item>
     </style>
 
     <style name="Theme.ToGather.Button_White">
@@ -15,12 +16,31 @@
         <item name="android:background">@drawable/button_white</item>
     </style>
 
+    <style name="Theme.ToGather.Button_White_Short">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_white_short</item>
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">12dp</item>
+
+    </style>
+
     <style name="Theme.ToGather.Button_Yellow">
         <item name="android:layout_width">358dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:background">@drawable/button_yellow</item>
         <item name="android:fontFamily">@font/bold</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Theme.ToGather.Button_Yellow_Short">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_yellow_short</item>
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">12dp</item>
     </style>
 
     <style name="Theme.ToGather.CardView_Tag">

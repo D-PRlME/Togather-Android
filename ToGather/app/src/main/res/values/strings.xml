@@ -12,6 +12,7 @@
     <string name="menu_post">글쓰기</string>
     <string name="menu_search">검색</string>
     <string name="menu_mypage">나</string>
+
     <string name="tag_flutter">Flutter</string>
     <string name="tag_kotlin">Kotlin</string>
     <string name="tag_java">Java</string>
@@ -19,4 +20,11 @@
     <string name="tag_spring_boot">Spring\nBoot</string>
     <string name="tag_react">React</string>
     <string name="tag_swift">Swift</string>
+
+    <string name="post_title">제목</string>
+    <string name="post_link">연락받을 링크</string>
+    <string name="post_main">본문을 입력하세요</string>
+    <string name="post_tag">모든 태그 보기</string>
+    <string name="tag_all_tag">모든 태그 보기</string>
+    <string name="tag_search">검색</string>
 </resources>
