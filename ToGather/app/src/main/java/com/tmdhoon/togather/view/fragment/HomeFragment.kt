@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentHomeBinding
-import com.tmdhoon.togather.model.data.PostList
+import com.tmdhoon.togather.model.response.data.PostList
 import com.tmdhoon.togather.remoteimport.MainAdapter
 import com.tmdhoon.togather.viewmodel.MainViewModel
 
@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
 
-    private val arrayList : ArrayList<PostList> by lazy {
+    private val postList : ArrayList<PostList> by lazy {
         ArrayList()
     }
 
@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
     }
 
     private val mainAdapter : MainAdapter by lazy {
-        MainAdapter(arrayList)
+        MainAdapter(postList)
     }
 
     override fun onCreateView(
@@ -43,14 +43,15 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        initRecyclerView()
-
         mainViewModel.tag()
         mainViewModel.get()
 
         mainViewModel.mainResponse.observe(viewLifecycleOwner, Observer {
             when(it.code()){
-                200 -> arrayList.addAll(listOf(it.body()!!))
+                200 ->{
+                    postList.addAll(it.body()!!.post_list)
+                    initRecyclerView()
+                }
             }
         })
 
@@ -62,7 +63,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.rvHomeRecyclerView.layoutManager = LinearLayoutManager(view?.context)
         binding.rvHomeRecyclerView.adapter = mainAdapter
+        binding.rvHomeRecyclerView.layoutManager = LinearLayoutManager(view?.context)
     }
 }

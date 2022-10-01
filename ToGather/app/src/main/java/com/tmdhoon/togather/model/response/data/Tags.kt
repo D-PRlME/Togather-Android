@@ -1,4 +1,4 @@
-package com.tmdhoon.togather.model.data
+package com.tmdhoon.togather.model.response.data
 
 data class Tags(
     val name : String,
