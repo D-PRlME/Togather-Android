@@ -19,8 +19,6 @@ class MainRepository(private val mainViewModel: MainViewModel) {
                 response: Response<MainResponse>
             ) {
                 mainViewModel.mainResponse.value = response
-                Log.d("TEST", response.body()!!.post_list[0].tags[0].name)
-                Log.d("TEST", response.body()!!.post_list[0].tags[1].name)
             }
 
             override fun onFailure(call: Call<MainResponse>, t: Throwable) {
