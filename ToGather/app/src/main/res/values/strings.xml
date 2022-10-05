@@ -25,6 +25,12 @@
     <string name="post_link">연락받을 링크</string>
     <string name="post_main">본문을 입력하세요</string>
     <string name="post_tag">모든 태그 보기</string>
+
     <string name="tag_all_tag">모든 태그 보기</string>
     <string name="tag_search">검색</string>
+    <string name="mypage_edit_info">계정 정보 수정</string>
+    <string name="mypage_change_pw">비밀번호 변경</string>
+    <string name="mypage_check_my_post">내 게시글 보기</string>
+    <string name="mypage_developers">개발자들</string>
+    <string name="mypage_logout">로그아웃</string>
 </resources>

@@ -46,13 +46,11 @@
             app:layout_constraintTop_toTopOf="@id/cv_list_tag_tag" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/Theme.ToGather.ConstraintLayout_Line"
             android:id="@+id/constraintLayout"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="30dp"
-            android:background="@color/all_stroke"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_list_tag_tag" />
