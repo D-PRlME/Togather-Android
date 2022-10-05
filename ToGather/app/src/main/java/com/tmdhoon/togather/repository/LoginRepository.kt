@@ -21,7 +21,7 @@ class LoginRepository(private val loginViewModel: LoginViewModel) {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.d("TEST", "error $t")
+
             }
         })
     }
