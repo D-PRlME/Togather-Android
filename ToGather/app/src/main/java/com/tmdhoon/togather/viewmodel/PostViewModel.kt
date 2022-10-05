@@ -9,7 +9,8 @@ import retrofit2.Response
 class PostViewModel : ViewModel() {
 
     val postResponse : MutableLiveData<Response<Void>> = MutableLiveData()
-    val postRepository by lazy {
+
+    private val postRepository by lazy {
         PostRepository(this)
     }
 

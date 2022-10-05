@@ -11,7 +11,9 @@ class MainViewModel : ViewModel() {
     val tagResponse : MutableLiveData<Response<TagResponse>> = MutableLiveData()
     val mainResponse : MutableLiveData<Response<MainResponse>> = MutableLiveData()
 
-    val mainRepository = MainRepository(this)
+    private val mainRepository : MainRepository by lazy{
+        MainRepository(this)
+    }
 
     fun tag(){
         mainRepository.tag()

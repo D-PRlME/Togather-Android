@@ -8,7 +8,10 @@ import retrofit2.Response
 
 class LoginViewModel() : ViewModel() {
     val loginResponse: MutableLiveData<Response<LoginResponse>> = MutableLiveData()
-    val loginRepository : LoginRepository = LoginRepository(this)
+
+    private val loginRepository : LoginRepository by lazy{
+        LoginRepository(this)
+    }
 
     fun login(email: String, pw: String) {
         loginRepository.login(email, pw)
