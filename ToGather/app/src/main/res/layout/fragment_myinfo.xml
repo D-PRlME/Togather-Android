@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.fragment.HomeFragment">
+
+    <data>
+        <variable
+            name="user"
+            type="com.tmdhoon.togather.viewmodel.MyInfoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="228dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cimg_mypage_profile"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                loadImage="@{user.myInfoResponse.body().profile_image_url}"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_mypage_name"
+                style="@style/Theme.ToGather.TextView_Title"
+                android:layout_marginStart="8dp"
+                android:text="@{user.myInfoResponse.body().name}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/cimg_mypage_profile"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_mypage_email"
+                style="@style/Theme.ToGather.TextView_Focus_Out"
+                android:text="@{user.myInfoResponse.body().email}"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_mypage_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constrainLayout2"
+            style="@style/Theme.ToGather.ConstraintLayout_Line"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
+
+        <Button
+            android:id="@+id/bt_mypage_edit_info"
+            style="@style/Theme.ToGather.Button_MyPage"
+            android:text="@string/mypage_edit_info"
+            app:layout_constraintEnd_toEndOf="@id/constrainLayout2"
+            app:layout_constraintStart_toStartOf="@id/constrainLayout2"
+            app:layout_constraintTop_toBottomOf="@id/constrainLayout2" />
+
+        <Button
+            android:id="@+id/bt_mypage_change_pw"
+            style="@style/Theme.ToGather.Button_MyPage"
+            android:text="@string/mypage_change_pw"
+            app:layout_constraintEnd_toEndOf="@id/bt_mypage_edit_info"
+            app:layout_constraintStart_toStartOf="@id/bt_mypage_edit_info"
+            app:layout_constraintTop_toBottomOf="@id/bt_mypage_edit_info" />
+
+        <Button
+            android:id="@+id/bt_mypage_check_my_post"
+            style="@style/Theme.ToGather.Button_MyPage"
+            android:text="@string/mypage_check_my_post"
+            app:layout_constraintEnd_toEndOf="@id/bt_mypage_change_pw"
+            app:layout_constraintStart_toStartOf="@id/bt_mypage_change_pw"
+            app:layout_constraintTop_toBottomOf="@id/bt_mypage_change_pw" />
+
+        <Button
+            android:id="@+id/bt_mypage_developers"
+            style="@style/Theme.ToGather.Button_MyPage"
+            android:text="@string/mypage_developers"
+            app:layout_constraintEnd_toEndOf="@id/bt_mypage_check_my_post"
+            app:layout_constraintStart_toStartOf="@id/bt_mypage_check_my_post"
+            app:layout_constraintTop_toBottomOf="@id/bt_mypage_check_my_post" />
+
+        <Button
+            android:id="@+id/bt_mypage_logout"
+            style="@style/Theme.ToGather.Button_MyPage"
+            android:text="@string/mypage_logout"
+            app:layout_constraintEnd_toEndOf="@id/bt_mypage_developers"
+            app:layout_constraintStart_toStartOf="@id/bt_mypage_developers"
+            app:layout_constraintTop_toBottomOf="@id/bt_mypage_developers" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
