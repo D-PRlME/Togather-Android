@@ -4,6 +4,7 @@ import com.tmdhoon.togather.model.request.LoginRequest
 import com.tmdhoon.togather.model.request.PostRequest
 import com.tmdhoon.togather.model.response.LoginResponse
 import com.tmdhoon.togather.model.response.MainResponse
+import com.tmdhoon.togather.model.response.MyInfoResponse
 import com.tmdhoon.togather.model.response.TagResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -33,4 +34,9 @@ interface ServerApi {
         @Header("Authorization") accessToken: String,
         @Body postRequest: PostRequest
     ) : Call<Void>
+
+    @GET("users")
+    fun myInfo(
+        @Header("Authorization") accessToken: String
+    ) : Call<MyInfoResponse>
 }
