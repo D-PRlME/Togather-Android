@@ -41,11 +41,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        initDataBinding(inflater, container)
+        initRequest()
+        initObserve()
 
-        mainViewModel.tag()
-        mainViewModel.get()
+        return binding.root
+    }
 
+    private fun initObserve() {
         mainViewModel.mainResponse.observe(viewLifecycleOwner, Observer {
             when(it.code()){
                 200 ->{
@@ -54,12 +57,17 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+    }
 
+    private fun initRequest() {
+        mainViewModel.tag()
+        mainViewModel.get()
+    }
+
+    private fun initDataBinding(inflater : LayoutInflater, container: ViewGroup?) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.tagInfo = mainViewModel
-
         binding.lifecycleOwner = this
-
-        return binding.root
     }
 
     private fun initRecyclerView() {

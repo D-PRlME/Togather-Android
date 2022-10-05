@@ -26,8 +26,12 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        initDataBinding(inflater, container)
 
         return binding.root
+    }
+
+    private fun initDataBinding(inflater : LayoutInflater, container: ViewGroup?) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
     }
 }

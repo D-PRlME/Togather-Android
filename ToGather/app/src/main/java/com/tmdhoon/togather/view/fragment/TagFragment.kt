@@ -31,23 +31,36 @@ class TagFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tag, container, false)
+        initDataBinding(inflater, container)
+        initRequest()
+        initObserve()
 
-        binding.rvTagRecyclerView.adapter = TagAdapter(tagList)
+        return binding.root
+    }
 
-        mainViewModel.tag()
-
+    private fun initObserve() {
         mainViewModel.tagResponse.observe(this, Observer {
             when (it.code()) {
                 200 -> {
+                    initRecyclerView()
                     tagList.addAll(it.body()!!.tags)
-                    binding.rvTagRecyclerView.layoutManager = LinearLayoutManager(view?.context)
                 }
             }
         })
+    }
 
+    private fun initRequest() {
+        mainViewModel.tag()
+    }
 
-        return binding.root
+    private fun initRecyclerView() {
+        binding.rvTagRecyclerView.adapter = TagAdapter(tagList)
+        binding.rvTagRecyclerView.layoutManager = LinearLayoutManager(view?.context)
+
+    }
+
+    private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tag, container, false)
     }
 
 }
