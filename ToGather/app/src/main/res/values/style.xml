@@ -113,4 +113,16 @@
         <item name="android:background">@drawable/button_white</item>
     </style>
 
+    <style name="Theme.ToGather.TextInputLayout_Register">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Theme.ToGather.TextView_Notify">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

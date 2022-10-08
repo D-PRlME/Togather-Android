@@ -20,17 +20,24 @@
     <string name="tag_spring_boot">Spring\nBoot</string>
     <string name="tag_react">React</string>
     <string name="tag_swift">Swift</string>
+    <string name="tag_all_tag">모든 태그 보기</string>
+    <string name="tag_search">검색</string>
+
 
     <string name="post_title">제목</string>
     <string name="post_link">연락받을 링크</string>
     <string name="post_main">본문을 입력하세요</string>
     <string name="post_tag">모든 태그 보기</string>
 
-    <string name="tag_all_tag">모든 태그 보기</string>
-    <string name="tag_search">검색</string>
     <string name="mypage_edit_info">계정 정보 수정</string>
     <string name="mypage_change_pw">비밀번호 변경</string>
     <string name="mypage_check_my_post">내 게시글 보기</string>
     <string name="mypage_developers">개발자들</string>
     <string name="mypage_logout">로그아웃</string>
+
+    <string name="register_name">이름</string>
+    <string name="register_email">dsm.hs.kr 도메인을 사용하는 이메일을 사용하세요</string>
+    <string name="register_pw">8자리 이상, 숫자, 영어 소문자, 특수문자를 포함해야 합니다</string>
+    <string name="register_next">다음</string>
+    <string name="verify_email_code">인증번호</string>
 </resources>
