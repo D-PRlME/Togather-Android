@@ -5,6 +5,7 @@ import com.tmdhoon.togather.model.request.LoginRequest
 import com.tmdhoon.togather.model.response.LoginResponse
 import com.tmdhoon.togather.model.response.TagResponse
 import com.tmdhoon.togather.network.ApiProvider
+import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.LoginViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,6 +19,8 @@ class LoginRepository(private val loginViewModel: LoginViewModel) {
         ApiProvider.retrofit.login(loginRequest).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 loginViewModel.loginResponse.value = response
+                ACCESS_TOKEN = response.body()!!.access_token
+
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
