@@ -1,11 +1,10 @@
 package com.tmdhoon.togather.network
 
+import com.tmdhoon.togather.model.request.CodeRequest
+import com.tmdhoon.togather.model.request.EmailRequest
 import com.tmdhoon.togather.model.request.LoginRequest
 import com.tmdhoon.togather.model.request.PostRequest
-import com.tmdhoon.togather.model.response.LoginResponse
-import com.tmdhoon.togather.model.response.MainResponse
-import com.tmdhoon.togather.model.response.MyInfoResponse
-import com.tmdhoon.togather.model.response.TagResponse
+import com.tmdhoon.togather.model.response.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -39,4 +38,25 @@ interface ServerApi {
     fun myInfo(
         @Header("Authorization") accessToken: String
     ) : Call<MyInfoResponse>
+
+    @POST("users/mail/duplicate")
+    fun duplicate(
+        @Body emailRequest: EmailRequest
+    ) : Call<Void>
+
+    @POST("users/mail/signup")
+    fun verifyEmail(
+        @Body emailRequest: EmailRequest
+    ) : Call<Void>
+
+    @POST("users/mail/verify")
+    fun verifyCode(
+        @Body codeRequest: CodeRequest
+    ) : Call<Void>
+
+    @POST("users")
+    fun register(
+        @Body registerRequest: RegisterRequest
+    ) : Call<LoginResponse>
+
 }

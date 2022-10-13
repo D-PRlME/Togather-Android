@@ -2,11 +2,8 @@ package com.tmdhoon.togather.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ActivityMainBinding
 import com.tmdhoon.togather.view.fragment.*
@@ -30,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         SearchFragment.newInstance()
     }
 
-    private val mypageFragment: MyPageFragment by lazy {
-        MyPageFragment.newInstance()
+    private val myInfoFragment: MyInfoFragment by lazy {
+        MyInfoFragment.newInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menu_mypage -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, mypageFragment).commit()
+                        .replace(R.id.frameLayout, myInfoFragment).commit()
                 }
             }
             true
