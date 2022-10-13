@@ -1,24 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/iv_register_image"
-        android:layout_width="141dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="204dp"
-        android:src="@drawable/image_register"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_register_email"
-        style="@style/Theme.ToGather.EditText"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="@id/iv_register_image"
-        app:layout_constraintTop_toBottomOf="@id/iv_register_image" />
+        <ImageView
+            android:id="@+id/iv_register_image"
+            android:layout_width="141dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="204dp"
+            android:src="@drawable/image_register"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout_register_email"
+            style="@style/Theme.ToGather.TextInputLayout_Register"
+            android:layout_marginTop="48dp"
+            app:hintEnabled="false"
+            app:errorEnabled="true"
+            app:errorTextColor="#FF0000"
+            app:helperText="@string/register_email"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_register_image">
+
+            <EditText
+                android:id="@+id/et_register_email"
+                style="@style/Theme.ToGather.EditText"
+                android:hint="@string/login_email"
+                android:tooltipText="@string/login_email" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout_register_pw"
+            style="@style/Theme.ToGather.TextInputLayout_Register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:hintEnabled="false"
+            android:layout_marginTop="8dp"
+            app:helperText="@string/register_pw"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout_register_email">
+
+            <EditText
+                android:id="@+id/et_register_pw"
+                style="@style/Theme.ToGather.EditText"
+                android:hint="@string/login_password"
+                android:inputType="textPassword"
+                app:layout_constraintStart_toStartOf="@id/et_register_email"
+                app:layout_constraintTop_toBottomOf="@id/et_register_email" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.ToGather.TextInputLayout_Register"
+            android:layout_marginTop="8dp"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout_register_pw"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <EditText
+                android:id="@+id/et_register_name"
+                style="@style/Theme.ToGather.EditText"
+                android:layout_marginTop="36dp"
+                android:hint="@string/register_name"
+                android:tooltipText="@string/register_name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/bt_register_next"
+            style="@style/Theme.ToGather.Button_White"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="34dp"
+            android:text="@string/register_next"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
