@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.tmdhoon.togather.R
-import com.tmdhoon.togather.databinding.FragmentMypageBinding
+import com.tmdhoon.togather.databinding.FragmentMyinfoBinding
 import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 
 class MyInfoFragment : Fragment() {
@@ -18,7 +18,7 @@ class MyInfoFragment : Fragment() {
         }
     }
 
-    private lateinit var binding : FragmentMypageBinding
+    private lateinit var binding : FragmentMyinfoBinding
 
     private val myInfoViewModel : MyInfoViewModel by lazy {
         MyInfoViewModel()
