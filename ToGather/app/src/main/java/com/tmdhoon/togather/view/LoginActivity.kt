@@ -1,15 +1,14 @@
 package com.tmdhoon.togather.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ActivityLoginBinding
-import com.tmdhoon.togather.util.ACCESS_TOKEN
-import com.tmdhoon.togather.util.IntentUtil
-import com.tmdhoon.togather.util.ToastUtil
+import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -39,9 +38,12 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginResponse.observe(this, Observer {
             when (it.code()) {
                 200 -> {
+                    ACCESS_TOKEN = it.body()!!.access_token
                     ToastUtil.print(this, "로그인에 성공하였습니다!")
                     IntentUtil.startIntent(this, MainActivity::class.java)
                     finish()
+                    putPref(initPref(this, MODE_PRIVATE).edit(), "code", 200)
+                    Log.d("TEST", getPref(initPref(this, MODE_PRIVATE), "code", 0).toString())
                 }
                 400 -> ToastUtil.print(this, "아이디, 비밀번호를 확인해주세요!")
                 403 -> ToastUtil.print(this, "비밀번호가 다릅니다!")
@@ -60,4 +62,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
 }

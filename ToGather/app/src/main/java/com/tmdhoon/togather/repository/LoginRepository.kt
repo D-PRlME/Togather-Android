@@ -19,7 +19,6 @@ class LoginRepository(private val loginViewModel: LoginViewModel) {
         ApiProvider.retrofit.login(loginRequest).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 loginViewModel.loginResponse.value = response
-                ACCESS_TOKEN = response.body()!!.access_token
 
             }
 
