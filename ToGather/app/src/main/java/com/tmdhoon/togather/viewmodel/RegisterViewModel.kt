@@ -24,11 +24,11 @@ class RegisterViewModel : ViewModel() {
         registerRepository.verifyEmail(email)
     }
 
-    fun verifyCode(email : String, code : Int){
+    fun verifyCode(email : String, code : String){
         registerRepository.verifyCode(email, code)
     }
 
-    fun register(email : String, pw : String, name : String){
+    fun register(pw : String, name : String, email : String){
         registerRepository.register(email, pw, name)
     }
 

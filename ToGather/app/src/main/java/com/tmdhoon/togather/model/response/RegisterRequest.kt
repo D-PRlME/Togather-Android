@@ -1,7 +1,7 @@
 package com.tmdhoon.togather.model.response
 
 data class RegisterRequest(
-    val email: String,
-    val name: String,
-    val password: String
+    val password : String,
+    val name : String,
+    val email : String,
 )

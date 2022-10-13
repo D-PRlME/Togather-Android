@@ -42,28 +42,27 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
         })
     }
 
-    fun verifyCode(email : String, code : Int){
-        val codeRequest = CodeRequest(email, code.toString())
+    fun verifyCode(email : String, code : String){
+        val codeRequest = CodeRequest(email, code)
         ApiProvider.retrofit.verifyCode(codeRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 registerViewModel.verifyCodeResponse.value = response
-                Log.d("TEST", response.code().toString())
+                Log.d("TEST", code)
             }
 
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-
+                Log.d("TEST", "fail")
             }
 
         })
     }
 
-    fun register(email : String, pw : String, name : String){
+    fun register(pw : String, name : String, email : String){
         val registerRequest = RegisterRequest(email, pw, name)
         ApiProvider.retrofit.register(registerRequest).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 registerViewModel.registerResponse.value = response
-                ACCESS_TOKEN = response.body()!!.access_token
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
