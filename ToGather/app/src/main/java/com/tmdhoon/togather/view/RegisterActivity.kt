@@ -2,6 +2,9 @@ package com.tmdhoon.togather.view
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -35,6 +38,31 @@ class RegisterActivity : AppCompatActivity() {
         initRegisterButton()
         initObserveRegister()
         initObserveDuplicate()
+        initObserveChangeEdittext()
+    }
+
+    private fun initObserveChangeEdittext() {
+        binding.etRegisterEmail.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val email = binding.etRegisterEmail.text
+                val domain = email.split("@")
+                if(domain.size>=2){
+                    if(!domain[1].equals("dsm.hs.kr")){
+                        binding.etRegisterEmail.setBackgroundResource(R.drawable.edittext_error)
+                    }else{
+                        binding.etRegisterEmail.setBackgroundResource(R.drawable.edittext_courner)
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
     }
 
     private fun initRegisterButton() {
