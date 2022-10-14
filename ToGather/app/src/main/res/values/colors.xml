@@ -12,6 +12,7 @@
     <color name="all_background_gray">#F7F7F7</color>
     <color name="all_background_yellow">#E1AD01</color>
     <color name="all_background_focusOut">#787878</color>
+    <color name="all_error">#FE3D3D</color>
 
     <color name="tag_background_gray">#E7E7E7</color>
 
