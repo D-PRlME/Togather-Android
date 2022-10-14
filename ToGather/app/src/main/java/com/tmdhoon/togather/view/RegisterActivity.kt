@@ -38,15 +38,25 @@ class RegisterActivity : AppCompatActivity() {
         initRegisterButton()
         initObserveRegister()
         initObserveDuplicate()
-        initObserveChangeEdittext()
+        initObserveChangeEmailEdittext()
+        initObserveChangePwEdittext()
+        initObserveChangeNameEdittext()
     }
 
-    private fun initObserveChangeEdittext() {
+    private fun checkNull(){
+        val email = binding.etRegisterEmail.text
+        val pw = binding.etRegisterPw.text
+        val name = binding.etRegisterName.text
+        if(email.isNotEmpty() && pw.isNotEmpty() && name.isNotEmpty()){
+            binding.btRegisterNext.setBackgroundResource(R.drawable.button_yellow)
+        }else{
+            binding.btRegisterNext.setBackgroundResource(R.drawable.edittext_courner)
+        }
+    }
+
+    private fun initObserveChangeEmailEdittext() {
         binding.etRegisterEmail.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val email = binding.etRegisterEmail.text
                 val domain = email.split("@")
@@ -58,10 +68,42 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             }
-
             override fun afterTextChanged(s: Editable?) {
+                checkNull()
+            }
+        })
+    }
+
+    private fun initObserveChangePwEdittext(){
+        binding.etRegisterPw.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                checkNull()
+            }
+
+        })
+    }
+
+    private fun initObserveChangeNameEdittext() {
+        binding.etRegisterName.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                checkNull()
+            }
+
         })
     }
 
