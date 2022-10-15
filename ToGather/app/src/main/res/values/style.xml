@@ -105,12 +105,12 @@
         <item name="android:layout_width">358dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginTop">12dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">12dp</item>
         <item name="android:fontFamily">@font/medium</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:background">@drawable/button_white</item>
+        <item name="android:background">@drawable/button_myinfo</item>
     </style>
 
     <style name="Theme.ToGather.TextInputLayout_Register">
