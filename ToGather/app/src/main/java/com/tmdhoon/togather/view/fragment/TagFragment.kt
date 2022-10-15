@@ -1,5 +1,6 @@
 package com.tmdhoon.togather.view.fragment
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentTagBinding
@@ -36,6 +39,14 @@ class TagFragment : BottomSheetDialogFragment() {
         initObserve()
 
         return binding.root
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireContext(), theme).apply {
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        return dialog
     }
 
     private fun initObserve() {

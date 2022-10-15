@@ -1,11 +1,14 @@
 package com.tmdhoon.togather.view.fragment
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentPostBinding
@@ -37,6 +40,14 @@ class PostFragment : BottomSheetDialogFragment() {
         initPostObserve()
 
         return binding.root
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireContext(), theme).apply {
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        return dialog
     }
 
     private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
