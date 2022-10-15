@@ -2,6 +2,8 @@ package com.tmdhoon.togather.view
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -36,6 +38,28 @@ class VerifyEmailActivity : AppCompatActivity() {
         initNextButton()
         initObserveVerifyCode()
         initObserveRegister()
+        initVerifyCodeEdittext()
+    }
+
+    private fun initVerifyCodeEdittext() {
+        binding.etVerifyEmailCode.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val code = binding.etVerifyEmailCode.text
+                if(code.isNotBlank()){
+                    binding.btVerifyEmailNext.setBackgroundResource(R.drawable.button_yellow)
+                }else{
+                    binding.btVerifyEmailNext.setBackgroundResource(R.drawable.button_white)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
     }
 
     private fun initNextButton() {
