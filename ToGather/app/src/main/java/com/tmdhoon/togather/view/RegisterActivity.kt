@@ -76,13 +76,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun initObserveChangePwEdittext(){
         binding.etRegisterPw.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 checkNull()
             }
@@ -92,18 +87,11 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun initObserveChangeNameEdittext() {
         binding.etRegisterName.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 checkNull()
             }
-
         })
     }
 
@@ -159,7 +147,6 @@ class RegisterActivity : AppCompatActivity() {
                 400 -> ToastUtil.print(this, "항목을 확인해주세요!")
                 401 -> ToastUtil.print(this, "인증되지 않은 이메일 입니다")
                 409 -> ToastUtil.print(this, "중복된 아이디 입니다")
-
             }
         })
     }
