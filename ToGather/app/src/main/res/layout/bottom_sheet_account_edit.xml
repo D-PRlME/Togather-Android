@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="844dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="844dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_post_close"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/image_close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/cimg_account_edit_profile"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="72dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/bt_account_edit_update_img"
+                    style="@style/Theme.ToGather.Button_Yellow_Short"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/account_edit_change_img"
+                    app:layout_constraintBottom_toBottomOf="@id/cimg_account_edit_profile"
+                    app:layout_constraintStart_toEndOf="@id/cimg_account_edit_profile"
+                    app:layout_constraintTop_toTopOf="@id/cimg_account_edit_profile" />
+
+                <EditText
+                    android:id="@+id/et_account_edit_name"
+                    style="@style/Theme.ToGather.EditText"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bt_account_edit_update_img" />
+
+                <EditText
+                    android:id="@+id/et_account_edit_email"
+                    style="@style/Theme.ToGather.EditText"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_account_edit_name" />
+
+                <EditText
+                    android:id="@+id/et_account_edit_tag"
+                    style="@style/Theme.ToGather.EditText"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_account_edit_email" />
+
+                <EditText
+                    android:id="@+id/et_account_edit_description"
+                    style="@style/Theme.ToGather.EditText"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_account_edit_tag" />
+
+                <Button
+                    android:id="@+id/bt_post_post"
+                    style="@style/Theme.ToGather.Button_Yellow_Short"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/account_edit_save"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/bt_post_tag"
+                    style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/account_edit_delete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
