@@ -71,6 +71,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
+        postList.clear()
         binding.rvHomeRecyclerView.adapter = mainAdapter
         binding.rvHomeRecyclerView.layoutManager = LinearLayoutManager(view?.context)
     }
