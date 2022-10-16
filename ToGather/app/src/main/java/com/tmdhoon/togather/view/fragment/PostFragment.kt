@@ -51,7 +51,7 @@ class PostFragment : BottomSheetDialogFragment() {
     }
 
     private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet_post, container, false)
     }
 
     private fun initPostObserve() {

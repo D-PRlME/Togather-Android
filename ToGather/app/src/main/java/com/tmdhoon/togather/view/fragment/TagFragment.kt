@@ -71,7 +71,7 @@ class TagFragment : BottomSheetDialogFragment() {
     }
 
     private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tag, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet_tag, container, false)
     }
 
 }
