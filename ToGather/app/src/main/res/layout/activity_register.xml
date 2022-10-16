@@ -22,7 +22,7 @@
             android:layout_marginTop="48dp"
             app:hintEnabled="false"
             app:errorEnabled="true"
-            app:errorTextColor="#FF0000"
+            app:errorTextColor="@color/all_error"
             app:helperText="@string/register_email"
             app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"

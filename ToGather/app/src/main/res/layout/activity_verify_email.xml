@@ -26,16 +26,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_verify_email_email" />
 
-        l<EditText
+        <EditText
             android:id="@+id/et_verify_email_code"
             style="@style/Theme.ToGather.EditText"
             android:layout_marginTop="12dp"
             android:hint="@string/verify_email_code"
             android:inputType="number"
+            android:maxLength="6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_verify_email_notify"
-            tools:ignore="TextFields" />
+            app:layout_constraintTop_toBottomOf="@id/tv_verify_email_notify" />
 
         <ImageView
             android:layout_width="150dp"

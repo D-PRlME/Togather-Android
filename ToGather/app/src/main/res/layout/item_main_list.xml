@@ -26,10 +26,11 @@
         android:layout_height="170dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="362dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,7 @@
                     style="@style/Theme.ToGather.TextView_Title"
                     android:layout_marginTop="12dp"
                     android:text="@{main.title}"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="12dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

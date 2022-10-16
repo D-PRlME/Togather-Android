@@ -25,9 +25,9 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cimg_mypage_profile"
+                loadImage="@{user.myInfoResponse.body().profile_image_url}"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                loadImage="@{user.myInfoResponse.body().profile_image_url}"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -63,14 +63,15 @@
             android:id="@+id/bt_mypage_edit_info"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_edit_info"
-            app:layout_constraintEnd_toEndOf="@id/constrainLayout2"
-            app:layout_constraintStart_toStartOf="@id/constrainLayout2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/constrainLayout2" />
 
         <Button
             android:id="@+id/bt_mypage_change_pw"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_change_pw"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="@id/bt_mypage_edit_info"
             app:layout_constraintStart_toStartOf="@id/bt_mypage_edit_info"
             app:layout_constraintTop_toBottomOf="@id/bt_mypage_edit_info" />
@@ -79,6 +80,7 @@
             android:id="@+id/bt_mypage_check_my_post"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_check_my_post"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="@id/bt_mypage_change_pw"
             app:layout_constraintStart_toStartOf="@id/bt_mypage_change_pw"
             app:layout_constraintTop_toBottomOf="@id/bt_mypage_change_pw" />
