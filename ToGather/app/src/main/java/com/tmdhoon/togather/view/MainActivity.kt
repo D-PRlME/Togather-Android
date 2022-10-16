@@ -2,8 +2,11 @@ package com.tmdhoon.togather.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ActivityMainBinding
 import com.tmdhoon.togather.view.fragment.*
@@ -44,13 +47,14 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.menu_post -> {
                     val bottomSheetFragment = PostFragment()
-                    BottomSheetBehavior.STATE_EXPANDED
                     bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                 }
             }
             true
         }
     }
+
+
 
     private fun initBottomNavigation() {
         binding.bnMainBottomNavigation.setOnNavigationItemSelectedListener {
