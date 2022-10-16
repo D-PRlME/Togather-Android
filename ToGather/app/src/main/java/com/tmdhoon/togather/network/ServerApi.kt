@@ -1,14 +1,12 @@
 package com.tmdhoon.togather.network
 
-import com.tmdhoon.togather.model.request.CodeRequest
-import com.tmdhoon.togather.model.request.EmailRequest
-import com.tmdhoon.togather.model.request.LoginRequest
-import com.tmdhoon.togather.model.request.PostRequest
+import com.tmdhoon.togather.model.request.*
 import com.tmdhoon.togather.model.response.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface ServerApi {
@@ -58,5 +56,11 @@ interface ServerApi {
     fun register(
         @Body registerRequest: RegisterRequest
     ) : Call<LoginResponse>
+
+    @PATCH("users")
+    fun editAccount(
+        @Header("Authorization") accessToken : String,
+        @Body accountEditRequest: AccountEditRequest,
+    ) : Call<Void>
 
 }
