@@ -31,6 +31,7 @@ class MyInfoFragment : Fragment() {
 
         initDataBinding(inflater, container)
         initRequest()
+        initEditInfoButton()
 
         return binding.root
     }
@@ -43,5 +44,12 @@ class MyInfoFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_myinfo, container, false)
         binding.user = myInfoViewModel
         binding.lifecycleOwner = this
+    }
+
+    private fun initEditInfoButton(){
+        binding.btMypageEditInfo.setOnClickListener {
+            val bottomSheetFragment = AccountEditFragment()
+            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+        }
     }
 }
