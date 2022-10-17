@@ -19,7 +19,6 @@ class MyInfoRepository(private val myInfoViewModel: MyInfoViewModel) {
                 response: Response<MyInfoResponse>
             ) {
                 myInfoViewModel.myInfoResponse.value = response
-                Log.d("TEST", response.code().toString())
             }
 
             override fun onFailure(call: Call<MyInfoResponse>, t: Throwable) {
@@ -30,16 +29,10 @@ class MyInfoRepository(private val myInfoViewModel: MyInfoViewModel) {
     }
 
     fun editAccount(name : String, url : String, introduce : String, position : List<String>){
-        val accountEditRequest = AccountEditRequest(name, url, introduce, position)
-        Log.d("TEST", "name : $name")
-        Log.d("TEST", "url : $url")
-        Log.d("TEST", "introduce : $introduce")
-        Log.d("TEST", "position : $position")
+        val accountEditRequest = AccountEditRequest(name, "https://avatars.githubusercontent.com/u/102812085?v=4", introduce, position)
         ApiProvider.retrofit.editAccount("Bearer $ACCESS_TOKEN", accountEditRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 myInfoViewModel.accountEditResponse.value = response
-                Log.d("TEST", response.errorBody()?.string()!!)
-                Log.d("TEST", response.code().toString())
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
