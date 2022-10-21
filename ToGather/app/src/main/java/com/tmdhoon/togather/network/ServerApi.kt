@@ -63,4 +63,8 @@ interface ServerApi {
         @Body accountEditRequest: AccountEditRequest,
     ) : Call<Void>
 
+    @POST("users/mail/find")
+    fun changePwVerifyEmail(
+         @Body emailRequest: EmailRequest
+    ) : Call<Void>
 }
