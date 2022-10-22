@@ -1,5 +1,6 @@
 package com.tmdhoon.togather.view
 
+import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
@@ -11,27 +12,10 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ActivityMainBinding
 import com.tmdhoon.togather.view.fragment.*
 
-@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_main)
-    }
-
-    private val homeFragment: HomeFragment by lazy {
-        HomeFragment.newInstance()
-    }
-
-    private val chatFragment: ChatFragment by lazy {
-        ChatFragment.newInstance()
-    }
-
-    private val searchFragment: SearchFragment by lazy {
-        SearchFragment.newInstance()
-    }
-
-    private val myInfoFragment: MyInfoFragment by lazy {
-        MyInfoFragment.newInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +27,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNavigationPost() {
-        binding.bnMainBottomNavigationPost.setOnNavigationItemSelectedListener {
+        binding.bnMainBottomNavigationPost.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.menu_post -> {
-                    val bottomSheetFragment = PostFragment()
-                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-                }
+                R.id.menu_post -> PostFragment().show(supportFragmentManager, PostFragment().tag)
             }
             true
         }
@@ -57,26 +38,20 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initBottomNavigation() {
-        binding.bnMainBottomNavigation.setOnNavigationItemSelectedListener {
+        binding.bnMainBottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_home -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, homeFragment).commit()
-                }
-                R.id.menu_chat -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, chatFragment).commit()
-                }
-                R.id.menu_post -> {
+                R.id.menu_home -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, HomeFragment()).commitAllowingStateLoss()
 
-                }
-                R.id.menu_search -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, searchFragment).commit()
-                }
+                R.id.menu_chat -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, ChatFragment()).commitAllowingStateLoss()
+
+                R.id.menu_search -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, SearchFragment()).commitAllowingStateLoss()
+
                 R.id.menu_mypage -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, myInfoFragment).commit()
+                        .replace(R.id.frameLayout, MyInfoFragment()).commitAllowingStateLoss()
                 }
             }
             true
@@ -85,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, HomeFragment()).commitAllowingStateLoss()
     }
 
 }

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="main"
-            type="com.tmdhoon.togather.model.response.data.PostList" />
+            type="com.tmdhoon.togather.dto.response.data.PostList" />
 
         <variable
             name="user"
-            type="com.tmdhoon.togather.model.response.data.User" />
+            type="com.tmdhoon.togather.dto.response.data.User" />
 
         <variable
             name="tags"
@@ -49,62 +50,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_list_item_tag1"
-                    style="@style/Theme.ToGather.CardView_Tag_Post"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_main_tagList"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:layout_constraintStart_toStartOf="@id/tv_list_item_title"
-                    app:layout_constraintTop_toBottomOf="@id/tv_list_item_title">
-
-                    <TextView
-                        android:id="@+id/tv_list_item_tag1"
-                        style="@style/Theme.ToGather.TextView_Tag_Post" />
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_list_item_tag2"
-                    style="@style/Theme.ToGather.CardView_Tag_Post"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:layout_constraintStart_toEndOf="@id/cv_list_item_tag1"
-                    app:layout_constraintTop_toTopOf="@id/cv_list_item_tag1">
-
-                    <TextView
-                        android:id="@+id/tv_list_item_tag2"
-                        style="@style/Theme.ToGather.TextView_Tag_Post" />
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_list_item_tag3"
-                    style="@style/Theme.ToGather.CardView_Tag_Post"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:layout_constraintStart_toEndOf="@id/cv_list_item_tag2"
-                    app:layout_constraintTop_toTopOf="@id/cv_list_item_tag2">
-
-                    <TextView
-                        android:id="@+id/tv_list_item_tag3"
-                        style="@style/Theme.ToGather.TextView_Tag_Post" />
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_list_item_tag4"
-                    style="@style/Theme.ToGather.CardView_Tag_Post"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:layout_constraintBottom_toBottomOf="@id/cv_list_item_tag3"
-                    app:layout_constraintStart_toEndOf="@id/cv_list_item_tag3"
-                    app:layout_constraintTop_toTopOf="@id/cv_list_item_tag3">
-
-                    <TextView
-                        android:id="@+id/tv_list_item_tag4"
-                        style="@style/Theme.ToGather.TextView_Tag_Post" />
-
-                </androidx.cardview.widget.CardView>
+                    tools:listitem="@layout/item_main_tag_list"
+                    android:layout_marginHorizontal="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_list_item_title"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
@@ -114,7 +68,7 @@
                     android:layout_marginEnd="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cv_list_item_tag1" />
+                    app:layout_constraintTop_toBottomOf="@id/rv_main_tagList" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/cimg_list_item_profile"

@@ -1,4 +1,4 @@
-package com.tmdhoon.togather.model.request
+package com.tmdhoon.togather.dto.request
 
 data class CodeRequest(
     val email : String,

@@ -1,4 +1,4 @@
-package com.tmdhoon.togather.model.response
+package com.tmdhoon.togather.dto.response
 
 data class RegisterRequest(
     val password : String,

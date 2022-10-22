@@ -1,6 +1,6 @@
-package com.tmdhoon.togather.model.request
+package com.tmdhoon.togather.dto.request
 
-import com.tmdhoon.togather.model.request.data.Tags
+import com.tmdhoon.togather.dto.request.data.Tags
 
 data class PostRequest(
     val title : String,

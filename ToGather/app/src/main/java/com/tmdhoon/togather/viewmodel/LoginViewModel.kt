@@ -2,7 +2,7 @@ package com.tmdhoon.togather.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tmdhoon.togather.model.response.LoginResponse
+import com.tmdhoon.togather.dto.response.LoginResponse
 import com.tmdhoon.togather.repository.LoginRepository
 import retrofit2.Response
 

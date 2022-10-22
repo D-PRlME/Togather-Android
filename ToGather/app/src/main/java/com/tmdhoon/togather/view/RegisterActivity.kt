@@ -1,6 +1,7 @@
 package com.tmdhoon.togather.view
 
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -49,8 +50,10 @@ class RegisterActivity : AppCompatActivity() {
         val name = binding.etRegisterName.text
         if(email.isNotEmpty() && pw.isNotEmpty() && name.isNotEmpty()){
             binding.btRegisterNext.setBackgroundResource(R.drawable.button_yellow)
+            binding.btRegisterNext.setTextColor(Color.BLACK)
         }else{
-            binding.btRegisterNext.setBackgroundResource(R.drawable.edittext_courner)
+            binding.btRegisterNext.setBackgroundResource(R.drawable.button_white)
+            binding.btRegisterNext.setTextColor(R.color.all_background_focusOut)
         }
     }
 

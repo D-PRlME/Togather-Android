@@ -1,7 +1,6 @@
 package com.tmdhoon.togather.repository
 
-import android.util.Log
-import com.tmdhoon.togather.model.request.EmailRequest
+import com.tmdhoon.togather.dto.request.EmailRequest
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.viewmodel.ChangePwViewModel
 import retrofit2.Call

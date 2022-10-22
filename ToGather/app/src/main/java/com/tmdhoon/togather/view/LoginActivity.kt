@@ -26,6 +26,13 @@ class LoginActivity : AppCompatActivity() {
         initLoginObserve()
         initLoginButton()
         initRegisterText()
+        initChangePwText()
+    }
+
+    private fun initChangePwText() {
+        binding.tvLoginChangePw.setOnClickListener{
+            IntentUtil.startIntent(this, ChangePwActivity::class.java)
+        }
     }
 
     private fun initRegisterText() {

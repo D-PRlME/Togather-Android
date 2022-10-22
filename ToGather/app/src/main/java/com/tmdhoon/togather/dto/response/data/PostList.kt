@@ -1,4 +1,4 @@
-package com.tmdhoon.togather.model.response.data
+package com.tmdhoon.togather.dto.response.data
 
 
 data class PostList(

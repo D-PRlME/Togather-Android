@@ -11,16 +11,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.tmdhoon.togather.R
+import com.tmdhoon.togather.base.BaseActivity
 import com.tmdhoon.togather.databinding.ActivityChangePwBinding
+import com.tmdhoon.togather.databinding.ActivityLoginBinding
 import com.tmdhoon.togather.util.ToastUtil
 import com.tmdhoon.togather.viewmodel.ChangePwViewModel
 import com.tmdhoon.togather.viewmodel.RegisterViewModel
 
-class ChangePwActivity : AppCompatActivity() {
-
-    private val binding : ActivityChangePwBinding by lazy {
-        DataBindingUtil.setContentView(this, R.layout.activity_change_pw)
-    }
+class ChangePwActivity : BaseActivity<ActivityChangePwBinding>(R.layout.activity_change_pw) {
 
     private val changePwViewModel : ChangePwViewModel by lazy {
         ViewModelProvider(this).get(ChangePwViewModel::class.java)
@@ -39,7 +37,6 @@ class ChangePwActivity : AppCompatActivity() {
             val email = binding.etChangePwEmail.text.toString()
             if(email.isNotEmpty()){
                 changePwViewModel.changePwVerifyEmail(email)
-                Log.d("TEST", email)
             }
         }
     }
@@ -70,7 +67,6 @@ class ChangePwActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 checkNull()
             }
-
         })
     }
 }

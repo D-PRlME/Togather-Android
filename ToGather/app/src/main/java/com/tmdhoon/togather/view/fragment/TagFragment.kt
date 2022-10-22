@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.BottomSheetTagBinding
-import com.tmdhoon.togather.model.response.data.Tags
+import com.tmdhoon.togather.dto.response.data.Tags
 import com.tmdhoon.togather.remote.TagAdapter
 import com.tmdhoon.togather.viewmodel.MainViewModel
 

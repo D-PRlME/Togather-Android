@@ -1,8 +1,7 @@
 package com.tmdhoon.togather.repository
 
-import android.util.Log
-import com.tmdhoon.togather.model.request.AccountEditRequest
-import com.tmdhoon.togather.model.response.MyInfoResponse
+import com.tmdhoon.togather.dto.request.AccountEditRequest
+import com.tmdhoon.togather.dto.response.MyInfoResponse
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.MyInfoViewModel

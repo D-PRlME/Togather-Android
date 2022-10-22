@@ -2,7 +2,7 @@ package com.tmdhoon.togather.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tmdhoon.togather.model.request.data.Tags
+import com.tmdhoon.togather.dto.request.data.Tags
 import com.tmdhoon.togather.repository.PostRepository
 import retrofit2.Response
 

@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ItemTagListBinding
-import com.tmdhoon.togather.model.response.data.Tags
+import com.tmdhoon.togather.dto.response.data.Tags
 
 class TagAdapter(private val tagList : ArrayList<Tags>) :
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {

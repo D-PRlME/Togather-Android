@@ -1,7 +1,7 @@
 package com.tmdhoon.togather.repository
 
-import com.tmdhoon.togather.model.request.PostRequest
-import com.tmdhoon.togather.model.request.data.Tags
+import com.tmdhoon.togather.dto.request.PostRequest
+import com.tmdhoon.togather.dto.request.data.Tags
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.PostViewModel

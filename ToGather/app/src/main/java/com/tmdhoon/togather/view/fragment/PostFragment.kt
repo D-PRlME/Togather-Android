@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.BottomSheetPostBinding
-import com.tmdhoon.togather.model.request.data.Tags
+import com.tmdhoon.togather.dto.request.data.Tags
 import com.tmdhoon.togather.util.ToastUtil
 import com.tmdhoon.togather.viewmodel.PostViewModel
 

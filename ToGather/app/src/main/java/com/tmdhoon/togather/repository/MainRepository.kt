@@ -1,8 +1,7 @@
 package com.tmdhoon.togather.repository
 
-import android.util.Log
-import com.tmdhoon.togather.model.response.MainResponse
-import com.tmdhoon.togather.model.response.TagResponse
+import com.tmdhoon.togather.dto.response.MainResponse
+import com.tmdhoon.togather.dto.response.TagResponse
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.MainViewModel

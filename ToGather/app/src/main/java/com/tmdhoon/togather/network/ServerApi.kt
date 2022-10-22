@@ -1,7 +1,7 @@
 package com.tmdhoon.togather.network
 
-import com.tmdhoon.togather.model.request.*
-import com.tmdhoon.togather.model.response.*
+import com.tmdhoon.togather.dto.request.*
+import com.tmdhoon.togather.dto.response.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

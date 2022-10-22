@@ -1,12 +1,11 @@
 package com.tmdhoon.togather.repository
 
 import android.util.Log
-import com.tmdhoon.togather.model.request.CodeRequest
-import com.tmdhoon.togather.model.request.EmailRequest
-import com.tmdhoon.togather.model.response.LoginResponse
-import com.tmdhoon.togather.model.response.RegisterRequest
+import com.tmdhoon.togather.dto.request.CodeRequest
+import com.tmdhoon.togather.dto.request.EmailRequest
+import com.tmdhoon.togather.dto.response.LoginResponse
+import com.tmdhoon.togather.dto.response.RegisterRequest
 import com.tmdhoon.togather.network.ApiProvider
-import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.RegisterViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,6 +32,8 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
         ApiProvider.retrofit.verifyEmail(emailRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 registerViewModel.verifyEmailResponse.value = response
+                Log.d("TEST", response.code().toString())
+                Log.d("TEST", response.errorBody()?.string()!!)
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
