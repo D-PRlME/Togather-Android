@@ -14,4 +14,12 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.App.Start" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_app</item>
+        <item name="postSplashScreenTheme">@style/Theme.ToGather</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/icon_app2</item>
+    </style>
+
 </resources>

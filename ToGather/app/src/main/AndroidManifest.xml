@@ -12,7 +12,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ToGather"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".view.ChangePwActivity"
@@ -23,13 +22,6 @@
         </activity>
         <activity
             android:name=".view.SuccessActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.SplashActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -47,7 +39,8 @@
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
