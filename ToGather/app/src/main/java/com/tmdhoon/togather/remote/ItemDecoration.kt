@@ -1,4 +1,4 @@
-package com.tmdhoon.togather
+package com.tmdhoon.togather.remote
 
 import android.content.Context
 import android.graphics.Rect

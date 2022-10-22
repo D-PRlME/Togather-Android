@@ -12,8 +12,8 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentHomeBinding
 import com.tmdhoon.togather.dto.response.data.PostList
 import com.tmdhoon.togather.dto.response.data.Tags
-import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.remote.MainTagAdapter
+import com.tmdhoon.togather.remote.MainTagListAdapter
 import com.tmdhoon.togather.remoteimport.MainAdapter
 import com.tmdhoon.togather.viewmodel.MainViewModel
 
@@ -33,12 +33,16 @@ class HomeFragment : Fragment() {
         MainViewModel()
     }
 
-    private val mainTagAdapter : MainTagAdapter by lazy {
-        MainTagAdapter(tagList)
+    private val mainTagListAdapter : MainTagListAdapter by lazy {
+        MainTagListAdapter(tagList)
     }
 
     private val mainAdapter : MainAdapter by lazy {
-        MainAdapter(postList, mainTagAdapter, this.requireContext())
+        MainAdapter(postList, mainTagListAdapter, this.requireContext())
+    }
+
+    private val mainTagAdapter : MainTagAdapter by lazy {
+        MainTagAdapter(tagList)
     }
 
     override fun onCreateView(
@@ -78,6 +82,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
+        binding.rvHomeTag.adapter = mainTagAdapter
+        binding.rvHomeTag.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        tagList.add(Tags("Kotlin", ""))
+        tagList.add(Tags("Kotlin", ""))
+        tagList.add(Tags("Kotlin", ""))
+        tagList.add(Tags("Kotlin", ""))
+        tagList.add(Tags("Kotlin", ""))
+        tagList.add(Tags("Kotlin", ""))
+        tagList.add(Tags("Kotlin", ""))
+        tagList.add(Tags("Kotlin", ""))
+
         binding.rvHomeRecyclerView.adapter = mainAdapter
         binding.rvHomeRecyclerView.layoutManager = LinearLayoutManager(this.requireContext())
     }
