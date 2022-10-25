@@ -14,10 +14,6 @@
             type="com.tmdhoon.togather.dto.response.data.User" />
 
         <variable
-            name="tags"
-            type="com.tmdhoon.togather.viewmodel.MainViewModel" />
-
-        <variable
             name="position"
             type="Integer" />
     </data>

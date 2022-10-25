@@ -11,15 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tmdhoon.togather.R
+import com.tmdhoon.togather.base.BaseActivity
 import com.tmdhoon.togather.databinding.ActivityRegisterBinding
 import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.viewmodel.RegisterViewModel
 
-class RegisterActivity : AppCompatActivity() {
-
-    private val binding: ActivityRegisterBinding by lazy {
-        DataBindingUtil.setContentView(this, R.layout.activity_register)
-    }
+class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
 
     private val registerViewModel: RegisterViewModel by lazy {
         ViewModelProvider(this).get(RegisterViewModel::class.java)
@@ -103,7 +100,7 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.etRegisterEmail.text.toString()
             val pw = binding.etRegisterPw.text.toString()
             val name = binding.etRegisterName.text.toString()
-            if (email != "" && pw != "" && name != "") {
+            if (email.isNotEmpty() && pw.isNotEmpty() && name.isNotEmpty()) {
                 if (getPref(pref, "VerifyEmail", false) as Boolean) {
                     registerViewModel.register(email, pw, name)
                     initPreferences(email, pw, name)

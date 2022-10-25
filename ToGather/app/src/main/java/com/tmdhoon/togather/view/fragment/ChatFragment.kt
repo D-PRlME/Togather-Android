@@ -13,12 +13,6 @@ import com.tmdhoon.togather.databinding.FragmentHomeBinding
 
 class ChatFragment : Fragment() {
 
-    companion object{
-        fun newInstance() : ChatFragment{
-            return ChatFragment()
-        }
-    }
-
     private lateinit var binding : FragmentChatBinding
 
     override fun onCreateView(

@@ -6,6 +6,7 @@ import com.tmdhoon.togather.dto.request.EmailRequest
 import com.tmdhoon.togather.dto.response.LoginResponse
 import com.tmdhoon.togather.dto.response.RegisterRequest
 import com.tmdhoon.togather.network.ApiProvider
+import com.tmdhoon.togather.util.TAG
 import com.tmdhoon.togather.viewmodel.RegisterViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,12 +19,12 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
         ApiProvider.retrofit.duplicate(emailRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 registerViewModel.duplicateResponse.value = response
+
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
 
             }
-
         })
     }
 
@@ -32,14 +33,12 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
         ApiProvider.retrofit.verifyEmail(emailRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 registerViewModel.verifyEmailResponse.value = response
-                Log.d("TEST", response.code().toString())
-                Log.d("TEST", response.errorBody()?.string()!!)
+
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
 
             }
-
         })
     }
 
@@ -48,14 +47,12 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
         ApiProvider.retrofit.verifyCode(codeRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 registerViewModel.verifyCodeResponse.value = response
-                Log.d("TEST", code)
-            }
 
+            }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.d("TEST", "fail")
-            }
 
+            }
         })
     }
 
@@ -69,9 +66,6 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
 
             }
-
         })
     }
-
-
 }
