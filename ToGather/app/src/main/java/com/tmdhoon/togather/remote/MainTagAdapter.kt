@@ -13,7 +13,7 @@ class MainTagAdapter(private val arrayList : ArrayList<Tags>) :
 
     class MainTagViewHolder(val binding : ItemMainTagBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(arrayList : Tags){
-            binding.tag = arrayList
+            binding.tags = arrayList
         }
     }
 

@@ -8,13 +8,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentHomeBinding
 import com.tmdhoon.togather.dto.response.data.PostList
+import com.tmdhoon.togather.dto.response.data.TagLists
 import com.tmdhoon.togather.dto.response.data.Tags
+import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.remote.MainTagAdapter
 import com.tmdhoon.togather.remote.MainTagListAdapter
 import com.tmdhoon.togather.remoteimport.MainAdapter
+import com.tmdhoon.togather.util.SUCCESS
 import com.tmdhoon.togather.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
@@ -25,7 +29,11 @@ class HomeFragment : Fragment() {
         ArrayList()
     }
 
-    private val tagList : ArrayList<Tags> by lazy {
+    private val tags : ArrayList<Tags> by lazy {
+        ArrayList()
+    }
+
+    private val tagList : ArrayList<TagLists> by lazy {
         ArrayList()
     }
 
@@ -42,14 +50,13 @@ class HomeFragment : Fragment() {
     }
 
     private val mainTagAdapter : MainTagAdapter by lazy {
-        MainTagAdapter(tagList)
+        MainTagAdapter(tags)
     }
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         initDataBinding(inflater, container)
         initRequest()
         initObserve()
@@ -64,6 +71,16 @@ class HomeFragment : Fragment() {
                 200 ->{
                     postList.clear()
                     postList.addAll(it.body()!!.post_list)
+                    initRecyclerView()
+                }
+            }
+        })
+
+        mainViewModel.tagResponse.observe(viewLifecycleOwner, Observer {
+            when(it.code()){
+                SUCCESS ->{
+                    tags.clear()
+                    tags.addAll(it.body()!!.tags)
                     initRecyclerView()
                 }
             }
@@ -84,15 +101,6 @@ class HomeFragment : Fragment() {
     private fun initRecyclerView() {
         binding.rvHomeTag.adapter = mainTagAdapter
         binding.rvHomeTag.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        tagList.add(Tags("Kotlin", ""))
-        tagList.add(Tags("Kotlin", ""))
-        tagList.add(Tags("Kotlin", ""))
-        tagList.add(Tags("Kotlin", ""))
-        tagList.add(Tags("Kotlin", ""))
-        tagList.add(Tags("Kotlin", ""))
-        tagList.add(Tags("Kotlin", ""))
-        tagList.add(Tags("Kotlin", ""))
 
         binding.rvHomeRecyclerView.adapter = mainAdapter
         binding.rvHomeRecyclerView.layoutManager = LinearLayoutManager(this.requireContext())

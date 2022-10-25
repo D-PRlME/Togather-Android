@@ -1,24 +1,34 @@
 package com.tmdhoon.togather.remote
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ItemMainTagListBinding
+import com.tmdhoon.togather.dto.response.data.TagLists
 import com.tmdhoon.togather.dto.response.data.Tags
+import com.tmdhoon.togather.util.TAG
 
-class MainTagListAdapter(private val tagList : ArrayList<Tags>) :
+class MainTagListAdapter(private val tagList: ArrayList<TagLists>) :
     RecyclerView.Adapter<MainTagListAdapter.MainTagViewHolder>() {
 
-    class MainTagViewHolder(val binding: ItemMainTagListBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(tags: Tags){
+    class MainTagViewHolder(val binding: ItemMainTagListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(tags: TagLists) {
             binding.tag = tags
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainTagViewHolder {
-        val binding = DataBindingUtil.inflate<ItemMainTagListBinding>(LayoutInflater.from(parent.context), R.layout.item_main_tag_list, parent, false)
+        val binding = DataBindingUtil.inflate<ItemMainTagListBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.item_main_tag_list,
+            parent,
+            false
+        )
+
         return MainTagViewHolder(binding)
     }
 
@@ -27,6 +37,7 @@ class MainTagListAdapter(private val tagList : ArrayList<Tags>) :
     }
 
     override fun getItemCount(): Int {
-        return 3
+        Log.d(TAG, tagList.size.toString())
+        return tagList.size
     }
 }
