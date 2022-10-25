@@ -1,9 +1,15 @@
 package com.tmdhoon.togather.view
 
+import android.animation.ObjectAnimator
 import android.app.ProgressDialog.show
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AnticipateInterpolator
 import android.widget.FrameLayout
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -20,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initBottomNavigation()
         initBottomNavigationPost()
 
@@ -34,8 +39,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
-
 
     private fun initBottomNavigation() {
         binding.bnMainBottomNavigation.setOnItemSelectedListener {
