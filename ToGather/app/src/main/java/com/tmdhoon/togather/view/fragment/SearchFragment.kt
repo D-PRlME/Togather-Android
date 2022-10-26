@@ -13,12 +13,6 @@ import com.tmdhoon.togather.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
 
-    companion object{
-        fun newInstance() : SearchFragment{
-            return SearchFragment()
-        }
-    }
-
     private lateinit var binding : FragmentSearchBinding
 
     override fun onCreateView(

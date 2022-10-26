@@ -12,12 +12,6 @@ import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 
 class MyInfoFragment : Fragment() {
 
-    companion object{
-        fun newInstance() : MyInfoFragment{
-            return MyInfoFragment()
-        }
-    }
-
     private lateinit var binding : FragmentMyinfoBinding
 
     private val myInfoViewModel : MyInfoViewModel by lazy {
