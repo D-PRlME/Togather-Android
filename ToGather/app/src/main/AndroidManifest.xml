@@ -15,6 +15,13 @@
         android:theme="@style/Theme.ToGather"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.AuthChangePwActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.ChangePwActivity"
             android:exported="false">
             <meta-data
