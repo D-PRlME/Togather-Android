@@ -98,12 +98,12 @@ class VerifyEmailActivity : AppCompatActivity() {
         registerViewModel.registerResponse.observe(this, Observer {
             when (it.code()) {
                 201 -> {
-                    IntentUtil.startIntent(this, SuccessActivity::class.java)
+                    startIntent(this, SuccessActivity::class.java)
                     finish()
                 }
                 400 -> {
                     ToastUtil.print(this, "항목을 확인해주세요!")
-                    IntentUtil.startIntent(this, RegisterActivity::class.java)
+                    startIntent(this, RegisterActivity::class.java)
                     finish()
                 }
                 401 -> ToastUtil.print(this, "인증되지 않은 이메일 입니다")

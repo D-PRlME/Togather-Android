@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ActivitySuccessBinding
-import com.tmdhoon.togather.util.IntentUtil
+import com.tmdhoon.togather.util.startIntent
 
 class SuccessActivity : AppCompatActivity() {
 
@@ -20,7 +20,7 @@ class SuccessActivity : AppCompatActivity() {
 
     private fun initNextButton() {
         binding.btSuccessNext.setOnClickListener {
-            IntentUtil.startIntent(this, MainActivity::class.java)
+            startIntent(this, MainActivity::class.java)
         }
     }
 }

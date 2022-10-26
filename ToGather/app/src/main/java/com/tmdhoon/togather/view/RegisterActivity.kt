@@ -121,7 +121,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
                     registerViewModel.verifyEmail(
                         getPref(pref, "email", "").toString()
                     )
-                    IntentUtil.startIntent(this, VerifyEmailActivity::class.java)
+                    startIntent(this, VerifyEmailActivity::class.java)
                     finish()
                 }
                 400 -> ToastUtil.print(this, "이메일 형식이 잘못되었습니다!")
@@ -140,7 +140,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
         registerViewModel.registerResponse.observe(this, Observer {
             when (it.code()) {
                 201 -> {
-                    IntentUtil.startIntent(this, SuccessActivity::class.java)
+                    startIntent(this, SuccessActivity::class.java)
                     ACCESS_TOKEN = it.body()!!.access_token
                     finish()
                 }

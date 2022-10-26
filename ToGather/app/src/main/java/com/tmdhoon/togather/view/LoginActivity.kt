@@ -51,13 +51,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initChangePwText() {
         binding.tvLoginChangePw.setOnClickListener{
-            IntentUtil.startIntent(this, ChangePwActivity::class.java)
+            startIntent(this, ChangePwActivity::class.java)
         }
     }
 
     private fun initRegisterText() {
         binding.tvLoginRegister.setOnClickListener {
-            IntentUtil.startIntent(this, RegisterActivity::class.java)
+            startIntent(this, RegisterActivity::class.java)
         }
     }
 
@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 200 -> {
                     ACCESS_TOKEN = it.body()!!.access_token
                     ToastUtil.print(this, "로그인에 성공하였습니다!")
-                    IntentUtil.startIntent(this, MainActivity::class.java)
+                    startIntent(this, MainActivity::class.java)
                     finish()
                     putPref(initPref(this, MODE_PRIVATE).edit(), "code", 200)
                     Log.d("TEST", getPref(initPref(this, MODE_PRIVATE), "code", 0).toString())
