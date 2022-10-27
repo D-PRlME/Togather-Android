@@ -14,9 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.BottomSheetAccountEditBinding
-import com.tmdhoon.togather.databinding.FragmentChatBinding
-import com.tmdhoon.togather.databinding.FragmentHomeBinding
-import com.tmdhoon.togather.util.ToastUtil
+import com.tmdhoon.togather.util.printToast
 import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 
 class AccountEditFragment : BottomSheetDialogFragment() {
@@ -80,10 +78,10 @@ class AccountEditFragment : BottomSheetDialogFragment() {
         myInfoViewModel.accountEditResponse.observe(this, Observer {
             when(it.code()){
                 204->{
-                    ToastUtil.print(this.context, "정보가 성공적으로 변경되었습니다")
+                    printToast(this.context, "정보가 성공적으로 변경되었습니다")
                     initRequest()
                 }
-                400 -> ToastUtil.print(this.context, "항목을 확인해주세요!")
+                400 -> printToast(this.context, "항목을 확인해주세요!")
             }
         })
     }

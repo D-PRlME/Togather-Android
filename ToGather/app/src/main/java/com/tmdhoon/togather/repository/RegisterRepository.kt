@@ -47,7 +47,6 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
         ApiProvider.retrofit.verifyCode(codeRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 registerViewModel.verifyCodeResponse.value = response
-
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {

@@ -79,7 +79,6 @@
             style="@style/Theme.ToGather.Button_White"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="34dp"
             android:text="@string/register_next"
             app:layout_constraintEnd_toEndOf="parent"/>
 

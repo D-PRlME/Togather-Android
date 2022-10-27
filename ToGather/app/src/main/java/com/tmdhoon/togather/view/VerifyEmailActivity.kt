@@ -80,7 +80,7 @@ class VerifyEmailActivity : AppCompatActivity() {
         registerViewModel.verifyCodeResponse.observe(this, Observer {
             when (it.code()) {
                 204 -> {
-                    ToastUtil.print(this, "이메일이 성공적으로 인증되었습니다!")
+                    printToast(this, "이메일이 성공적으로 인증되었습니다!")
                     registerViewModel.register(
                         getPref(pref, "email", "").toString(),
                         getPref(pref, "pw", "").toString(),
@@ -88,7 +88,7 @@ class VerifyEmailActivity : AppCompatActivity() {
                     )
                     putPref(editor, "VerifyEmail", true)
                 }
-                401 -> ToastUtil.print(this, "인증코드가 잘못되었습니다!")
+                401 -> printToast(this, "인증코드가 잘못되었습니다!")
 
             }
         })
@@ -102,12 +102,12 @@ class VerifyEmailActivity : AppCompatActivity() {
                     finish()
                 }
                 400 -> {
-                    ToastUtil.print(this, "항목을 확인해주세요!")
+                    printToast(this, "항목을 확인해주세요!")
                     startIntent(this, RegisterActivity::class.java)
                     finish()
                 }
-                401 -> ToastUtil.print(this, "인증되지 않은 이메일 입니다")
-                409 -> ToastUtil.print(this, "중복된 아이디 입니다")
+                401 -> printToast(this, "인증되지 않은 이메일 입니다")
+                409 -> printToast(this, "중복된 아이디 입니다")
             }
         })
     }

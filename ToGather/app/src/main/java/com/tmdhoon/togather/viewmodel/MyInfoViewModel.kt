@@ -4,6 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tmdhoon.togather.dto.response.MyInfoResponse
 import com.tmdhoon.togather.repository.MyInfoRepository
+import com.tmdhoon.togather.util.startIntent
+import com.tmdhoon.togather.view.AuthChangePwActivity
+import com.tmdhoon.togather.view.fragment.MyInfoFragment
 import retrofit2.Response
 
 class MyInfoViewModel : ViewModel() {
@@ -21,5 +24,4 @@ class MyInfoViewModel : ViewModel() {
     fun editAccount(name : String, url : String, introduce : String, positon : List<String>){
         myInfoRepository.editAccount(name, url, introduce, positon)
     }
-
 }

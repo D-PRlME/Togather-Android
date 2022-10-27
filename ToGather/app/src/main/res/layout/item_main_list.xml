@@ -13,9 +13,6 @@
             name="user"
             type="com.tmdhoon.togather.dto.response.data.User" />
 
-        <variable
-            name="position"
-            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,6 +65,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/cimg_list_item_profile"
+                    style="@style/Theme.ToGather.Circular_Image"
                     loadImage="@{user.profile_image_url}"
                     android:layout_width="32dp"
                     android:layout_height="32dp"

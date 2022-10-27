@@ -15,7 +15,4 @@ class ChangePwViewModel:ViewModel() {
     fun changePwVerifyEmail(email : String){
         changePwRepository.changePwVerifyEmail(email)
     }
-
-
-
 }

@@ -6,8 +6,12 @@
 
     <data>
         <variable
-            name="user"
+            name="MyInfoViewModel"
             type="com.tmdhoon.togather.viewmodel.MyInfoViewModel" />
+
+        <variable
+            name="MyInfoFragment"
+            type="com.tmdhoon.togather.view.fragment.MyInfoFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +29,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cimg_mypage_profile"
-                loadImage="@{user.myInfoResponse.body().profile_image_url}"
+                loadImage="@{MyInfoViewModel.myInfoResponse.body().profile_image_url}"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/ic_launcher_background"
@@ -36,7 +40,7 @@
                 android:id="@+id/tv_mypage_name"
                 style="@style/Theme.ToGather.TextView_Title"
                 android:layout_marginStart="8dp"
-                android:text="@{user.myInfoResponse.body().name}"
+                android:text="@{MyInfoViewModel.myInfoResponse.body().name}"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/cimg_mypage_profile"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +48,7 @@
             <TextView
                 android:id="@+id/tv_mypage_email"
                 style="@style/Theme.ToGather.TextView_Focus_Out"
-                android:text="@{user.myInfoResponse.body().email}"
+                android:text="@{MyInfoViewModel.myInfoResponse.body().email}"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_name"
                 app:layout_constraintTop_toBottomOf="@id/tv_mypage_name" />
 
@@ -71,6 +75,7 @@
             android:id="@+id/bt_mypage_change_pw"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_change_pw"
+            android:onClick="@{()->MyInfoFragment.changePw()}"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="@id/bt_mypage_edit_info"
             app:layout_constraintStart_toStartOf="@id/bt_mypage_edit_info"

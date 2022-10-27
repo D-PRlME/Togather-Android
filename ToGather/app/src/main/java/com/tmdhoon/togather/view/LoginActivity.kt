@@ -66,15 +66,15 @@ class LoginActivity : AppCompatActivity() {
             when (it.code()) {
                 200 -> {
                     ACCESS_TOKEN = it.body()!!.access_token
-                    ToastUtil.print(this, "로그인에 성공하였습니다!")
+                    printToast(this, "로그인에 성공하였습니다!")
                     startIntent(this, MainActivity::class.java)
                     finish()
                     putPref(initPref(this, MODE_PRIVATE).edit(), "code", 200)
                     Log.d("TEST", getPref(initPref(this, MODE_PRIVATE), "code", 0).toString())
                 }
-                400 -> ToastUtil.print(this, "아이디, 비밀번호를 확인해주세요!")
-                403 -> ToastUtil.print(this, "비밀번호가 다릅니다!")
-                404 -> ToastUtil.print(this, "존재하지 않는 회원입니다!")
+                400 -> printToast(this, "아이디, 비밀번호를 확인해주세요!")
+                403 -> printToast(this, "비밀번호가 다릅니다!")
+                404 -> printToast(this, "존재하지 않는 회원입니다!")
             }
         })
     }

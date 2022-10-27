@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.BottomSheetPostBinding
 import com.tmdhoon.togather.dto.request.data.Tags
-import com.tmdhoon.togather.util.ToastUtil
+import com.tmdhoon.togather.util.printToast
 import com.tmdhoon.togather.viewmodel.PostViewModel
 
 class PostFragment : BottomSheetDialogFragment() {
@@ -58,14 +58,14 @@ class PostFragment : BottomSheetDialogFragment() {
         postViewModel.postResponse.observe(this, Observer {
             when(it.code()){
                 201 ->{
-                    ToastUtil.print(view?.context, "글이 정상적으로 등록되었습니다!")
+                    printToast(view?.context, "글이 정상적으로 등록되었습니다!")
                     binding.etPostMain.text = null
                     binding.etPostTitle.text = null
                     binding.etPostLink.text = null
                     tagList.clear()
                 }
                 400 -> {
-                    ToastUtil.print(view?.context, "값이 잘못되었습니다!")
+                    printToast(view?.context, "값이 잘못되었습니다!")
                 }
             }
         })

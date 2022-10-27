@@ -32,6 +32,7 @@
             android:layout_marginTop="12dp"
             android:hint="@string/verify_email_code"
             android:inputType="number"
+            android:layout_marginHorizontal="16dp"
             android:maxLength="6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

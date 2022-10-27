@@ -117,15 +117,15 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
         registerViewModel.duplicateResponse.observe(this, Observer {
             when (it.code()) {
                 204 -> {
-                    ToastUtil.print(this, "인증 메일이 전송되었습니다!")
+                    printToast(this, "인증 메일이 전송되었습니다!")
                     registerViewModel.verifyEmail(
                         getPref(pref, "email", "").toString()
                     )
                     startIntent(this, VerifyEmailActivity::class.java)
                     finish()
                 }
-                400 -> ToastUtil.print(this, "이메일 형식이 잘못되었습니다!")
-                409 -> ToastUtil.print(this, "중복된 이메일 입니다")
+                400 -> printToast(this, "이메일 형식이 잘못되었습니다!")
+                409 -> printToast(this, "중복된 이메일 입니다")
             }
         })
     }
@@ -144,9 +144,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
                     ACCESS_TOKEN = it.body()!!.access_token
                     finish()
                 }
-                400 -> ToastUtil.print(this, "항목을 확인해주세요!")
-                401 -> ToastUtil.print(this, "인증되지 않은 이메일 입니다")
-                409 -> ToastUtil.print(this, "중복된 아이디 입니다")
+                400 -> printToast(this, "항목을 확인해주세요!")
+                401 -> printToast(this, "인증되지 않은 이메일 입니다")
+                409 -> printToast(this, "중복된 아이디 입니다")
             }
         })
     }
