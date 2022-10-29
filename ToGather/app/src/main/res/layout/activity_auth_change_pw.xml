@@ -4,6 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.AuthChangePwActivity">
 
+    <data>
+        <variable
+            name="AuthChangePwActivity"
+            type="com.tmdhoon.togather.view.AuthChangePwActivity" />
+
+        <variable
+            name="email"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,6 +40,7 @@
             style="@style/Theme.ToGather.EditText"
             android:layout_marginTop="12dp"
             android:hint="@string/verify_email_code"
+            android:layout_marginHorizontal="16dp"
             android:maxLength="6"
             android:singleLine="true"
             android:inputType="number"

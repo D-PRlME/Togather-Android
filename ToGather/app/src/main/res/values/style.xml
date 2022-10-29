@@ -8,16 +8,17 @@
         <item name="android:fontFamily">@font/medium</item>
         <item name="android:background">@drawable/edittext_courner</item>
         <item name="android:singleLine">true</item>
-        <item name="android:layout_marginHorizontal">16dp</item>
     </style>
 
     <style name="Theme.ToGather.Button_White">
-        <item name="android:layout_width">358dp</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginBottom">34dp</item>
         <item name="android:fontFamily">@font/medium</item>
         <item name="android:textColor">@color/all_background_focusOut</item>
         <item name="android:background">@drawable/button_white</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
     </style>
 
     <style name="Theme.ToGather.Button_White_Short">
@@ -118,6 +119,7 @@
     <style name="Theme.ToGather.TextInputLayout_Register">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
     </style>
 
     <style name="Theme.ToGather.TextView_Notify">
@@ -146,6 +148,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">12dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

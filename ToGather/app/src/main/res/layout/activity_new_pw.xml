@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.NewPwActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_new_pw_title"
+            style="@style/Theme.ToGather.TextView_Title_View"
+            android:text="@string/change_pw_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_new_pw_des"
+            style="@style/Theme.ToGather.Textview_Title_Des"
+            android:layout_marginStart="16dp"
+            android:text="@string/new_pw_des"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_new_pw_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout_new_pw"
+            android:layout_marginTop="42dp"
+            android:layout_marginHorizontal="16dp"
+            app:hintEnabled="false"
+            app:helperText="8자리 이상, 숫자, 영어 소문자, 특수문자를 포함해야 합니다"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_new_pw_des"
+            style="@style/Theme.ToGather.TextInputLayout_Register">
+
+            <EditText
+                style="@style/Theme.ToGather.EditText"
+                android:hint="@string/login_password"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/bt_new_pw_next"
+            style="@style/Theme.ToGather.Button_White"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/register_next"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
