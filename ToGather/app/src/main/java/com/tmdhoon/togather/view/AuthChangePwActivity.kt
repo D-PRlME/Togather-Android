@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.base.BaseActivity
 import com.tmdhoon.togather.databinding.ActivityAuthChangePwBinding
-import com.tmdhoon.togather.util.SUCCESS
-import com.tmdhoon.togather.util.printToast
-import com.tmdhoon.togather.util.startIntent
+import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 import com.tmdhoon.togather.viewmodel.RegisterViewModel
 
@@ -60,21 +58,26 @@ class AuthChangePwActivity : BaseActivity<ActivityAuthChangePwBinding>(R.layout.
         })
     }
 
-    fun initNextButton(email : String){
+    fun initNextButton(){
+        val email = getPref(initPref(this, MODE_PRIVATE), "email", "")
         binding.btAuthChangePwNext.setOnClickListener {
             val code = binding.etAuthChangePwCode.text
             if(code.isNotEmpty()){
-                registerViewModel.verifyCode(email, code.toString())
+                registerViewModel.verifyCode(email.toString(), code.toString())
             }
         }
     }
 
     private fun observeCodeResponse(){
-        registerViewModel.registerResponse.observe(this, Observer {
+        registerViewModel.verifyCodeResponse.observe(this, Observer {
             when(it.code()){
-                SUCCESS -> {
+                204 -> {
                     printToast(this, "인증되었습니다!")
                     startIntent(this, NewPwActivity::class.java)
+                    finish()
+                }
+                400 ->{
+                    printToast(this, "인증번호가 다릅니다")
                 }
             }
         })

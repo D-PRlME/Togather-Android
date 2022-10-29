@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface ServerApi {
 
@@ -79,4 +80,11 @@ interface ServerApi {
         @Header("Authorization") accessToken: String,
         @Body emailRequest: EmailRequest
     ): Call<Void>
+
+    // 새 비밀번호
+    @PUT("users/password")
+    fun newPassword(
+        @Header("Authorization") accessToken: String,
+        @Body newPwRequest: NewPwRequest
+    ) : Call<Void>
 }

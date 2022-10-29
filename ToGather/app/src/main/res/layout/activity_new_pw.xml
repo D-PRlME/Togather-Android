@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.NewPwActivity">
 
+    <data>
+        <variable
+            name="NewPwActivity"
+            type="com.tmdhoon.togather.view.NewPwActivity" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,6 +41,7 @@
             style="@style/Theme.ToGather.TextInputLayout_Register">
 
             <EditText
+                android:id="@+id/et_new_pw_pw"
                 style="@style/Theme.ToGather.EditText"
                 android:hint="@string/login_password"/>
 
@@ -42,6 +49,7 @@
 
         <Button
             android:id="@+id/bt_new_pw_next"
+            android:onClick="@{()->NewPwActivity.initComplementButton()}"
             style="@style/Theme.ToGather.Button_White"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
