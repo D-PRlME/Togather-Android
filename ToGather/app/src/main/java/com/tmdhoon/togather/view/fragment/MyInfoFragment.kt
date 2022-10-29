@@ -1,5 +1,6 @@
 package com.tmdhoon.togather.view.fragment
 
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentMyinfoBinding
+import com.tmdhoon.togather.util.getPref
 import com.tmdhoon.togather.util.initPref
 import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.util.startIntent
@@ -29,8 +31,6 @@ class MyInfoFragment : Fragment() {
     private val changePwViewModel : ChangePwViewModel by lazy {
         ViewModelProvider(this).get(ChangePwViewModel::class.java)
     }
-
-    private lateinit var email : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,8 +57,9 @@ class MyInfoFragment : Fragment() {
     }
 
     private fun observeMyInfo(){
-        myInfoViewModel.myInfoResponse.observe(this, Observer {
-            email = it.body()!!.email
+        myInfoViewModel.myInfoResponse.observe(viewLifecycleOwner, Observer {
+            val email = it.body()!!.email
+            putPref(initPref(this.requireContext(), MODE_PRIVATE).edit(), "email", email)
         })
     }
 
@@ -71,6 +72,6 @@ class MyInfoFragment : Fragment() {
 
     fun changePw(){
         startIntent(this.requireContext(), AuthChangePwActivity::class.java)
-        changePwViewModel.changePwVerifyEmail(email)
+        changePwViewModel.changePwVerifyEmail(getPref(initPref(this.requireContext(), MODE_PRIVATE), "email", "").toString())
     }
 }
