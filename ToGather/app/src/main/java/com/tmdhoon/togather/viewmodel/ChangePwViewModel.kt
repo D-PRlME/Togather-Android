@@ -8,11 +8,17 @@ import retrofit2.Response
 
 class ChangePwViewModel:ViewModel() {
     val changePwVerifyEmailResponse : MutableLiveData<Response<Void>> = MutableLiveData()
+    val newPwResponse : MutableLiveData<Response<Void>> = MutableLiveData()
+
     private val changePwRepository : ChangePwRepository by lazy {
         ChangePwRepository(this)
     }
 
     fun changePwVerifyEmail(email : String){
         changePwRepository.changePwVerifyEmail(email)
+    }
+
+    fun newPw(pw : String){
+        changePwRepository.newPassword(pw)
     }
 }
