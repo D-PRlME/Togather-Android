@@ -102,6 +102,7 @@
             android:id="@+id/bt_mypage_logout"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_logout"
+            android:onClick="@{()->MyInfoFragment.logout()}"
             app:layout_constraintEnd_toEndOf="@id/bt_mypage_developers"
             app:layout_constraintStart_toStartOf="@id/bt_mypage_developers"
             app:layout_constraintTop_toBottomOf="@id/bt_mypage_developers" />
