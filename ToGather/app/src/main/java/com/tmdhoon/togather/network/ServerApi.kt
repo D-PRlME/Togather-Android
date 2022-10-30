@@ -4,6 +4,7 @@ import com.tmdhoon.togather.dto.request.*
 import com.tmdhoon.togather.dto.response.*
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.PATCH
@@ -86,5 +87,10 @@ interface ServerApi {
     fun newPassword(
         @Header("Authorization") accessToken: String,
         @Body newPwRequest: NewPwRequest
+    ) : Call<Void>
+
+    @DELETE("users/logout")
+    fun logout(
+        @Header("Authorization") accessToken: String,
     ) : Call<Void>
 }

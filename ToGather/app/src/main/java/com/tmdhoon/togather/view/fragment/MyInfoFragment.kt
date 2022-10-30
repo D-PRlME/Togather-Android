@@ -12,12 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentMyinfoBinding
-import com.tmdhoon.togather.util.getPref
-import com.tmdhoon.togather.util.initPref
-import com.tmdhoon.togather.util.putPref
-import com.tmdhoon.togather.util.startIntent
+import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.view.AuthChangePwActivity
+import com.tmdhoon.togather.view.LoginActivity
 import com.tmdhoon.togather.viewmodel.ChangePwViewModel
+import com.tmdhoon.togather.viewmodel.LogoutViewModel
 import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 
 class MyInfoFragment : Fragment() {
@@ -32,6 +31,10 @@ class MyInfoFragment : Fragment() {
         ViewModelProvider(this).get(ChangePwViewModel::class.java)
     }
 
+    private val logoutViewModel : LogoutViewModel by lazy {
+        ViewModelProvider(this).get(LogoutViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +44,7 @@ class MyInfoFragment : Fragment() {
         initRequest()
         initEditInfoButton()
         observeMyInfo()
+        observeLogout()
 
         return binding.root
     }
@@ -73,5 +77,21 @@ class MyInfoFragment : Fragment() {
     fun changePw(){
         startIntent(this.requireContext(), AuthChangePwActivity::class.java)
         changePwViewModel.changePwVerifyEmail(getPref(initPref(this.requireContext(), MODE_PRIVATE), "email", "").toString())
+    }
+
+    fun logout(){
+        logoutViewModel.logout()
+    }
+
+    private fun observeLogout(){
+        logoutViewModel.logoutResponse.observe(viewLifecycleOwner, Observer {
+            when(it.code()){
+                204 -> {
+                    printToast(this.requireContext(), "로그아웃 되었습니다")
+                    startIntent(this.requireContext(), LoginActivity::class.java)
+                    ACCESS_TOKEN = ""
+                }
+            }
+        })
     }
 }
