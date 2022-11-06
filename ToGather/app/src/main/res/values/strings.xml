@@ -49,6 +49,12 @@
     <string name="change_pw_des">인증번호를 받기 위한 이메일 주소가 필요합니다</string>
     <string name="auth_change_pw_des">계정에 입력된 이메일로 전송된 n자리 인증 번호를 입력해 주세요. 인증 번호는 5분 후에 만료됩니다</string>
     <string name="new_pw_des">바꿀 새 비밀번호를 입력해 주세요</string>
+    <string name="delete_user_title">계정 삭제</string>
+    <string name="delete_user_des">계정을 삭제하려면 비밀번호를 입력해 주세요.</string>
+    <string name="delete_user_dialog_title">정말 계정을 삭제하시겠습니까?</string>
+    <string name="delete_user_dialog_des">모든 입력한 정보, 작성한 글이 서버에서 삭제되며 이 작업은 되돌릴 수 없습니다.</string>
+    <string name="delete_user_dialog_confirm">진행</string>
+    <string name="delete_user_dialog_cancel">취소</string>
 
 
 </resources>

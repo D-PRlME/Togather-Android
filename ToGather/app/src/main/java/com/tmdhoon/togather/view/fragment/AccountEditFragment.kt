@@ -65,6 +65,7 @@ class AccountEditFragment : BottomSheetDialogFragment() {
     private fun initDataBinding(inflater : LayoutInflater, container: ViewGroup?){
         binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet_account_edit, container, false)
         binding.user = myInfoViewModel
+        binding.accountEditFragment = this
         binding.lifecycleOwner = this
     }
 
@@ -72,6 +73,10 @@ class AccountEditFragment : BottomSheetDialogFragment() {
         binding.imgPostClose.setOnClickListener {
             dismiss()
         }
+    }
+
+    fun deleteUser(){
+        DeleteUserFragment().show(parentFragmentManager, DeleteUserFragment().tag)
     }
 
     private fun initObserveEditAccountResponse(){

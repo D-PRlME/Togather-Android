@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="MyInfoViewModel"
+            type="com.tmdhoon.togather.viewmodel.MyInfoViewModel" />
+
+        <variable
+            name="DeleteUserFragment"
+            type="com.tmdhoon.togather.view.fragment.DeleteUserFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="844dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_post_close"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/image_close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_delete_user_title"
+                    style="@style/Theme.ToGather.TextView_Title_View"
+                    android:layout_marginTop="86dp"
+                    android:text="@string/delete_user_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_delete_user_des"
+                    style="@style/Theme.ToGather.Textview_Title_Des"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/delete_user_des"
+                    app:layout_constraintStart_toStartOf="@id/tv_delete_user_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_delete_user_title" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/cimg_delete_user_profile"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    loadImage="@{MyInfoViewModel.myInfoResponse.body().profile_image_url}"
+                    android:layout_marginStart="140dp"
+                    android:layout_marginTop="164dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_delete_user_des" />
+
+                <TextView
+                    android:id="@+id/tv_delete_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/medium"
+                    android:text="@{MyInfoViewModel.myInfoResponse.body().name}"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@id/cimg_delete_user_profile"
+                    app:layout_constraintStart_toEndOf="@id/cimg_delete_user_profile"
+                    app:layout_constraintTop_toTopOf="@id/cimg_delete_user_profile" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Theme.ToGather.TextInputLayout_Register"
+                    android:layout_marginTop="24dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cimg_delete_user_profile">
+
+                    <EditText
+                        android:inputType="textPassword"
+                        android:id="@+id/et_delete_user_pw"
+                        style="@style/Theme.ToGather.EditText"
+                        android:hint="@string/login_password" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/bt_delete_user_delete_user"
+                    style="@style/Theme.ToGather.Button_White"
+                    android:text="@string/delete_user_title"
+                    android:onClick="@{()->DeleteUserFragment.deleteUser()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

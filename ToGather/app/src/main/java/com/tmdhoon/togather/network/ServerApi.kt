@@ -3,13 +3,7 @@ package com.tmdhoon.togather.network
 import com.tmdhoon.togather.dto.request.*
 import com.tmdhoon.togather.dto.response.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface ServerApi {
 
@@ -89,8 +83,16 @@ interface ServerApi {
         @Body newPwRequest: NewPwRequest
     ) : Call<Void>
 
+    // 로그아웃
     @DELETE("users/logout")
     fun logout(
         @Header("Authorization") accessToken: String,
+    ) : Call<Void>
+
+    // 회원탈퇴
+    @HTTP(method="DELETE", hasBody=true, path="users")
+    fun deleteUser(
+        @Header("Authorization") accessToken: String,
+        @Body deleteUserRequest: DeleteUserRequest,
     ) : Call<Void>
 }

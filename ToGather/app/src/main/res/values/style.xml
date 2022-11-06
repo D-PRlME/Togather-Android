@@ -99,7 +99,7 @@
 
     <style name="Theme.ToGather.ConstraintLayout_Line">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/all_stroke</item>
     </style>
 
