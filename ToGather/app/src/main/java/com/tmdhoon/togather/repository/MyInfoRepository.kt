@@ -1,6 +1,7 @@
 package com.tmdhoon.togather.repository
 
 import com.tmdhoon.togather.dto.request.AccountEditRequest
+import com.tmdhoon.togather.dto.request.DeleteUserRequest
 import com.tmdhoon.togather.dto.response.MyInfoResponse
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
@@ -23,7 +24,6 @@ class MyInfoRepository(private val myInfoViewModel: MyInfoViewModel) {
             override fun onFailure(call: Call<MyInfoResponse>, t: Throwable) {
 
             }
-
         })
     }
 
@@ -41,4 +41,16 @@ class MyInfoRepository(private val myInfoViewModel: MyInfoViewModel) {
         })
     }
 
+    fun deleteUser(password : String){
+        val deleteUserRequest = DeleteUserRequest(password)
+        ApiProvider.retrofit.deleteUser("Bearer $ACCESS_TOKEN", deleteUserRequest).enqueue(object : Callback<Void>{
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                myInfoViewModel.deleteUserResponse.value = response
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+
+            }
+        })
+    }
 }

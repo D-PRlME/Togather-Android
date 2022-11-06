@@ -8,6 +8,10 @@
         <variable
             name="user"
             type="com.tmdhoon.togather.viewmodel.MyInfoViewModel" />
+
+        <variable
+            name="AccountEditFragment"
+            type="com.tmdhoon.togather.view.fragment.AccountEditFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,6 +105,7 @@
                     android:layout_marginEnd="16dp"
                     android:paddingHorizontal="16dp"
                     android:text="@string/account_edit_delete"
+                    android:onClick="@{()->AccountEditFragment.deleteUser()}"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />

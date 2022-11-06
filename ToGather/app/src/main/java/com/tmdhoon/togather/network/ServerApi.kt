@@ -89,8 +89,16 @@ interface ServerApi {
         @Body newPwRequest: NewPwRequest
     ) : Call<Void>
 
+    // 로그아웃
     @DELETE("users/logout")
     fun logout(
         @Header("Authorization") accessToken: String,
+    ) : Call<Void>
+
+    // 회원탈퇴
+    @DELETE("users")
+    fun deleteUser(
+        @Header("Authorization") accessToken: String,
+        @Body deleteUserRequest: DeleteUserRequest,
     ) : Call<Void>
 }

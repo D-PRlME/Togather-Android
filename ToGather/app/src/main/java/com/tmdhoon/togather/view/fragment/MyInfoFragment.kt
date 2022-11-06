@@ -62,8 +62,7 @@ class MyInfoFragment : Fragment() {
 
     private fun observeMyInfo(){
         myInfoViewModel.myInfoResponse.observe(viewLifecycleOwner, Observer {
-            val email = it.body()!!.email
-            putPref(initPref(this.requireContext(), MODE_PRIVATE).edit(), "email", email)
+            putPref(initPref(this.requireContext(), MODE_PRIVATE).edit(), "email", it.body()!!.email)
         })
     }
 
@@ -89,6 +88,7 @@ class MyInfoFragment : Fragment() {
                 204 -> {
                     printToast(this.requireContext(), "로그아웃 되었습니다")
                     startIntent(this.requireContext(), LoginActivity::class.java)
+                    requireActivity().finish()
                     ACCESS_TOKEN = ""
                 }
             }

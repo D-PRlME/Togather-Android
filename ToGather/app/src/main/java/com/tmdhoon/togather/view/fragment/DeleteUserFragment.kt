@@ -1,6 +1,8 @@
 package com.tmdhoon.togather.view.fragment
 
 import android.app.Dialog
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -15,13 +17,20 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentDeleteUserBinding
+import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.printToast
+import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 
 class DeleteUserFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding : FragmentDeleteUserBinding
+    private val pref : SharedPreferences by lazy {
+        initPref(this.requireContext(), MODE_PRIVATE)
+    }
 
-    private val myInfoViewModel : MyInfoViewModel by lazy {
+    private lateinit var binding: FragmentDeleteUserBinding
+
+    private val myInfoViewModel: MyInfoViewModel by lazy {
         MyInfoViewModel()
     }
 
@@ -48,24 +57,35 @@ class DeleteUserFragment : BottomSheetDialogFragment() {
         return dialog
     }
 
-    fun deleteUser(){
+    fun deleteUser() {
         val pw = binding.etDeleteUserPw.text.toString()
-        DeleteUserDialog().show(parentFragmentManager, DeleteUserDialog().tag)
+        if (pw.isNotEmpty()) {
+            DeleteUserDialog().show(parentFragmentManager, DeleteUserDialog().tag)
+            putPref(pref.edit(), "password", pw)
+        }else{
+            printToast(this.requireContext(), "비밀번호를 입력해주세요")
+        }
     }
 
-    private fun observePwEdittext(){
-        binding.etDeleteUserPw.addTextChangedListener(object : TextWatcher{
+    private fun observePwEdittext() {
+        binding.etDeleteUserPw.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val pw = binding.etDeleteUserPw.text
-                if(pw.isNotEmpty()){
+                if (pw.isNotEmpty()) {
                     binding.btDeleteUserDeleteUser.setBackgroundResource(R.drawable.button_red)
                     binding.btDeleteUserDeleteUser.setTextColor(Color.BLACK)
-                }else{
+                } else {
                     binding.btDeleteUserDeleteUser.setBackgroundResource(R.drawable.button_white)
-                    binding.btDeleteUserDeleteUser.setTextColor(ContextCompat.getColor(this@DeleteUserFragment.requireContext(), R.color.all_background_focusOut))
+                    binding.btDeleteUserDeleteUser.setTextColor(
+                        ContextCompat.getColor(
+                            this@DeleteUserFragment.requireContext(),
+                            R.color.all_background_focusOut
+                        )
+                    )
                 }
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
     }
