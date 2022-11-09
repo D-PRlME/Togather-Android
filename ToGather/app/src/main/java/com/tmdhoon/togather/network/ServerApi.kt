@@ -95,4 +95,10 @@ interface ServerApi {
         @Header("Authorization") accessToken: String,
         @Body deleteUserRequest: DeleteUserRequest,
     ) : Call<Void>
+
+    @GET("users/{user-id}")
+    fun userInfo(
+        @Header("Authorization") accessToken: String,
+        @Path("user-id") userId : Int,
+    ) : Call<UserInfoResponse>
 }
