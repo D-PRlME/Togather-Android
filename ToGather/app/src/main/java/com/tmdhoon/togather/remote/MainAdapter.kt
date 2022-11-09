@@ -1,6 +1,8 @@
 package com.tmdhoon.togather.remoteimport
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 
 import android.view.ViewGroup
@@ -13,6 +15,8 @@ import com.tmdhoon.togather.databinding.ItemMainListBinding
 import com.tmdhoon.togather.dto.response.data.PostList
 import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.remote.MainTagListAdapter
+import com.tmdhoon.togather.util.startIntent
+import com.tmdhoon.togather.view.DetailUserActivity
 
 class MainAdapter (val postList: ArrayList<PostList>, val mainTagListAdapter: MainTagListAdapter, val context : Context) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>(){
@@ -36,6 +40,14 @@ class MainAdapter (val postList: ArrayList<PostList>, val mainTagListAdapter: Ma
         holder.binding.rvMainTagList.adapter = mainTagListAdapter
         holder.binding.rvMainTagList.layoutManager = GridLayoutManager(context, 5)
         holder.binding.rvMainTagList.addItemDecoration(ItemDecoration(-120))
+
+        holder.binding.clMainListProfile.setOnClickListener {
+            val intent = Intent(this.context, DetailUserActivity::class.java)
+            intent.putExtra("userId", postList[position].user.user_id)
+            Log.d("TEST", postList[position].user.user_id.toString())
+            this.context.startActivity(intent)
+
+        }
     }
 
     override fun getItemCount(): Int {
