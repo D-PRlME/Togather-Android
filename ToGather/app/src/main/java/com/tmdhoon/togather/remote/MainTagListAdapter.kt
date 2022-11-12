@@ -37,7 +37,6 @@ class MainTagListAdapter(private val tagList: ArrayList<TagLists>) :
     }
 
     override fun getItemCount(): Int {
-        Log.d(TAG, tagList.size.toString())
         return tagList.size
     }
 }
