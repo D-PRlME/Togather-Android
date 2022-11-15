@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdhoon.togather.remote.ItemDecoration
@@ -17,8 +18,13 @@ import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.remote.MainTagListAdapter
 import com.tmdhoon.togather.util.startIntent
 import com.tmdhoon.togather.view.DetailUserActivity
+import com.tmdhoon.togather.view.fragment.DetailFragment
 
-class MainAdapter (val postList: ArrayList<PostList>, val mainTagListAdapter: MainTagListAdapter, val context : Context) :
+class MainAdapter (
+    val postList: ArrayList<PostList>,
+    val mainTagListAdapter: MainTagListAdapter,
+    val context : Context,
+    val parentFragmentManager : FragmentManager) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>(){
 
     class MainViewHolder(val binding : ItemMainListBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -35,6 +41,10 @@ class MainAdapter (val postList: ArrayList<PostList>, val mainTagListAdapter: Ma
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(postList.get(position), postList.get(position).user)
+
+        holder.itemView.setOnClickListener {
+            DetailFragment().show(parentFragmentManager, DetailFragment().tag)
+        }
 
         holder.binding.rvMainTagList.removeItemDecoration(ItemDecoration(20))
         holder.binding.rvMainTagList.adapter = mainTagListAdapter
