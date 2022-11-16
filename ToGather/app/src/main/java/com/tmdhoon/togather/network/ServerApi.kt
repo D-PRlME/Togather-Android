@@ -101,4 +101,10 @@ interface ServerApi {
         @Header("Authorization") accessToken: String,
         @Path("user-id") userId : Int,
     ) : Call<UserInfoResponse>
+
+    @GET("posts/{post-id}")
+    fun getPosts(
+        @Header("Authorization") accessToken: String,
+        @Path("post-id") postId : Long,
+    ) : Call<DetailResponse>
 }
