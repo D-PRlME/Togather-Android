@@ -12,6 +12,6 @@ data class DetailResponse(
     val tag : ArrayList<Tags>,
     val content : String,
     val is_completed : Boolean,
-    val is_liked : Long,
+    val is_liked : Boolean,
     val like_count : Long,
 )
