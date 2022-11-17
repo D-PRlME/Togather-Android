@@ -69,41 +69,98 @@
 
                 <TextView
                     style="@style/Theme.ToGather.TextView_Focus_Out"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="16dp"
                     android:text="@{DetailViewModel.detailResponse.body().created_at}"
-                    app:layout_constraintTop_toTopOf="@id/tv_detail_profile_name"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_detail_profile_name"/>
+                    app:layout_constraintBottom_toBottomOf="@id/tv_detail_profile_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_detail_profile_name" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_detail_line"
                     style="@style/Theme.ToGather.ConstraintLayout_Line"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="18dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_profile_name"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_profile_name" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_detail_tag"
                     android:layout_width="0dp"
-                    android:layout_marginHorizontal="16dp"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_main_tag_list"
-                    app:layout_constraintTop_toBottomOf="@id/cl_detail_line"
+                    android:layout_marginHorizontal="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@id/cl_detail_line"
+                    tools:listitem="@layout/item_main_tag_list" />
 
                 <TextView
                     android:id="@+id/tv_detail_content"
                     style="@style/Theme.ToGather.TextView_Tag"
                     android:layout_width="0dp"
+                    android:layout_marginHorizontal="16dp"
                     android:gravity="start"
                     android:text="@{DetailViewModel.detailResponse.body().content}"
-                    android:layout_marginHorizontal="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_detail_tag"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_detail_tag" />
+
+                <Button
+                    android:id="@+id/bt_detail_contact"
+                    style="@style/Theme.ToGather.Button_Yellow_Short"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="210dp"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:text="@string/detail_contact"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="2dp"
+                    android:elevation="100dp"
+                    android:src="@drawable/ic_contact"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_contact"
+                    app:layout_constraintStart_toStartOf="@id/bt_detail_contact"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_contact" />
+
+                <Button
+                    android:id="@+id/bt_detail_delete"
+                    style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/button_red_radius"
+                    android:text="@string/detail_delete"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_contact"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_contact" />
+
+                <Button
+                    android:id="@+id/bt_detail_edit"
+                    style="@style/Theme.ToGather.Button_White_Short"
+                    android:text="@string/detail_edit"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_delete"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_delete"
+                    app:layout_constraintEnd_toStartOf="@id/bt_detail_delete"/>
+
+                <Button
+                    android:id="@+id/bt_detail_like"
+                    style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{String.valueOf(DetailViewModel.detailResponse.body().like_count)}"
+                    android:paddingStart="32dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toTopOf="@id/bt_detail_delete"
+                    app:layout_constraintEnd_toEndOf="@+id/bt_detail_delete"
+                    app:layout_constraintStart_toStartOf="@id/bt_detail_delete" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
