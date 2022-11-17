@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     }
 
     private val mainAdapter : MainAdapter by lazy {
-        MainAdapter(postList, mainTagListAdapter, this.requireContext())
+        MainAdapter(postList, mainTagListAdapter, this.requireContext(), parentFragmentManager)
     }
 
     private val mainTagAdapter : MainTagAdapter by lazy {

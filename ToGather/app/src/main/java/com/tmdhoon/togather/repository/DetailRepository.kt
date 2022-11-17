@@ -22,7 +22,7 @@ class DetailRepository(
             }
 
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
         })
