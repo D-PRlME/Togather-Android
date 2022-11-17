@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="tag"
-            type="com.tmdhoon.togather.dto.response.data.TagLists" />
+            name="tags"
+            type="com.tmdhoon.togather.dto.response.data.Tags" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,14 +16,14 @@
             android:id="@+id/cv_main_tag"
             style="@style/Theme.ToGather.CardView_Tag_Post"
             app:cardCornerRadius="36dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_list_item_tag1"
-                android:text="@{tag.name}"
+                android:text="@{tags.name}"
                 style="@style/Theme.ToGather.TextView_Tag_Post" />
 
         </androidx.cardview.widget.CardView>
