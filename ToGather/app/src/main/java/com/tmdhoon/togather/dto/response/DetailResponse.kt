@@ -9,7 +9,7 @@ data class DetailResponse(
     val user : User,
     val is_mine : Boolean,
     val created_at : String,
-    val tag : ArrayList<Tags>,
+    val tags : ArrayList<Tags>,
     val content : String,
     val is_completed : Boolean,
     val is_liked : Boolean,

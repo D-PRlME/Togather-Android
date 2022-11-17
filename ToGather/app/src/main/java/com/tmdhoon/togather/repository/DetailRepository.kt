@@ -1,5 +1,6 @@
 package com.tmdhoon.togather.repository
 
+import android.util.Log
 import com.tmdhoon.togather.dto.response.DetailResponse
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
