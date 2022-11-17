@@ -31,7 +31,7 @@ class PostFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         initDataBinding(inflater, container)
         initCloseButton()

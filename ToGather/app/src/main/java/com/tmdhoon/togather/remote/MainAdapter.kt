@@ -1,6 +1,7 @@
 package com.tmdhoon.togather.remoteimport
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,8 @@ import com.tmdhoon.togather.databinding.ItemMainListBinding
 import com.tmdhoon.togather.dto.response.data.PostList
 import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.remote.MainTagListAdapter
+import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.util.startIntent
 import com.tmdhoon.togather.view.DetailUserActivity
 import com.tmdhoon.togather.view.fragment.DetailFragment
@@ -43,6 +46,14 @@ class MainAdapter (
         holder.bind(postList.get(position), postList.get(position).user)
 
         holder.itemView.setOnClickListener {
+            putPref(
+                initPref(
+                    context = context,
+                    mode = MODE_PRIVATE,
+                ).edit(),
+                "postId",
+                postList[position].post_id,
+            )
             DetailFragment().show(parentFragmentManager, DetailFragment().tag)
         }
 
