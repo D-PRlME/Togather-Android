@@ -1,9 +1,11 @@
 package com.tmdhoon.togather.viewmodel
 
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tmdhoon.togather.dto.response.DetailResponse
 import com.tmdhoon.togather.repository.DetailRepository
+import com.tmdhoon.togather.util.initPref
 import retrofit2.Response
 
 class DetailViewModel() : ViewModel() {
@@ -13,8 +15,18 @@ class DetailViewModel() : ViewModel() {
     }
 
     val detailResponse : MutableLiveData<Response<DetailResponse>> = MutableLiveData()
+    val likeOnResponse : MutableLiveData<Response<Void>> = MutableLiveData()
+    val likeOffResponse : MutableLiveData<Response<Void>> = MutableLiveData()
 
     fun getPosts(postId : Int){
         detailRepository.getPosts(postId.toLong())
+    }
+
+    fun like(postId: Int){
+        detailRepository.like(postId.toLong())
+    }
+
+    fun unLike(postId : Int){
+        detailRepository.unLike(postId.toLong())
     }
 }
