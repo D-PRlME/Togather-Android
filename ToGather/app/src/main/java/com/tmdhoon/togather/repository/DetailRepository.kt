@@ -13,20 +13,39 @@ class DetailRepository(
     private val detailViewModel: DetailViewModel,
 ) {
 
-    fun getPosts(postId : Long) =
-        ApiProvider.retrofit.getPosts("Bearer $ACCESS_TOKEN", postId).enqueue(object : Callback<DetailResponse>{
-            override fun onResponse(
-                call: Call<DetailResponse>,
-                response: Response<DetailResponse>
-            ) {
-                detailViewModel.detailResponse.value = response
+    fun getPosts(postId: Long) =
+        ApiProvider.retrofit.getPosts("Bearer $ACCESS_TOKEN", postId)
+            .enqueue(object : Callback<DetailResponse> {
+                override fun onResponse(
+                    call: Call<DetailResponse>,
+                    response: Response<DetailResponse>
+                ) {
+                    detailViewModel.detailResponse.value = response
+                }
+
+                override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
+
+                }
+            })
+
+    fun like(postId: Long) =
+        ApiProvider.retrofit.like("Bearer $ACCESS_TOKEN", postId).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                detailViewModel.likeOnResponse.value = response
             }
 
-            override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-
+            override fun onFailure(call: Call<Void>, t: Throwable) {
             }
-
         })
 
+    fun unLike(postId: Long) =
+        ApiProvider.retrofit.unLike("Bearer $ACCESS_TOKEN", postId)
+            .enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    detailViewModel.likeOffResponse.value = response
+                }
 
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                }
+            })
 }
