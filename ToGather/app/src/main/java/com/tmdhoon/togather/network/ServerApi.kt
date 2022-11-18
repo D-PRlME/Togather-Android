@@ -102,9 +102,23 @@ interface ServerApi {
         @Path("user-id") userId : Int,
     ) : Call<UserInfoResponse>
 
+    // 게시글 상세조회
     @GET("posts/{post-id}")
     fun getPosts(
         @Header("Authorization") accessToken: String,
         @Path("post-id") postId : Long,
     ) : Call<DetailResponse>
+
+    // 좋아요 추가
+    @POST("posts/like/{post-id}")
+    fun like(
+        @Header("Authorization") accessToken: String,
+        @Path("post-id") postId : Long,
+    ) : Call<Void>
+
+    @DELETE("posts/like/{post-id}")
+    fun unLike(
+        @Header("Authorization") accessToken : String,
+        @Path("post-id") postId : Long,
+    ) : Call<Void>
 }
