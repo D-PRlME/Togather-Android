@@ -6,5 +6,4 @@ data class PostRequest(
     val title : String,
     val tags : ArrayList<Tags>,
     val content : String,
-    val link : String,
 )

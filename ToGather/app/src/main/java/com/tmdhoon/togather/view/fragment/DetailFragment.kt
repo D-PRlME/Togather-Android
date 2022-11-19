@@ -4,21 +4,12 @@ import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.print.PrintAttributes.Margins
 import android.util.Log
-import android.view.Display
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.LinearLayout
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.core.view.marginTop
-import androidx.core.view.setMargins
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -26,33 +17,30 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentDetailBinding
 import com.tmdhoon.togather.dto.response.data.Tags
-import com.tmdhoon.togather.remote.MainTagAdapter
 import com.tmdhoon.togather.remote.MainTagListAdapter
 import com.tmdhoon.togather.util.getPref
 import com.tmdhoon.togather.util.initPref
 import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.viewmodel.DetailViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class DetailFragment : BottomSheetDialogFragment() {
 
-    private val detailViewModel : DetailViewModel by lazy {
+    private val detailViewModel: DetailViewModel by lazy {
         DetailViewModel()
     }
 
-    private val tagList : ArrayList<Tags> by lazy {
+    private val tagList: ArrayList<Tags> by lazy {
         ArrayList()
     }
 
-    private val pref : SharedPreferences by lazy {
+    private val pref: SharedPreferences by lazy {
         initPref(requireContext(), MODE_PRIVATE)
     }
 
-    private var postId : Int = 0
+    private var postId: Int = 0
 
-    private lateinit var binding : FragmentDetailBinding
+    private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomSheetDialog(requireContext(), theme).apply {
@@ -67,7 +55,6 @@ class DetailFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         binding.lifecycleOwner = this
         binding.detailViewModel = detailViewModel
@@ -75,7 +62,12 @@ class DetailFragment : BottomSheetDialogFragment() {
         observeDetailResponse()
         observeLikeOnResponse()
         observeLikeOffResponse()
+        getPostDetail()
 
+        return binding.root
+    }
+
+    private fun getPostDetail() {
         detailViewModel.getPosts(
             getPref(
                 initPref(requireContext(), MODE_PRIVATE),
@@ -83,22 +75,43 @@ class DetailFragment : BottomSheetDialogFragment() {
                 0
             ) as Int
         )
-
-        return binding.root
     }
 
-    fun like(){
-        if(getPref(pref, "like$postId", false) as Boolean){
+    fun editPost() {
+        putPref(
+            editor = pref.edit(),
+            key = "isEdited",
+            true
+        )
+        PostFragment().show(
+            parentFragmentManager,
+            PostFragment().tag,
+        )
+        putPref(
+            pref.edit(),
+            "title",
+            binding.tvDetailTitle.text,
+        )
+        putPref(
+            pref.edit(),
+            "content",
+            binding.tvDetailContent.text,
+        )
+
+    }
+
+    fun like() {
+        if (getPref(pref, "like$postId", false) as Boolean) {
             detailViewModel.unLike(postId)
-        }else{
+        } else {
             detailViewModel.like(postId)
         }
     }
 
-    private fun observeLikeOnResponse(){
-        detailViewModel.likeOnResponse.observe(viewLifecycleOwner){
-            when(it.code()){
-                204->{
+    private fun observeLikeOnResponse() {
+        detailViewModel.likeOnResponse.observe(viewLifecycleOwner) {
+            when (it.code()) {
+                204 -> {
                     setLikeOn()
                     putPref(pref.edit(), "like$postId", true)
                     detailViewModel.getPosts(postId)
@@ -107,10 +120,10 @@ class DetailFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun observeLikeOffResponse(){
-        detailViewModel.likeOffResponse.observe(viewLifecycleOwner){
-            when(it.code()){
-                204->{
+    private fun observeLikeOffResponse() {
+        detailViewModel.likeOffResponse.observe(viewLifecycleOwner) {
+            when (it.code()) {
+                204 -> {
                     setLikeOff()
                     putPref(pref.edit(), "like$postId", false)
                     detailViewModel.getPosts(postId)
@@ -119,7 +132,7 @@ class DetailFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setLikeOn(){
+    private fun setLikeOn() {
         binding.imgDetailLike.setImageDrawable(
             getDrawable(
                 requireContext(),
@@ -128,7 +141,7 @@ class DetailFragment : BottomSheetDialogFragment() {
         )
     }
 
-    private fun setLikeOff(){
+    private fun setLikeOff() {
         binding.imgDetailLike.setImageDrawable(
             getDrawable(
                 requireContext(),
@@ -137,22 +150,26 @@ class DetailFragment : BottomSheetDialogFragment() {
         )
     }
 
-    private fun observeDetailResponse(){
+    private fun observeDetailResponse() {
         detailViewModel.detailResponse.observe(viewLifecycleOwner) {
-            when(it.code()){
-                200->{
+            when (it.code()) {
+                200 -> {
                     postId = getPref(pref, "postId", 0) as Int
                     tagList.clear()
                     tagList.addAll(it.body()!!.tags)
                     binding.rvDetailTag.run {
                         adapter = MainTagListAdapter(tagList)
-                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                        layoutManager = LinearLayoutManager(
+                            requireContext(),
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        )
                     }
-                    if(it.body()!!.is_liked){
+                    if (it.body()!!.is_liked) {
                         setLikeOn()
                         putPref(pref.edit(), "like$postId", false)
 
-                    }else{
+                    } else {
                         setLikeOff()
                         putPref(pref.edit(), "like$postId", false)
                     }

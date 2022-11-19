@@ -3,6 +3,7 @@ package com.tmdhoon.togather.network
 import com.tmdhoon.togather.dto.request.*
 import com.tmdhoon.togather.dto.response.*
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ServerApi {
@@ -123,9 +124,17 @@ interface ServerApi {
         @Path("post-id") postId : Long,
     ) : Call<Void>
 
+    // 내 게시글 조회
     @GET("posts/my")
     fun getMyPostsList(
         @Header("Authorization") accessToken: String,
     ) : Call<MyPostsResponse>
+
+    @PATCH("posts/{post-id}")
+    fun editPosts(
+        @Header("Authorization") accessToken: String,
+        @Path("post-id") postId : Long,
+        @Body postRequest : PostRequest,
+    ) : Call<Void>
 
 }

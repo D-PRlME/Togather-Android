@@ -54,6 +54,7 @@
     <string name="detail_contact">연락하기</string>
     <string name="detail_delete">삭제</string>
     <string name="detail_edit">수정</string>
+    <string name="detail_do_edit">수정하기</string>
 
     <string name="my_post_my_post">내 게시글 보기</string>
 
