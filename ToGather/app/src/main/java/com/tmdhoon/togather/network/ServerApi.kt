@@ -116,9 +116,16 @@ interface ServerApi {
         @Path("post-id") postId : Long,
     ) : Call<Void>
 
+    // 좋아요 취소
     @DELETE("posts/like/{post-id}")
     fun unLike(
         @Header("Authorization") accessToken : String,
         @Path("post-id") postId : Long,
     ) : Call<Void>
+
+    @GET("posts/my")
+    fun getMyPostsList(
+        @Header("Authorization") accessToken: String,
+    ) : Call<MyPostsResponse>
+
 }

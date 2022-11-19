@@ -1,8 +1,10 @@
 package com.tmdhoon.togather.repository
 
+import android.util.Log
 import com.tmdhoon.togather.dto.request.AccountEditRequest
 import com.tmdhoon.togather.dto.request.DeleteUserRequest
 import com.tmdhoon.togather.dto.response.MyInfoResponse
+import com.tmdhoon.togather.dto.response.MyPostsResponse
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.MyInfoViewModel
@@ -50,6 +52,20 @@ class MyInfoRepository(private val myInfoViewModel: MyInfoViewModel) {
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
 
+            }
+        })
+    }
+
+    fun getMyPostList(){
+        ApiProvider.retrofit.getMyPostsList("Bearer $ACCESS_TOKEN").enqueue(object : Callback<MyPostsResponse>{
+            override fun onResponse(
+                call: Call<MyPostsResponse>,
+                response: Response<MyPostsResponse>
+            ) {
+                myInfoViewModel.myPostsResponse.value = response
+            }
+
+            override fun onFailure(call: Call<MyPostsResponse>, t: Throwable) {
             }
         })
     }
