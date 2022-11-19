@@ -9,6 +9,7 @@ import retrofit2.Response
 class PostViewModel : ViewModel() {
 
     val postResponse : MutableLiveData<Response<Void>> = MutableLiveData()
+    val editResponse : MutableLiveData<Response<Void>> = MutableLiveData()
 
     private val postRepository by lazy {
         PostRepository(this)
@@ -26,5 +27,17 @@ class PostViewModel : ViewModel() {
         )
     }
 
-
+    fun editPost(
+        title : String,
+        tags : ArrayList<Tags>,
+        content : String,
+        postId : Int,
+    ){
+        postRepository.editPost(
+            title = title,
+            tags = tags,
+            content = content,
+            postId = postId.toLong(),
+        )
+    }
 }

@@ -19,11 +19,11 @@ class PostRepository(
         content : String,
     ){
         ApiProvider.retrofit.post(
-            "Bearer ${ACCESS_TOKEN}",
-            PostRequest(
-                title,
-                tags,
-                content,
+            accessToken = "Bearer $ACCESS_TOKEN",
+            postRequest = PostRequest(
+                title = title,
+                tags = tags,
+                content = content,
             ),
         ).enqueue(object :
             Callback<Void> {
@@ -38,6 +38,31 @@ class PostRepository(
                 call: Call<Void>,
                 t: Throwable,
             ) {
+            }
+        })
+    }
+
+    fun editPost(
+        title : String,
+        tags : ArrayList<Tags>,
+        content : String,
+        postId : Long,
+    ){
+        ApiProvider.retrofit.editPosts(
+            accessToken = "Bearer $ACCESS_TOKEN",
+            postId = postId,
+            postRequest = PostRequest(
+                title = title,
+                tags = tags,
+                content = content,
+            ),
+        ).enqueue(object : Callback<Void>{
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                postViewModel.editResponse.value = response
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+
             }
         })
     }
