@@ -78,6 +78,10 @@ class MyInfoFragment : Fragment() {
         changePwViewModel.changePwVerifyEmail(getPref(initPref(this.requireContext(), MODE_PRIVATE), "email", "").toString())
     }
 
+    fun showMyPost(){
+        MyPostFragment().show(parentFragmentManager, MyPostFragment().tag)
+    }
+
     fun logout(){
         logoutViewModel.logout()
     }

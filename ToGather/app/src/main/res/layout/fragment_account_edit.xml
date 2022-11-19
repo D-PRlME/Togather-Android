@@ -5,6 +5,7 @@
     tools:context="view.fragment.AccountEditFragment">
 
     <data>
+
         <variable
             name="user"
             type="com.tmdhoon.togather.viewmodel.MyInfoViewModel" />
@@ -42,11 +43,11 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/cimg_account_edit_profile"
+                    loadImage="@{user.myInfoResponse.body().profile_image_url}"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="26dp"
                     android:layout_marginTop="72dp"
-                    loadImage="@{user.myInfoResponse.body().profile_image_url}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,6 +65,7 @@
                 <EditText
                     android:id="@+id/et_account_edit_name"
                     style="@style/Theme.ToGather.EditText"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@{user.myInfoResponse.body().name}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -73,10 +75,11 @@
                 <EditText
                     android:id="@+id/et_account_edit_email"
                     style="@style/Theme.ToGather.EditText"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:focusableInTouchMode="false"
-                    android:textColor="@color/all_background_focusOut"
                     android:text="@{user.myInfoResponse.body().email}"
+                    android:textColor="@color/all_background_focusOut"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et_account_edit_name" />
@@ -84,6 +87,7 @@
                 <EditText
                     android:id="@+id/et_account_edit_introduce"
                     style="@style/Theme.ToGather.EditText"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:text="@{user.myInfoResponse.body().introduce}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -94,8 +98,8 @@
                     android:id="@+id/bt_account_edit_save"
                     style="@style/Theme.ToGather.Button_Yellow_Short"
                     android:layout_marginStart="16dp"
-                    android:text="@string/account_edit_save"
                     android:layout_marginBottom="16dp"
+                    android:text="@string/account_edit_save"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -103,10 +107,10 @@
                     android:id="@+id/bt_account_edit_delete_account"
                     style="@style/Theme.ToGather.Button_White_Short"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="@{()->AccountEditFragment.deleteUser()}"
                     android:paddingHorizontal="16dp"
                     android:text="@string/account_edit_delete"
-                    android:onClick="@{()->AccountEditFragment.deleteUser()}"
-                    android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 

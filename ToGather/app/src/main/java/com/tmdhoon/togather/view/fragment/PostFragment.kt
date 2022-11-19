@@ -11,14 +11,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
-import com.tmdhoon.togather.databinding.BottomSheetPostBinding
+import com.tmdhoon.togather.databinding.FragmentPostBinding
 import com.tmdhoon.togather.dto.request.data.Tags
 import com.tmdhoon.togather.util.printToast
 import com.tmdhoon.togather.viewmodel.PostViewModel
 
 class PostFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding : BottomSheetPostBinding
+    private lateinit var binding : FragmentPostBinding
 
     private val postViewModel : PostViewModel by lazy {
         PostViewModel()
@@ -51,7 +51,7 @@ class PostFragment : BottomSheetDialogFragment() {
     }
 
     private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet_post, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post, container, false)
     }
 
     private fun initPostObserve() {
