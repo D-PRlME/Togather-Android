@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdhoon.togather.remote.ItemDecoration
 import com.tmdhoon.togather.R
@@ -25,7 +26,6 @@ import com.tmdhoon.togather.view.fragment.DetailFragment
 
 class MainAdapter (
     val postList: ArrayList<PostList>,
-    val mainTagListAdapter: MainTagListAdapter,
     val context : Context,
     val parentFragmentManager : FragmentManager) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>(){
@@ -57,22 +57,20 @@ class MainAdapter (
             DetailFragment().show(parentFragmentManager, DetailFragment().tag)
         }
 
-        holder.binding.rvMainTagList.removeItemDecoration(ItemDecoration(20))
-        holder.binding.rvMainTagList.adapter = mainTagListAdapter
-        holder.binding.rvMainTagList.layoutManager = GridLayoutManager(context, 5)
-        holder.binding.rvMainTagList.addItemDecoration(ItemDecoration(-120))
+        holder.binding.rvMainTagList.run {
+            adapter = MainTagListAdapter(postList[position].tags)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
 
         holder.binding.clMainListProfile.setOnClickListener {
-            val intent = Intent(this.context, DetailUserActivity::class.java)
-            intent.putExtra("userId", postList[position].user.user_id)
-            Log.d("TEST", postList[position].user.user_id.toString())
-            this.context.startActivity(intent)
-
+            this.context.startActivity(
+                Intent(this.context, DetailUserActivity::class.java)
+                .putExtra("userId", postList[position].user.user_id)
+            )
         }
     }
 
-    override fun getItemCount(): Int {
-        return postList.size
-    }
+    override fun getItemCount(): Int =
+        postList.size
 
 }

@@ -1,5 +1,6 @@
 package com.tmdhoon.togather.remote
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,7 +9,8 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ItemMainTagListBinding
 import com.tmdhoon.togather.dto.response.data.Tags
 
-class MainTagListAdapter(private val tagList: ArrayList<Tags>) :
+class MainTagListAdapter(
+    private val tagList: ArrayList<Tags>) :
     RecyclerView.Adapter<MainTagListAdapter.MainTagViewHolder>() {
 
     class MainTagViewHolder(val binding: ItemMainTagListBinding) :

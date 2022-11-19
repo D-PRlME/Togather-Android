@@ -30,20 +30,12 @@ class HomeFragment : Fragment() {
         ArrayList()
     }
 
-    private val tagList : ArrayList<Tags> by lazy {
-        ArrayList()
-    }
-
     private val mainViewModel : MainViewModel by lazy {
         MainViewModel()
     }
 
-    private val mainTagListAdapter : MainTagListAdapter by lazy {
-        MainTagListAdapter(tagList)
-    }
-
     private val mainAdapter : MainAdapter by lazy {
-        MainAdapter(postList, mainTagListAdapter, this.requireContext(), parentFragmentManager)
+        MainAdapter(postList, this.requireContext(), parentFragmentManager)
     }
 
     private val mainTagAdapter : MainTagAdapter by lazy {
