@@ -9,21 +9,36 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PostRepository(private val postViewModel : PostViewModel) {
+class PostRepository(
+    private val postViewModel : PostViewModel,
+    ) {
 
-    fun post(title : String, tags : ArrayList<Tags>, content : String, link : String){
-        val postRequest = PostRequest(title, tags, content, link)
-        ApiProvider.retrofit.post("Bearer ${ACCESS_TOKEN}", postRequest).enqueue(object :
+    fun post(
+        title : String,
+        tags : ArrayList<Tags>,
+        content : String,
+    ){
+        ApiProvider.retrofit.post(
+            "Bearer ${ACCESS_TOKEN}",
+            PostRequest(
+                title,
+                tags,
+                content,
+            ),
+        ).enqueue(object :
             Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>,
+            ) {
                 postViewModel.postResponse.value = response
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-
+            override fun onFailure(
+                call: Call<Void>,
+                t: Throwable,
+            ) {
             }
-
         })
     }
-
 }

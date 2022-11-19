@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -29,11 +28,17 @@ class PostFragment : BottomSheetDialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_post,
+            container,
+            false,
+        )
 
-        initDataBinding(inflater, container)
         initCloseButton()
         initPostButton()
         initTagButton()
@@ -42,49 +47,58 @@ class PostFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomSheetDialog(requireContext(), theme).apply {
+    override fun onCreateDialog(
+        savedInstanceState: Bundle?,
+    ): Dialog =
+        BottomSheetDialog(
+            requireContext(),
+            theme,
+        ).apply {
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-        return dialog
-    }
-
-    private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post, container, false)
-    }
 
     private fun initPostObserve() {
-        postViewModel.postResponse.observe(this, Observer {
+        postViewModel.postResponse.observe(viewLifecycleOwner){
             when(it.code()){
                 201 ->{
-                    printToast(view?.context, "글이 정상적으로 등록되었습니다!")
-                    binding.etPostMain.text = null
-                    binding.etPostTitle.text = null
-                    binding.etPostLink.text = null
+                    printToast(
+                        context = view?.context,
+                        message = "글이 정상적으로 등록되었습니다!",
+                        )
                     tagList.clear()
+                    dismiss()
                 }
                 400 -> {
-                    printToast(view?.context, "값이 잘못되었습니다!")
+                    printToast(
+                        context = view?.context,
+                        message = "값이 잘못되었습니다!",
+                    )
                 }
             }
-        })
+        }
     }
 
     private fun initTagButton() {
         binding.btPostTag.setOnClickListener {
-            val bottomSheetFragment = TagFragment()
-            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+            TagFragment().show(
+                parentFragmentManager,
+                TagFragment().tag,
+            )
         }
     }
 
     private fun initPostButton() {
         binding.btPostPost.setOnClickListener {
-            val title = binding.etPostTitle.text.toString()
-            val link = binding.etPostLink.text.toString()
-            val main = binding.etPostMain.text.toString()
-            if(title != "" && link != "" && main != ""){
-                postViewModel.post(title, tagList, link, main)
+            if(
+                binding.etPostTitle.text.isNotEmpty()
+                && binding.etPostMain.text.isNotEmpty()
+            ){
+                postViewModel.post(
+                    binding.etPostTitle.text.toString(),
+                    tagList,
+                    binding.etPostMain.text.toString(),
+                )
             }
         }
     }

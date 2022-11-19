@@ -14,8 +14,16 @@ class PostViewModel : ViewModel() {
         PostRepository(this)
     }
 
-    fun post(title : String, tags : ArrayList<Tags>, content : String, link : String){
-        postRepository.post(title, tags, content, link)
+    fun post(
+        title : String,
+        tags : ArrayList<Tags>,
+        content : String,
+    ){
+        postRepository.post(
+            title = title,
+            tags = tags,
+            content = content,
+        )
     }
 
 
