@@ -1,11 +1,9 @@
 package com.tmdhoon.togather.viewmodel
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tmdhoon.togather.dto.response.DetailResponse
 import com.tmdhoon.togather.repository.DetailRepository
-import com.tmdhoon.togather.util.initPref
 import retrofit2.Response
 
 class DetailViewModel() : ViewModel() {

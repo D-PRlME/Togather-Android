@@ -149,6 +149,7 @@
                     android:id="@+id/bt_detail_edit"
                     style="@style/Theme.ToGather.Button_White_Short"
                     android:text="@string/detail_edit"
+                    android:onClick="@{()->DetailFragment.editPost()}"
                     android:layout_marginBottom="12dp"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toBottomOf="@id/bt_detail_delete"
