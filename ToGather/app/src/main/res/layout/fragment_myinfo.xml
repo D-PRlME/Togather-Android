@@ -85,6 +85,7 @@
             android:id="@+id/bt_mypage_check_my_post"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_check_my_post"
+            android:onClick="@{()->MyInfoFragment.showMyPost()}"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="@id/bt_mypage_change_pw"
             app:layout_constraintStart_toStartOf="@id/bt_mypage_change_pw"
