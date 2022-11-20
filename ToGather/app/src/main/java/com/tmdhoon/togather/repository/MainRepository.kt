@@ -1,7 +1,7 @@
 package com.tmdhoon.togather.repository
 
 import android.util.Log
-import com.tmdhoon.togather.dto.response.MainResponse
+import com.tmdhoon.togather.dto.response.PostListResponse
 import com.tmdhoon.togather.dto.response.TagResponse
 import com.tmdhoon.togather.dto.response.UserInfoResponse
 import com.tmdhoon.togather.network.ApiProvider
@@ -14,15 +14,15 @@ import retrofit2.Response
 class MainRepository(private val mainViewModel: MainViewModel) {
 
     fun get(){
-        ApiProvider.retrofit.get("Bearer $ACCESS_TOKEN").enqueue(object : Callback<MainResponse>{
+        ApiProvider.retrofit.get("Bearer $ACCESS_TOKEN").enqueue(object : Callback<PostListResponse>{
             override fun onResponse(
-                call: Call<MainResponse>,
-                response: Response<MainResponse>
+                call: Call<PostListResponse>,
+                response: Response<PostListResponse>
             ) {
-                mainViewModel.mainResponse.value = response
+                mainViewModel.postListResponse.value = response
             }
 
-            override fun onFailure(call: Call<MainResponse>, t: Throwable) {
+            override fun onFailure(call: Call<PostListResponse>, t: Throwable) {
             }
         })
     }
