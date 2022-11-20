@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,8 @@ class DetailFragment : BottomSheetDialogFragment() {
     }
 
     private var postId: Int = 0
+
+    private var likeCount : Int = 0
 
     private lateinit var binding: FragmentDetailBinding
 
@@ -96,10 +99,7 @@ class DetailFragment : BottomSheetDialogFragment() {
     private fun getPostDetail() {
         detailViewModel.getPosts(
             getPref(
-                initPref(
-                    context = requireContext(),
-                    mode = MODE_PRIVATE,
-                ),
+                preferences = pref,
                 key = "postId",
                 value = 0,
             ) as Int
@@ -126,7 +126,6 @@ class DetailFragment : BottomSheetDialogFragment() {
             key = "content",
             value = binding.tvDetailContent.text,
         )
-
     }
 
     fun like() {
@@ -136,8 +135,12 @@ class DetailFragment : BottomSheetDialogFragment() {
                 value = false,
             ) as Boolean
         ) {
+           binding.btDetailLike.text = likeCount.toString()
+            setLikeOff()
             detailViewModel.unLike(postId)
         } else {
+            binding.btDetailLike.text = (likeCount+1).toString()
+            setLikeOn()
             detailViewModel.like(postId)
         }
     }
@@ -152,7 +155,6 @@ class DetailFragment : BottomSheetDialogFragment() {
                         key = "like$postId",
                         value = true,
                     )
-                    detailViewModel.getPosts(postId)
                 }
             }
         }
@@ -168,7 +170,6 @@ class DetailFragment : BottomSheetDialogFragment() {
                         key = "like$postId",
                         value = false,
                     )
-                    detailViewModel.getPosts(postId)
                 }
             }
         }
@@ -233,8 +234,9 @@ class DetailFragment : BottomSheetDialogFragment() {
                         putPref(
                             editor = pref.edit(),
                             key = "like$postId",
-                            value = false,
+                            value = true,
                         )
+                        likeCount = (it.body()!!.like_count - 1).toInt()
 
                     } else {
                         setLikeOff()

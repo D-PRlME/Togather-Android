@@ -110,64 +110,37 @@
                     app:layout_constraintTop_toBottomOf="@id/rv_detail_tag" />
 
                 <Button
-                    android:id="@+id/bt_detail_contact"
-                    style="@style/Theme.ToGather.Button_Yellow_Short"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="210dp"
-                    android:paddingVertical="8dp"
-                    android:paddingStart="16dp"
-                    android:layout_marginBottom="18dp"
-                    android:text="@string/detail_contact"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="2dp"
-                    android:elevation="100dp"
-                    android:src="@drawable/ic_contact"
-                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_contact"
-                    app:layout_constraintStart_toStartOf="@id/bt_detail_contact"
-                    app:layout_constraintTop_toTopOf="@id/bt_detail_contact" />
-
-                <Button
                     android:id="@+id/bt_detail_delete"
                     style="@style/Theme.ToGather.Button_White_Short"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="12dp"
                     android:background="@drawable/button_red_radius"
-                    android:text="@string/detail_delete"
                     android:onClick="@{()->DetailFragment.deletePost()}"
-                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_contact"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/bt_detail_contact" />
+                    android:text="@string/detail_delete"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bt_detail_edit"
+                    app:layout_constraintStart_toEndOf="@id/bt_detail_edit"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_edit" />
 
                 <Button
                     android:id="@+id/bt_detail_edit"
                     style="@style/Theme.ToGather.Button_White_Short"
-                    android:text="@string/detail_edit"
                     android:onClick="@{()->DetailFragment.editPost()}"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_delete"
-                    app:layout_constraintTop_toTopOf="@id/bt_detail_delete"
-                    app:layout_constraintEnd_toStartOf="@id/bt_detail_delete"/>
+                    android:text="@string/detail_edit"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp" />
 
                 <Button
                     android:id="@+id/bt_detail_like"
                     style="@style/Theme.ToGather.Button_White_Short"
-                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:paddingStart="32dp"
                     android:onClick="@{()->DetailFragment.like()}"
                     android:text="@{String.valueOf(DetailViewModel.detailResponse.body().like_count)}"
-                    android:paddingStart="32dp"
-                    android:gravity="center_vertical"
-                    app:layout_constraintBottom_toTopOf="@id/bt_detail_delete"
-                    app:layout_constraintEnd_toEndOf="@+id/bt_detail_delete"
-                    app:layout_constraintStart_toStartOf="@id/bt_detail_delete" />
+                    app:layout_constraintBottom_toBottomOf="@+id/bt_detail_delete"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/bt_detail_delete" />
                 
                 <ImageView
                     android:id="@+id/img_detail_like"
