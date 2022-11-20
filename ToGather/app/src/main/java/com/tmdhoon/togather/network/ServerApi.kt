@@ -23,7 +23,7 @@ interface ServerApi {
     @GET("posts")
     fun get(
         @Header("Authorization") accessToken: String,
-    ): Call<MainResponse>
+    ): Call<PostListResponse>
 
     // 글쓰기
     @POST("posts")
@@ -143,4 +143,11 @@ interface ServerApi {
         @Header("Authorization") accessToken: String,
         @Path("post-id") postId : Long,
     ) : Call<Void>
+
+    // 게시글 제목 검색
+    @GET("posts/title")
+    fun searchPostTitle(
+        @Header("Authorization") accessToken: String,
+        @Query("title") title : String,
+    ) : Call<PostListResponse>
 }
