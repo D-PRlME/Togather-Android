@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +19,7 @@ import com.tmdhoon.togather.dto.response.data.Tags
 import com.tmdhoon.togather.remote.MainTagListAdapter
 import com.tmdhoon.togather.util.getPref
 import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.printToast
 import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.viewmodel.DetailViewModel
 
@@ -35,44 +35,73 @@ class DetailFragment : BottomSheetDialogFragment() {
     }
 
     private val pref: SharedPreferences by lazy {
-        initPref(requireContext(), MODE_PRIVATE)
+        initPref(
+            context = requireContext(),
+            mode = MODE_PRIVATE,
+        )
     }
 
     private var postId: Int = 0
 
     private lateinit var binding: FragmentDetailBinding
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomSheetDialog(requireContext(), theme).apply {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+        BottomSheetDialog(
+            requireContext(),
+            theme,
+        ).apply {
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-        return dialog
-    }
-
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_detail,
+            container,
+            false,
+        )
         binding.lifecycleOwner = this
-        binding.detailViewModel = detailViewModel
         binding.detailFragment = this
+        binding.detailViewModel = detailViewModel
         observeDetailResponse()
         observeLikeOnResponse()
         observeLikeOffResponse()
+        observeDeletePostResponse()
         getPostDetail()
+        refresh()
 
         return binding.root
+    }
+
+    private fun refresh() {
+        if (getPref(
+                preferences = pref,
+                key = "isEdited",
+                value = false,
+            ) as Boolean
+        ) {
+            getPostDetail()
+            putPref(
+                editor = pref.edit(),
+                key = "isEdited",
+                value = false
+            )
+        }
     }
 
     private fun getPostDetail() {
         detailViewModel.getPosts(
             getPref(
-                initPref(requireContext(), MODE_PRIVATE),
-                "postId",
-                0
+                initPref(
+                    context = requireContext(),
+                    mode = MODE_PRIVATE,
+                ),
+                key = "postId",
+                value = 0,
             ) as Int
         )
     }
@@ -81,27 +110,32 @@ class DetailFragment : BottomSheetDialogFragment() {
         putPref(
             editor = pref.edit(),
             key = "isEdited",
-            true
+            value = true,
         )
         PostFragment().show(
             parentFragmentManager,
             PostFragment().tag,
         )
         putPref(
-            pref.edit(),
-            "title",
-            binding.tvDetailTitle.text,
+            editor = pref.edit(),
+            key = "title",
+            value = binding.tvDetailTitle.text,
         )
         putPref(
-            pref.edit(),
-            "content",
-            binding.tvDetailContent.text,
+            editor = pref.edit(),
+            key = "content",
+            value = binding.tvDetailContent.text,
         )
 
     }
 
     fun like() {
-        if (getPref(pref, "like$postId", false) as Boolean) {
+        if (getPref(
+                preferences = pref,
+                key = "like$postId",
+                value = false,
+            ) as Boolean
+        ) {
             detailViewModel.unLike(postId)
         } else {
             detailViewModel.like(postId)
@@ -113,7 +147,11 @@ class DetailFragment : BottomSheetDialogFragment() {
             when (it.code()) {
                 204 -> {
                     setLikeOn()
-                    putPref(pref.edit(), "like$postId", true)
+                    putPref(
+                        editor = pref.edit(),
+                        key = "like$postId",
+                        value = true,
+                    )
                     detailViewModel.getPosts(postId)
                 }
             }
@@ -125,7 +163,11 @@ class DetailFragment : BottomSheetDialogFragment() {
             when (it.code()) {
                 204 -> {
                     setLikeOff()
-                    putPref(pref.edit(), "like$postId", false)
+                    putPref(
+                        editor = pref.edit(),
+                        key = "like$postId",
+                        value = false,
+                    )
                     detailViewModel.getPosts(postId)
                 }
             }
@@ -137,7 +179,7 @@ class DetailFragment : BottomSheetDialogFragment() {
             getDrawable(
                 requireContext(),
                 R.drawable.ic_detail_like_on,
-            )
+            ),
         )
     }
 
@@ -145,33 +187,62 @@ class DetailFragment : BottomSheetDialogFragment() {
         binding.imgDetailLike.setImageDrawable(
             getDrawable(
                 requireContext(),
-                R.drawable.ic_detail_like_off
-            )
+                R.drawable.ic_detail_like_off,
+            ),
         )
+    }
+
+    fun deletePost() {
+        detailViewModel.deletePost(postId)
+    }
+
+    private fun observeDeletePostResponse() {
+        detailViewModel.deleteResponse.observe(viewLifecycleOwner) {
+            when (it.code()) {
+                204 -> {
+                    printToast(
+                        context = requireContext(),
+                        message = "성공적으로 삭제되었습니다!"
+                    )
+                    dismiss()
+                }
+            }
+        }
     }
 
     private fun observeDetailResponse() {
         detailViewModel.detailResponse.observe(viewLifecycleOwner) {
             when (it.code()) {
                 200 -> {
-                    postId = getPref(pref, "postId", 0) as Int
+                    postId = getPref(
+                        preferences = pref,
+                        key = "postId",
+                        value = 0,
+                    ) as Int
                     tagList.clear()
-                    tagList.addAll(it.body()!!.tags)
                     binding.rvDetailTag.run {
-                        adapter = MainTagListAdapter(tagList)
+                        adapter = MainTagListAdapter(it.body()!!.tags)
                         layoutManager = LinearLayoutManager(
                             requireContext(),
                             LinearLayoutManager.HORIZONTAL,
-                            false
+                            false,
                         )
                     }
                     if (it.body()!!.is_liked) {
                         setLikeOn()
-                        putPref(pref.edit(), "like$postId", false)
+                        putPref(
+                            editor = pref.edit(),
+                            key = "like$postId",
+                            value = false,
+                        )
 
                     } else {
                         setLikeOff()
-                        putPref(pref.edit(), "like$postId", false)
+                        putPref(
+                            editor = pref.edit(),
+                            key = "like$postId",
+                            value = false,
+                        )
                     }
                 }
             }

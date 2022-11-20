@@ -48,7 +48,7 @@ class PostRepository(
         content : String,
         postId : Long,
     ){
-        ApiProvider.retrofit.editPosts(
+        ApiProvider.retrofit.editPost(
             accessToken = "Bearer $ACCESS_TOKEN",
             postId = postId,
             postRequest = PostRequest(
@@ -57,12 +57,17 @@ class PostRepository(
                 content = content,
             ),
         ).enqueue(object : Callback<Void>{
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>,
+            ) {
                 postViewModel.editResponse.value = response
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-
+            override fun onFailure(
+                call: Call<Void>,
+                t: Throwable,
+            ) {
             }
         })
     }

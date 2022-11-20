@@ -20,6 +20,7 @@ import com.tmdhoon.togather.dto.request.data.Tags
 import com.tmdhoon.togather.util.getPref
 import com.tmdhoon.togather.util.initPref
 import com.tmdhoon.togather.util.printToast
+import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.viewmodel.PostViewModel
 
 class PostFragment : BottomSheetDialogFragment() {
@@ -53,12 +54,10 @@ class PostFragment : BottomSheetDialogFragment() {
             false,
         )
 
-        Log.d("TEST", getPref(pref, "isEdited", false).toString())
-
         initCloseButton()
         initPostButton()
         initTagButton()
-        initPostObserve()
+        observePostResponse()
         initailizeEditPost()
         observeEditPostResponse()
 
@@ -75,54 +74,13 @@ class PostFragment : BottomSheetDialogFragment() {
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-    private fun observeEditPostResponse(){
-        postViewModel.editResponse.observe(viewLifecycleOwner){
-            when(it.code()){
-                204->{
-                    printToast(
-                        context = view?.context,
-                        message = "글이 성공적으로 수정되었습니다!",
-                    )
-                    tagList.clear()
-                    dismiss()
-                }
-                400 ->{
-                    printToast(
-                        context = view?.context,
-                        message = "값이 잘못되었습니다!",
-                    )
-                }
-            }
-        }
-    }
-
-    private fun initPostObserve() {
-        postViewModel.postResponse.observe(viewLifecycleOwner) {
-            when (it.code()) {
-                201 -> {
-                    printToast(
-                        context = view?.context,
-                        message = "글이 정상적으로 등록되었습니다!",
-                    )
-                    tagList.clear()
-                    dismiss()
-                }
-                400 -> {
-                    printToast(
-                        context = view?.context,
-                        message = "값이 잘못되었습니다!",
-                    )
-                }
-            }
-        }
-    }
-
     private fun initailizeEditPost() {
         if (getPref(
                 preferences = pref,
                 key = "isEdited",
                 value = false,
-        ) as Boolean) {
+            ) as Boolean
+        ) {
             binding.run {
                 setCursor(
                     view = etPostTitle,
@@ -158,29 +116,13 @@ class PostFragment : BottomSheetDialogFragment() {
         }
     }
 
-    fun setCursor(
-        view: EditText,
-        length: Int,
-    ) {
-        view.setSelection(length)
-    }
-
-    private fun initTagButton() {
-        binding.btPostTag.setOnClickListener {
-            TagFragment().show(
-                parentFragmentManager,
-                TagFragment().tag,
-            )
-        }
-    }
-
     private fun initPostButton() {
         binding.btPostPost.setOnClickListener {
             if(getPref(
                     preferences = pref,
                     key = "isEdited",
                     value = false,
-            ) as Boolean){
+                ) as Boolean){
                 if (
                     binding.etPostTitle.text.isNotEmpty()
                     && binding.etPostContent.text.isNotEmpty()
@@ -208,6 +150,64 @@ class PostFragment : BottomSheetDialogFragment() {
                     )
                 }
             }
+        }
+    }
+
+    private fun observeEditPostResponse(){
+        postViewModel.editResponse.observe(viewLifecycleOwner){
+            when(it.code()){
+                204->{
+                    printToast(
+                        context = view?.context,
+                        message = "글이 성공적으로 수정되었습니다!",
+                    )
+                    tagList.clear()
+                    dismiss()
+                }
+                400 ->{
+                    printToast(
+                        context = view?.context,
+                        message = "값이 잘못되었습니다!",
+                    )
+                }
+            }
+        }
+    }
+
+    private fun observePostResponse() {
+        postViewModel.postResponse.observe(viewLifecycleOwner) {
+            when (it.code()) {
+                201 -> {
+                    printToast(
+                        context = view?.context,
+                        message = "글이 정상적으로 등록되었습니다!",
+                    )
+                    tagList.clear()
+                    dismiss()
+                }
+                400 -> {
+                    printToast(
+                        context = view?.context,
+                        message = "값이 잘못되었습니다!",
+                    )
+                }
+            }
+        }
+    }
+
+    fun setCursor(
+        view: EditText,
+        length: Int,
+    ) {
+        view.setSelection(length)
+    }
+
+    private fun initTagButton() {
+        binding.btPostTag.setOnClickListener {
+            TagFragment().show(
+                parentFragmentManager,
+                TagFragment().tag,
+            )
         }
     }
 
