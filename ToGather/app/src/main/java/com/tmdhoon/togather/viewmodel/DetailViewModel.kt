@@ -15,6 +15,7 @@ class DetailViewModel() : ViewModel() {
     val detailResponse : MutableLiveData<Response<DetailResponse>> = MutableLiveData()
     val likeOnResponse : MutableLiveData<Response<Void>> = MutableLiveData()
     val likeOffResponse : MutableLiveData<Response<Void>> = MutableLiveData()
+    val deleteResponse : MutableLiveData<Response<Void>> = MutableLiveData()
 
     fun getPosts(postId : Int){
         detailRepository.getPosts(postId.toLong())
@@ -26,5 +27,9 @@ class DetailViewModel() : ViewModel() {
 
     fun unLike(postId : Int){
         detailRepository.unLike(postId.toLong())
+    }
+
+    fun deletePost(postId : Int){
+        detailRepository.deletePost(postId.toLong())
     }
 }

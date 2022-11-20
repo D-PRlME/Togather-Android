@@ -141,6 +141,7 @@
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/button_red_radius"
                     android:text="@string/detail_delete"
+                    android:onClick="@{()->DetailFragment.deletePost()}"
                     app:layout_constraintBottom_toBottomOf="@id/bt_detail_contact"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/bt_detail_contact" />
