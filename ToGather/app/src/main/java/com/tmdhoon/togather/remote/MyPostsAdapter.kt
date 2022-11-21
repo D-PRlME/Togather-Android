@@ -1,6 +1,8 @@
 package com.tmdhoon.togather.remote
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,6 +13,8 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ListMyPostBinding
 import com.tmdhoon.togather.dto.response.MyPostList
 import com.tmdhoon.togather.dto.response.data.User
+import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.view.fragment.DetailFragment
 
 class MyPostsAdapter(
@@ -18,6 +22,13 @@ class MyPostsAdapter(
     private val context : Context,
     private val fragmentManager: FragmentManager,
 ) : RecyclerView.Adapter<MyPostsAdapter.MyPostViewHolder>() {
+
+    private val pref : SharedPreferences by lazy {
+        initPref(
+            context = context,
+            mode = MODE_PRIVATE,
+        )
+    }
 
     class MyPostViewHolder(
         val binding : ListMyPostBinding,
@@ -66,6 +77,11 @@ class MyPostsAdapter(
                 )
             }
             itemView.setOnClickListener {
+                putPref(
+                    editor = pref.edit(),
+                    key = "postId",
+                    value = myPostList[position].post_id
+                )
                 DetailFragment().show(fragmentManager, DetailFragment().tag)
             }
         }
