@@ -1,25 +1,46 @@
 package com.tmdhoon.togather.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tmdhoon.togather.network.SocketProvider
 import com.tmdhoon.togather.repository.ChatRepository
-import io.socket.client.IO
+import com.tmdhoon.togather.util.ACCESS_TOKEN
+import io.socket.client.Manager
 import io.socket.client.Socket
+import io.socket.engineio.client.Transport
 
-class ChatViewModel() : ViewModel() {
-    private val chatRepository: ChatRepository by lazy {
-        ChatRepository()
+class ChatViewModel : ViewModel() {
+    private val socket by lazy {
+        SocketProvider.getSocket()
     }
 
-    fun startSocket(socket : Socket){
-        val option = IO.Options()
-        option.transports = arrayOf(
-            io.socket.engineio.client.transports.WebSocket.NAME
-        )
-        chatRepository.startSocket(
-            IO.socket(
-            "http://52.55.240.35:8081",
-                option,
-            )
+    private val chatRepository by lazy {
+        ChatRepository(
+            chatViewModel = this,
+            socket = socket,
         )
     }
+
+    fun connectSocket(){
+        socket.on(Socket.EVENT_CONNECT){
+            Log.d("TEST", "connect success")
+            Log.d("TEST", it.contentToString())
+        }
+        chatRepository.connectSocket()
+    }
+
+    fun disconnectSocket(){
+        socket.on(Socket.EVENT_DISCONNECT){
+            Log.d("TEST", "disconnect success")
+        }
+        chatRepository.disconnectSocket()
+    }
+
+
+
+
+
+
 }
