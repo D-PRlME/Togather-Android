@@ -18,10 +18,8 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentDetailBinding
 import com.tmdhoon.togather.dto.response.data.Tags
 import com.tmdhoon.togather.remote.MainTagListAdapter
-import com.tmdhoon.togather.util.getPref
-import com.tmdhoon.togather.util.initPref
-import com.tmdhoon.togather.util.printToast
-import com.tmdhoon.togather.util.putPref
+import com.tmdhoon.togather.util.*
+import com.tmdhoon.togather.view.ChatActivity
 import com.tmdhoon.togather.viewmodel.DetailViewModel
 
 
@@ -76,6 +74,7 @@ class DetailFragment : BottomSheetDialogFragment() {
         observeDeletePostResponse()
         getPostDetail()
         refresh()
+        initContactButton()
 
         return binding.root
     }
@@ -255,6 +254,15 @@ class DetailFragment : BottomSheetDialogFragment() {
                     btDetailEdit.visibility = View.INVISIBLE
                 }
             }
+        }
+    }
+
+    private fun initContactButton(){
+        binding.btDetailContact.setOnClickListener {
+            startIntent(
+                context = requireContext(),
+                to = ChatActivity::class.java,
+            )
         }
     }
 }
