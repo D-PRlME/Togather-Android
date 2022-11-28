@@ -1,6 +1,8 @@
 package com.tmdhoon.togather.repository
 
 import android.util.Log
+import com.tmdhoon.togather.dto.request.CreateRoomRequest
+import com.tmdhoon.togather.dto.response.CreateRoomResponse
 import com.tmdhoon.togather.dto.response.DetailResponse
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
@@ -91,4 +93,25 @@ class DetailRepository(
             ) {
             }
         })
+
+    fun createRoom(createRoomRequest: CreateRoomRequest){
+        ApiProvider.retrofit.createRoom(
+            accessToken = ACCESS_TOKEN,
+            createRoomRequest = createRoomRequest,
+        ).enqueue(object : Callback<CreateRoomResponse>{
+            override fun onResponse(
+                call: Call<CreateRoomResponse>,
+                response: Response<CreateRoomResponse>,
+            ) {
+                detailViewModel.createRoomResponse.value = response
+            }
+
+            override fun onFailure(
+                call: Call<CreateRoomResponse>,
+                t: Throwable,
+            ) {
+
+            }
+        })
+    }
 }

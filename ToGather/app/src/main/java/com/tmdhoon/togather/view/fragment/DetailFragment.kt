@@ -41,9 +41,7 @@ class DetailFragment : BottomSheetDialogFragment() {
     }
 
     private var postId: Int = 0
-
     private var likeCount : Int = 0
-
     private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
@@ -262,6 +260,14 @@ class DetailFragment : BottomSheetDialogFragment() {
             startIntent(
                 context = requireContext(),
                 to = ChatActivity::class.java,
+            )
+
+            detailViewModel.createRoom(
+                getPref(
+                    preferences = pref,
+                    key = "userId",
+                    value = 0,
+                ) as Int
             )
         }
     }
