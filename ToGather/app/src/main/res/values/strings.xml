@@ -57,5 +57,7 @@
     <string name="detail_do_edit">수정하기</string>
 
     <string name="my_post_my_post">내 게시글 보기</string>
+    <string name="chat_send">전송</string>
+    <string name="create_room_bad_request">잘못된 요청</string>
 
 </resources>

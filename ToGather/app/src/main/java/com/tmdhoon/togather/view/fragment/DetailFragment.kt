@@ -70,6 +70,7 @@ class DetailFragment : BottomSheetDialogFragment() {
         observeLikeOnResponse()
         observeLikeOffResponse()
         observeDeletePostResponse()
+        observeCreateRoomResponse()
         getPostDetail()
         refresh()
         initContactButton()
@@ -257,11 +258,6 @@ class DetailFragment : BottomSheetDialogFragment() {
 
     private fun initContactButton(){
         binding.btDetailContact.setOnClickListener {
-            startIntent(
-                context = requireContext(),
-                to = ChatActivity::class.java,
-            )
-
             detailViewModel.createRoom(
                 getPref(
                     preferences = pref,
@@ -269,6 +265,30 @@ class DetailFragment : BottomSheetDialogFragment() {
                     value = 0,
                 ) as Int
             )
+        }
+    }
+
+    private fun observeCreateRoomResponse(){
+        detailViewModel.createRoomResponse.observe(viewLifecycleOwner){
+            Log.d("TEST", it.code().toString())
+            when(it.code()){
+                201 -> startIntent(
+                    context = requireContext(),
+                    to = ChatActivity::class.java,
+                )
+                404 ->{
+                    printToast(
+                        context = requireContext(),
+                        message = getString(R.string.create_room_bad_request)
+                    )
+                }
+                409 ->{
+                    startIntent(
+                        context = requireContext(),
+                        to = ChatActivity::class.java,
+                    )
+                }
+            }
         }
     }
 }

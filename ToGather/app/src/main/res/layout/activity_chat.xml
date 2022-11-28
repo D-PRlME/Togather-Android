@@ -6,7 +6,54 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/all_background_gray">
+
+        <ImageView
+            android:id="@+id/img_chat_back"
+            style="@style/BackButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_chat_name"
+           style="@style/Theme.ToGather.TextView_Title"
+            app:layout_constraintTop_toTopOf="@id/img_chat_back"
+            app:layout_constraintStart_toEndOf="@id/img_chat_back"
+            android:layout_marginStart="17dp"
+            app:layout_constraintBottom_toBottomOf="@id/img_chat_back"/>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="95dp"
+            android:background="@color/white"
+            android:layout_marginBottom="98dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <EditText
+            android:id="@+id/et_chat_message"
+            style="@style/Theme.ToGather.EditText"
+            android:background="@drawable/edittext_chat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="34dp"
+            android:maxLength="24"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            style="@style/Theme.ToGather.Button_Yellow_Short"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="4dp"
+            android:layout_width="64dp"
+            android:text="@string/chat_send"
+            app:layout_constraintEnd_toEndOf="@id/et_chat_message"
+            app:layout_constraintTop_toTopOf="@id/et_chat_message"
+            app:layout_constraintBottom_toBottomOf="@id/et_chat_message"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

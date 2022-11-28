@@ -96,7 +96,7 @@ class DetailRepository(
 
     fun createRoom(createRoomRequest: CreateRoomRequest){
         ApiProvider.retrofit.createRoom(
-            accessToken = ACCESS_TOKEN,
+            accessToken = "Bearer $ACCESS_TOKEN",
             createRoomRequest = createRoomRequest,
         ).enqueue(object : Callback<CreateRoomResponse>{
             override fun onResponse(
