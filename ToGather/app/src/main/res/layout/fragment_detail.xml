@@ -8,6 +8,7 @@
         <variable
             name="DetailViewModel"
             type="com.tmdhoon.togather.viewmodel.DetailViewModel" />
+
         <variable
             name="DetailFragment"
             type="com.tmdhoon.togather.view.fragment.DetailFragment" />
@@ -90,9 +91,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_detail_tag"
                     android:layout_width="0dp"
-                    android:layout_marginTop="12dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cl_detail_line"
@@ -112,10 +113,10 @@
                 <Button
                     android:id="@+id/bt_detail_delete"
                     style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/button_red_radius"
                     android:onClick="@{()->DetailFragment.deletePost()}"
                     android:text="@string/detail_delete"
-                    android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="@+id/bt_detail_edit"
                     app:layout_constraintStart_toEndOf="@id/bt_detail_edit"
                     app:layout_constraintTop_toTopOf="@id/bt_detail_edit" />
@@ -123,34 +124,55 @@
                 <Button
                     android:id="@+id/bt_detail_edit"
                     style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
                     android:onClick="@{()->DetailFragment.editPost()}"
                     android:text="@string/detail_edit"
-                    android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="16dp" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
                     android:id="@+id/bt_detail_like"
                     style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:paddingStart="32dp"
                     android:onClick="@{()->DetailFragment.like()}"
+                    android:paddingStart="32dp"
                     android:text="@{String.valueOf(DetailViewModel.detailResponse.body().like_count)}"
-                    app:layout_constraintBottom_toBottomOf="@+id/bt_detail_delete"
+                    app:layout_constraintBottom_toTopOf="@+id/bt_detail_contact"
+                    app:layout_constraintEnd_toEndOf="@+id/bt_detail_contact" />
+
+                <Button
+                    android:id="@+id/bt_detail_contact"
+                    style="@style/Theme.ToGather.Button_Yellow_Short"
+                    android:layout_width="118dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/detail_contact"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_delete"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/bt_detail_delete" />
-                
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_delete" />
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_contact"
+                    android:translationZ="40dp"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_contact"
+                    app:layout_constraintStart_toStartOf="@id/bt_detail_contact"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_contact" />
+
                 <ImageView
                     android:id="@+id/img_detail_like"
                     android:layout_width="20dp"
                     android:layout_height="18dp"
-                    android:elevation="80dp"
                     android:layout_marginEnd="10dp"
+                    android:elevation="80dp"
                     app:layout_constraintBottom_toBottomOf="@id/bt_detail_like"
-                    app:layout_constraintTop_toTopOf="@id/bt_detail_like"
-                    app:layout_constraintEnd_toEndOf="@id/bt_detail_like" />
+                    app:layout_constraintEnd_toEndOf="@id/bt_detail_like"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_like" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
