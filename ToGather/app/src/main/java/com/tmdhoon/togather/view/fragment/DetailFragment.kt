@@ -40,8 +40,12 @@ class DetailFragment : BottomSheetDialogFragment() {
         )
     }
 
+    private val userName by lazy {
+        getPref(pref, "userName", "")
+    }
+
     private var postId: Int = 0
-    private var likeCount : Int = 0
+    private var likeCount: Int = 0
     private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
@@ -133,11 +137,11 @@ class DetailFragment : BottomSheetDialogFragment() {
                 value = false,
             ) as Boolean
         ) {
-           binding.btDetailLike.text = likeCount.toString()
+            binding.btDetailLike.text = likeCount.toString()
             setLikeOff()
             detailViewModel.unLike(postId)
         } else {
-            binding.btDetailLike.text = (likeCount+1).toString()
+            binding.btDetailLike.text = (likeCount + 1).toString()
             setLikeOn()
             detailViewModel.like(postId)
         }
@@ -256,7 +260,7 @@ class DetailFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun initContactButton(){
+    private fun initContactButton() {
         binding.btDetailContact.setOnClickListener {
             detailViewModel.createRoom(
                 getPref(
@@ -268,21 +272,32 @@ class DetailFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun observeCreateRoomResponse(){
-        detailViewModel.createRoomResponse.observe(viewLifecycleOwner){
-            Log.d("TEST", it.code().toString())
-            when(it.code()){
-                201 -> startIntent(
-                    context = requireContext(),
-                    to = ChatActivity::class.java,
-                )
-                404 ->{
+    private fun observeCreateRoomResponse() {
+        detailViewModel.createRoomResponse.observe(viewLifecycleOwner) {
+            when (it.code()) {
+                201 -> {
+                    putPref(
+                        editor = pref.edit(),
+                        key = getPref(pref, "userName", "").toString(),
+                        value = it.body()!!.room_id,
+                    )
+                    startIntent(
+                        context = requireContext(),
+                        to = ChatActivity::class.java,
+                    )
+                }
+                404 -> {
                     printToast(
                         context = requireContext(),
                         message = getString(R.string.create_room_bad_request)
                     )
                 }
-                409 ->{
+                409 -> {
+                    putPref(
+                        editor = pref.edit(),
+                        key = userName.toString(),
+                        value = 16,
+                    )
                     startIntent(
                         context = requireContext(),
                         to = ChatActivity::class.java,

@@ -6,6 +6,8 @@ import com.tmdhoon.togather.dto.request.CreateRoomRequest
 import com.tmdhoon.togather.dto.response.CreateRoomResponse
 import com.tmdhoon.togather.dto.response.DetailResponse
 import com.tmdhoon.togather.repository.DetailRepository
+import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.putPref
 import retrofit2.Response
 
 class DetailViewModel() : ViewModel() {

@@ -69,7 +69,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
     private fun joinRoom(){
         chatViewModel.joinRoom(
             is_join_room = true,
-            room_id = Integer.parseInt(getPref(pref, userName.toString(), 0).toString())
+            room_id = getPref(pref, userName.toString(), 0) as Int
         )
     }
 
