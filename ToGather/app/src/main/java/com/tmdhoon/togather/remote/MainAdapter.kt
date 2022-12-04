@@ -54,6 +54,16 @@ class MainAdapter (
                 "postId",
                 postList[position].post_id,
             )
+            putPref(
+                editor = initPref(context, MODE_PRIVATE).edit(),
+                key = "userId",
+                value = postList[position].user.user_id
+            )
+            putPref(
+                editor = initPref(context, MODE_PRIVATE).edit(),
+                key = "userName",
+                value = postList[position].user.user_name,
+            )
             DetailFragment().show(parentFragmentManager, DetailFragment().tag)
         }
 

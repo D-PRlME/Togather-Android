@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="com.tmdhoon.togather.dto.response.data.Chat" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_message_my_time"
+            style="@style/Theme.ToGather.TextView_Focus_Out"
+            android:layout_marginEnd="4dp"
+            android:text="@{model.send_at}"
+            app:layout_constraintBottom_toBottomOf="@id/cv_message_my"
+            app:layout_constraintEnd_toStartOf="@id/cv_message_my" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_message_my"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/all_background_yellow"
+            android:elevation="0dp"
+            app:cardCornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ExtraText">
+
+            <TextView
+                android:id="@+id/tv_message_my"
+                style="@style/Theme.ToGather.TextView_Tag"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="@{model.message}" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -23,7 +23,7 @@
 
     <style name="Theme.ToGather.Button_White_Short">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">38dp</item>
         <item name="android:background">@drawable/button_white_short</item>
         <item name="android:fontFamily">@font/bold</item>
         <item name="android:textSize">18sp</item>
@@ -40,7 +40,7 @@
 
     <style name="Theme.ToGather.Button_Yellow_Short">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">38dp</item>
         <item name="android:background">@drawable/button_yellow_short</item>
         <item name="android:fontFamily">@font/bold</item>
         <item name="android:textSize">18sp</item>
@@ -154,6 +154,14 @@
     <style name="MainRecyclerView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="BackButton">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:layout_margin">26dp</item>
+        <item name="android:layout_marginTop">60dp</item>
+        <item name="android:src">@drawable/icon_back</item>
     </style>
 
 </resources>

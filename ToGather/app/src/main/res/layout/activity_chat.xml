@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.ChatActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/all_background_gray">
+
+        <ImageView
+            android:id="@+id/img_chat_back"
+            style="@style/BackButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_chat_name"
+           style="@style/Theme.ToGather.TextView_Title"
+            app:layout_constraintTop_toTopOf="@id/img_chat_back"
+            app:layout_constraintStart_toEndOf="@id/img_chat_back"
+            android:layout_marginStart="17dp"
+            app:layout_constraintBottom_toBottomOf="@id/img_chat_back"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="95dp"
+            android:layout_marginBottom="98dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
+
+        <EditText
+            android:id="@+id/et_chat_message"
+            style="@style/Theme.ToGather.EditText"
+            android:background="@drawable/edittext_chat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="34dp"
+            android:maxLength="24"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/bt_chat_send"
+            style="@style/Theme.ToGather.Button_Yellow_Short"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="4dp"
+            android:layout_width="64dp"
+            android:text="@string/chat_send"
+            app:layout_constraintEnd_toEndOf="@id/et_chat_message"
+            app:layout_constraintTop_toTopOf="@id/et_chat_message"
+            app:layout_constraintBottom_toBottomOf="@id/et_chat_message"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

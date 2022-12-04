@@ -18,10 +18,8 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentDetailBinding
 import com.tmdhoon.togather.dto.response.data.Tags
 import com.tmdhoon.togather.remote.MainTagListAdapter
-import com.tmdhoon.togather.util.getPref
-import com.tmdhoon.togather.util.initPref
-import com.tmdhoon.togather.util.printToast
-import com.tmdhoon.togather.util.putPref
+import com.tmdhoon.togather.util.*
+import com.tmdhoon.togather.view.ChatActivity
 import com.tmdhoon.togather.viewmodel.DetailViewModel
 
 
@@ -42,10 +40,12 @@ class DetailFragment : BottomSheetDialogFragment() {
         )
     }
 
+    private val userName by lazy {
+        getPref(pref, "userName", "")
+    }
+
     private var postId: Int = 0
-
-    private var likeCount : Int = 0
-
+    private var likeCount: Int = 0
     private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
@@ -74,8 +74,10 @@ class DetailFragment : BottomSheetDialogFragment() {
         observeLikeOnResponse()
         observeLikeOffResponse()
         observeDeletePostResponse()
+        observeCreateRoomResponse()
         getPostDetail()
         refresh()
+        initContactButton()
 
         return binding.root
     }
@@ -135,11 +137,11 @@ class DetailFragment : BottomSheetDialogFragment() {
                 value = false,
             ) as Boolean
         ) {
-           binding.btDetailLike.text = likeCount.toString()
+            binding.btDetailLike.text = likeCount.toString()
             setLikeOff()
             detailViewModel.unLike(postId)
         } else {
-            binding.btDetailLike.text = (likeCount+1).toString()
+            binding.btDetailLike.text = (likeCount + 1).toString()
             setLikeOn()
             detailViewModel.like(postId)
         }
@@ -253,6 +255,53 @@ class DetailFragment : BottomSheetDialogFragment() {
                 binding.run {
                     btDetailDelete.visibility = View.INVISIBLE
                     btDetailEdit.visibility = View.INVISIBLE
+                }
+            }
+        }
+    }
+
+    private fun initContactButton() {
+        binding.btDetailContact.setOnClickListener {
+            detailViewModel.createRoom(
+                getPref(
+                    preferences = pref,
+                    key = "userId",
+                    value = 0,
+                ) as Int
+            )
+        }
+    }
+
+    private fun observeCreateRoomResponse() {
+        detailViewModel.createRoomResponse.observe(viewLifecycleOwner) {
+            when (it.code()) {
+                201 -> {
+                    putPref(
+                        editor = pref.edit(),
+                        key = getPref(pref, "userName", "").toString(),
+                        value = it.body()!!.room_id,
+                    )
+                    startIntent(
+                        context = requireContext(),
+                        to = ChatActivity::class.java,
+                    )
+                }
+                404 -> {
+                    printToast(
+                        context = requireContext(),
+                        message = getString(R.string.create_room_bad_request)
+                    )
+                }
+                409 -> {
+                    putPref(
+                        editor = pref.edit(),
+                        key = userName.toString(),
+                        value = getPref(pref, userName.toString(), 0),
+                    )
+                    startIntent(
+                        context = requireContext(),
+                        to = ChatActivity::class.java,
+                    )
                 }
             }
         }

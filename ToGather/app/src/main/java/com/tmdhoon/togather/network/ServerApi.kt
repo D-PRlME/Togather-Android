@@ -150,4 +150,11 @@ interface ServerApi {
         @Header("Authorization") accessToken: String,
         @Query("title") title : String,
     ) : Call<PostListResponse>
+
+    // 채팅방 생성
+    @POST("chats/room")
+    fun createRoom(
+        @Header("Authorization") accessToken: String,
+        @Body createRoomRequest: CreateRoomRequest,
+    ) : Call<CreateRoomResponse>
 }

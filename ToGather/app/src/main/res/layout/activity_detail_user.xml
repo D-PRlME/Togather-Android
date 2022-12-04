@@ -14,11 +14,7 @@
 
         <ImageView
             android:id="@+id/img_detail_user_back"
-            android:layout_width="8dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="60dp"
-            android:src="@drawable/icon_back"
+            style="@style/BackButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
