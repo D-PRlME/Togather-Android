@@ -2,6 +2,7 @@ package com.tmdhoon.togather.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tmdhoon.togather.dto.response.data.Chat
 import com.tmdhoon.togather.repository.ChatRepository
 import com.tmdhoon.togather.util.getPref
 import org.json.JSONObject
@@ -19,7 +20,7 @@ class ChatViewModel : ViewModel(){
         JSONObject()
     }
 
-    val message : MutableLiveData<String> = MutableLiveData()
+    val chat : MutableLiveData<Chat> = MutableLiveData()
 
     fun connectSocket(){
         chatRepository.connectSocket()

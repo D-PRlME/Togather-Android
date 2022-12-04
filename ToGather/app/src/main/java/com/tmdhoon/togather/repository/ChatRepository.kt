@@ -1,6 +1,8 @@
 package com.tmdhoon.togather.repository
 
 import android.util.Log
+import com.tmdhoon.togather.dto.response.data.Chat
+import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.network.SocketProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.ChatViewModel
@@ -32,13 +34,6 @@ class ChatRepository(
         obj : JSONObject,
     ){
         socket.emit("join", obj)
-        socket.on("room"){args->
-            val join = JSONObject(args[0].toString())
-            if(args[0] != null){
-                val joinRoom = args[0].toString()
-                Log.d("TEST", joinRoom)
-            }
-        }
     }
 
     fun sendMessage(
@@ -47,7 +42,18 @@ class ChatRepository(
         socket.emit("chat", obj)
         socket.on("chat"){args->
             val message = JSONObject(args[0].toString())
-            chatViewModel.message.postValue(message.getString("message"))
+            chatViewModel.chat.postValue(Chat(
+                room_id = message.getInt("room_id"),
+                user = User(
+                    user_id = message.getInt("user_id"),
+                    user_name = message.getString("user_name"),
+                    profile_image_url = message.getString("profile_image_url"),
+                ),
+                is_mine = message.getBoolean("is_mine"),
+                message = message.getString("message"),
+                send_at = message.getString("send_at"),
+                send_date = message.getString("send_data")
+            ))
         }
     }
 

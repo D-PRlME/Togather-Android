@@ -3,25 +3,25 @@ package com.tmdhoon.togather.view
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.base.BaseActivity
 import com.tmdhoon.togather.databinding.ActivityChatBinding
-import com.tmdhoon.togather.network.SocketProvider
-import com.tmdhoon.togather.util.ACCESS_TOKEN
+import com.tmdhoon.togather.dto.response.data.Chat
+import com.tmdhoon.togather.dto.response.data.User
+import com.tmdhoon.togather.remote.ChatAdapter
 import com.tmdhoon.togather.util.getPref
 import com.tmdhoon.togather.util.initPref
-import com.tmdhoon.togather.util.printToast
 import com.tmdhoon.togather.viewmodel.ChatViewModel
-import io.socket.client.Manager
-import io.socket.client.Socket
-import io.socket.engineio.client.Transport
 
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
-    private val socket: Socket by lazy {
-        SocketProvider.getSocket()
+    private val chatList: ArrayList<Chat> by lazy {
+        ArrayList()
     }
 
     private val pref by lazy {
@@ -50,23 +50,44 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         observeMessage()
     }
 
-    private fun initSendButton(){
+    private fun initSendButton() {
         binding.btChatSend.setOnClickListener {
             val message = binding.etChatMessage.text.toString()
-            if(message.isNotEmpty()){
+            if (message.isNotEmpty()) {
+                chatList.add(
+                    Chat(
+                        room_id = 0,
+                        user = User(0, "", ""),
+                        is_mine = true,
+                        message = message,
+                        send_at = "방금전",
+                        send_date = "",
+                    )
+                )
+                initRecyclerView(chatList)
                 chatViewModel.sendMessage(message)
                 binding.etChatMessage.text = null
             }
         }
     }
 
-    private fun observeMessage(){
-        chatViewModel.message.observe(this){
-
+    private fun observeMessage() {
+        chatViewModel.chat.observe(this) {
+            initRecyclerView(chatList)
         }
     }
 
-    private fun joinRoom(){
+    private fun initRecyclerView(chatList: ArrayList<Chat>) {
+        binding.rvChat.run {
+            adapter = ChatAdapter(
+                chatList = chatList,
+                chatViewModel = chatViewModel,
+            )
+            layoutManager = LinearLayoutManager(this@ChatActivity)
+        }
+    }
+
+    private fun joinRoom() {
         chatViewModel.joinRoom(
             is_join_room = true,
             room_id = getPref(pref, userName.toString(), 0) as Int
