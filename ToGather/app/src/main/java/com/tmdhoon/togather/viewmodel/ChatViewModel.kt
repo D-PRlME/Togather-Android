@@ -1,46 +1,47 @@
 package com.tmdhoon.togather.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tmdhoon.togather.network.SocketProvider
 import com.tmdhoon.togather.repository.ChatRepository
-import com.tmdhoon.togather.util.ACCESS_TOKEN
-import io.socket.client.Manager
-import io.socket.client.Socket
-import io.socket.engineio.client.Transport
+import com.tmdhoon.togather.util.getPref
+import org.json.JSONObject
 
-class ChatViewModel : ViewModel() {
-    private val socket by lazy {
-        SocketProvider.getSocket()
+class ChatViewModel : ViewModel(){
+    private val chatRepository : ChatRepository by lazy {
+        ChatRepository(this)
     }
 
-    private val chatRepository by lazy {
-        ChatRepository(
-            chatViewModel = this,
-            socket = socket,
-        )
+    private val roomObject by lazy {
+        JSONObject()
     }
+
+    private val chatObject by lazy {
+        JSONObject()
+    }
+
+    val message : MutableLiveData<String> = MutableLiveData()
 
     fun connectSocket(){
-        socket.on(Socket.EVENT_CONNECT){
-            Log.d("TEST", "connect success")
-            Log.d("TEST", it.contentToString())
-        }
         chatRepository.connectSocket()
     }
 
     fun disconnectSocket(){
-        socket.on(Socket.EVENT_DISCONNECT){
-            Log.d("TEST", "disconnect success")
-        }
         chatRepository.disconnectSocket()
     }
 
+    fun joinRoom(
+        is_join_room : Boolean,
+        room_id : Int,
+    ){
+        roomObject.put("is_join_room", is_join_room)
+        roomObject.put("room_id", room_id)
+        chatRepository.joinRoom(roomObject)
+    }
 
-
-
-
-
+    fun sendMessage(
+        message : String,
+    ){
+        chatObject.put("message", message)
+        chatRepository.sendMessage(chatObject)
+    }
 }
