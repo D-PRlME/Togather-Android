@@ -5,6 +5,6 @@ data class Chat(
     val user : User,
     val is_mine : Boolean,
     val message : String,
-    val send_at : String,
-    val send_date : String,
+    val sent_at : String,
+    val sent_date : String,
 )

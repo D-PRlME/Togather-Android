@@ -1,5 +1,6 @@
 package com.tmdhoon.togather.remote
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -16,8 +17,12 @@ class ChatAdapter(
     private val chatViewModel : ChatViewModel,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    companion object{
+        const val MY_CHAT = 1
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if(viewType == 0){
+        if(viewType == MY_CHAT){
             return MyChatViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
@@ -25,9 +30,8 @@ class ChatAdapter(
                     parent,
                     false
                 ),
-                chatViewModel = chatViewModel,
             )
-        }else{
+        }else {
             return OtherChatViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
@@ -35,23 +39,24 @@ class ChatAdapter(
                     parent,
                     false
                 ),
-                chatViewModel = chatViewModel
             )
         }
     }
 
     class MyChatViewHolder(
         val binding : ListMessageMyBinding,
-        val chatViewModel : ChatViewModel
     ) : RecyclerView.ViewHolder(binding.root){
-        fun bind(chat : Chat ){
+        fun bind(chat : Chat){
             binding.model = chat
         }
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if(chatList[position].is_mine) 1 else 2
+    }
+
     class OtherChatViewHolder(
         val binding : ListMessageOtherBinding,
-        val chatViewModel : ChatViewModel,
     ) : RecyclerView.ViewHolder(binding.root){
         fun bind(chat : Chat){
             binding.model = chat

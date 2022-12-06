@@ -1,6 +1,7 @@
 package com.tmdhoon.togather.view
 
 import android.os.Bundle
+import android.os.LocaleList
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,12 +16,15 @@ import com.tmdhoon.togather.util.initPref
 import com.tmdhoon.togather.viewmodel.ChatViewModel
 
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
-    private val chatList: ArrayList<Chat> by lazy {
+    private val chatList : ArrayList<Chat> by lazy {
         ArrayList()
     }
 
@@ -39,6 +43,22 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         getPref(pref, "userName", "")
     }
 
+    private val dateFormat : SimpleDateFormat by lazy {
+        SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+    }
+
+    private val timeFormat : SimpleDateFormat by lazy {
+        SimpleDateFormat("k:mm:ss")
+    }
+
+    private val getDate by lazy {
+        dateFormat.format(Date(System.currentTimeMillis()))
+    }
+
+    private val getTime by lazy {
+        timeFormat.format(System.currentTimeMillis())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
@@ -48,23 +68,30 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         joinRoom()
         initSendButton()
         observeMessage()
+        observeChattingList()
+        getChattingList()
+        chatViewModel.parsingMessage()
+    }
+
+    private fun getChattingList() {
+        chatViewModel.getChattingList(
+            roomId = getPref(pref, userName.toString(), 0) as Int,
+            time = "${getDate}T${getTime}"
+        )
+    }
+
+    private fun observeChattingList(){
+        chatViewModel.chatList.observe(this){
+            when(it.code()){
+                200 -> initRecyclerView(it.body()!!.chat_list)
+            }
+        }
     }
 
     private fun initSendButton() {
         binding.btChatSend.setOnClickListener {
             val message = binding.etChatMessage.text.toString()
             if (message.isNotEmpty()) {
-                chatList.add(
-                    Chat(
-                        room_id = 0,
-                        user = User(0, "", ""),
-                        is_mine = true,
-                        message = message,
-                        send_at = "방금전",
-                        send_date = "",
-                    )
-                )
-                initRecyclerView(chatList)
                 chatViewModel.sendMessage(message)
                 binding.etChatMessage.text = null
             }
@@ -73,7 +100,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
     private fun observeMessage() {
         chatViewModel.chat.observe(this) {
-            initRecyclerView(chatList)
+
         }
     }
 
@@ -85,6 +112,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
             )
             layoutManager = LinearLayoutManager(this@ChatActivity)
         }
+        binding.rvChat.adapter?.notifyDataSetChanged()
     }
 
     private fun joinRoom() {
