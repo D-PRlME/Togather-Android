@@ -266,7 +266,7 @@ class DetailFragment : BottomSheetDialogFragment() {
                 getPref(
                     preferences = pref,
                     key = "userId",
-                    value = 0,
+                    value = 16,
                 ) as Int
             )
         }
@@ -296,7 +296,7 @@ class DetailFragment : BottomSheetDialogFragment() {
                     putPref(
                         editor = pref.edit(),
                         key = userName.toString(),
-                        value = getPref(pref, userName.toString(), 0),
+                        value = 19
                     )
                     startIntent(
                         context = requireContext(),

@@ -24,9 +24,6 @@ import kotlin.collections.ArrayList
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
-    private val chatList : ArrayList<Chat> by lazy {
-        ArrayList()
-    }
 
     private val pref by lazy {
         initPref(
@@ -51,40 +48,37 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         SimpleDateFormat("k:mm:ss")
     }
 
-    private val getDate by lazy {
-        dateFormat.format(Date(System.currentTimeMillis()))
-    }
-
-    private val getTime by lazy {
-        timeFormat.format(System.currentTimeMillis())
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
+        setView()
+        setServer()
+    }
+
+    private fun setServer(){
         connectSocket()
-        initBackButton()
-        initNameTextView()
         joinRoom()
-        initSendButton()
-        observeMessage()
-        observeChattingList()
         getChattingList()
-        chatViewModel.parsingMessage()
+        observeChattingList()
+        chatViewModel.getMessage()
+    }
+
+    private fun setView(){
+        initNameTextView()
+        initSendButton()
+        initBackButton()
     }
 
     private fun getChattingList() {
         chatViewModel.getChattingList(
             roomId = getPref(pref, userName.toString(), 0) as Int,
-            time = "${getDate}T${getTime}"
+            time = "${dateFormat.format(Date(System.currentTimeMillis()))}T${timeFormat.format(Date(System.currentTimeMillis()))}"
         )
     }
 
     private fun observeChattingList(){
         chatViewModel.chatList.observe(this){
-            when(it.code()){
-                200 -> initRecyclerView(it.body()!!.chat_list)
-            }
+            initRecyclerView(it)
         }
     }
 
@@ -98,21 +92,16 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         }
     }
 
-    private fun observeMessage() {
-        chatViewModel.chat.observe(this) {
-
-        }
-    }
-
-    private fun initRecyclerView(chatList: ArrayList<Chat>) {
+    private fun initRecyclerView(chatList : ArrayList<Chat>) {
         binding.rvChat.run {
             adapter = ChatAdapter(
                 chatList = chatList,
                 chatViewModel = chatViewModel,
             )
-            layoutManager = LinearLayoutManager(this@ChatActivity)
+            layoutManager = LinearLayoutManager(this@ChatActivity).apply {
+                this.stackFromEnd = true
+            }
         }
-        binding.rvChat.adapter?.notifyDataSetChanged()
     }
 
     private fun joinRoom() {

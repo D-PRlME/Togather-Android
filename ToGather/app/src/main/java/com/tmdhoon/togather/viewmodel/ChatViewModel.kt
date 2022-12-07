@@ -1,7 +1,9 @@
 package com.tmdhoon.togather.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.JsonObject
 import com.tmdhoon.togather.dto.response.ChattingResponse
 import com.tmdhoon.togather.dto.response.data.Chat
 import com.tmdhoon.togather.repository.ChatRepository
@@ -22,8 +24,7 @@ class ChatViewModel : ViewModel(){
         JSONObject()
     }
 
-    val chat : MutableLiveData<Chat> = MutableLiveData()
-    val chatList : MutableLiveData<Response<ChattingResponse>> = MutableLiveData()
+    val chatList : MutableLiveData<ArrayList<Chat>> = MutableLiveData()
 
     fun connectSocket(){
         chatRepository.connectSocket()
@@ -40,10 +41,6 @@ class ChatViewModel : ViewModel(){
         roomObject.put("is_join_room", is_join_room)
         roomObject.put("room_id", room_id)
         chatRepository.joinRoom(roomObject)
-    }
-
-    fun parsingMessage(){
-        chatRepository.parsingMessage()
     }
 
     fun sendMessage(
@@ -63,7 +60,7 @@ class ChatViewModel : ViewModel(){
         )
     }
 
-    fun updateChat(){
-
+    fun getMessage(){
+        chatRepository.getMessage()
     }
 }
