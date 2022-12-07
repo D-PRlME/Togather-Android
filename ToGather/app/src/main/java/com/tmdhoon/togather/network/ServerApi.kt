@@ -165,4 +165,10 @@ interface ServerApi {
         @Path("room-id") roomId : Long,
         @Query("time") time : String,
     ) : Call<ChattingResponse>
+
+    // 채팅 방 목록 조회
+    @GET("chats/room")
+    fun getRoomList(
+        @Header("Authorization") accessToken: String,
+    ) : Call<RoomListResponse>
 }

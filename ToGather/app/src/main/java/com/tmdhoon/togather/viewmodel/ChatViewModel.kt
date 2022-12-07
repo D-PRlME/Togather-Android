@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.tmdhoon.togather.dto.response.ChattingResponse
+import com.tmdhoon.togather.dto.response.RoomListResponse
 import com.tmdhoon.togather.dto.response.data.Chat
 import com.tmdhoon.togather.repository.ChatRepository
 import com.tmdhoon.togather.util.getPref
@@ -25,6 +26,7 @@ class ChatViewModel : ViewModel(){
     }
 
     val chatList : MutableLiveData<ArrayList<Chat>> = MutableLiveData()
+    val roomList : MutableLiveData<Response<RoomListResponse>> = MutableLiveData()
 
     fun connectSocket(){
         chatRepository.connectSocket()
@@ -62,5 +64,9 @@ class ChatViewModel : ViewModel(){
 
     fun getMessage(){
         chatRepository.getMessage()
+    }
+
+    fun getRoomList(){
+        chatRepository.getRoomList()
     }
 }
