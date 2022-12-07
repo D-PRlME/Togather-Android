@@ -41,11 +41,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
     }
 
     private val dateFormat : SimpleDateFormat by lazy {
-        SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
-    }
-
-    private val timeFormat : SimpleDateFormat by lazy {
-        SimpleDateFormat("k:mm:ss")
+        SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ss", Locale.KOREA)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,8 +67,8 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
     private fun getChattingList() {
         chatViewModel.getChattingList(
-            roomId = getPref(pref, userName.toString(), 0) as Int,
-            time = "${dateFormat.format(Date(System.currentTimeMillis()))}T${timeFormat.format(Date(System.currentTimeMillis()))}"
+            roomId = intent.getIntExtra("roomId", 0),
+            time = dateFormat.format(Date(System.currentTimeMillis()))
         )
     }
 
@@ -107,16 +103,12 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
     private fun joinRoom() {
         chatViewModel.joinRoom(
             is_join_room = true,
-            room_id = getPref(pref, userName.toString(), 0) as Int
+            room_id = intent.getIntExtra("roomId", 0)
         )
     }
 
     private fun initNameTextView() {
-        binding.tvChatName.text = getPref(
-            preferences = pref,
-            key = "userName",
-            value = "",
-        ).toString()
+        binding.tvChatName.text = intent.getStringExtra("userName")
     }
 
     fun connectSocket() {

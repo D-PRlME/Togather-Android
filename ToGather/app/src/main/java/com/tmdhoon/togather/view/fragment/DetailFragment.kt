@@ -274,13 +274,9 @@ class DetailFragment : BottomSheetDialogFragment() {
 
     private fun observeCreateRoomResponse() {
         detailViewModel.createRoomResponse.observe(viewLifecycleOwner) {
+            Log.d("TEST", it.errorBody()!!.string())
             when (it.code()) {
                 201 -> {
-                    putPref(
-                        editor = pref.edit(),
-                        key = getPref(pref, "userName", "").toString(),
-                        value = it.body()!!.room_id,
-                    )
                     startIntent(
                         context = requireContext(),
                         to = ChatActivity::class.java,
@@ -293,15 +289,7 @@ class DetailFragment : BottomSheetDialogFragment() {
                     )
                 }
                 409 -> {
-                    putPref(
-                        editor = pref.edit(),
-                        key = userName.toString(),
-                        value = 19
-                    )
-                    startIntent(
-                        context = requireContext(),
-                        to = ChatActivity::class.java,
-                    )
+                    dismiss()
                 }
             }
         }
