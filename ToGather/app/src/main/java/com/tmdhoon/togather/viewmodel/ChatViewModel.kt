@@ -1,11 +1,15 @@
 package com.tmdhoon.togather.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.JsonObject
+import com.tmdhoon.togather.dto.response.ChattingResponse
 import com.tmdhoon.togather.dto.response.data.Chat
 import com.tmdhoon.togather.repository.ChatRepository
 import com.tmdhoon.togather.util.getPref
 import org.json.JSONObject
+import retrofit2.Response
 
 class ChatViewModel : ViewModel(){
     private val chatRepository : ChatRepository by lazy {
@@ -20,7 +24,7 @@ class ChatViewModel : ViewModel(){
         JSONObject()
     }
 
-    val chat : MutableLiveData<Chat> = MutableLiveData()
+    val chatList : MutableLiveData<ArrayList<Chat>> = MutableLiveData()
 
     fun connectSocket(){
         chatRepository.connectSocket()
@@ -44,5 +48,19 @@ class ChatViewModel : ViewModel(){
     ){
         chatObject.put("message", message)
         chatRepository.sendMessage(chatObject)
+    }
+
+    fun getChattingList(
+        roomId : Int,
+        time : String,
+    ){
+        chatRepository.getChattingList(
+            roomId = roomId.toLong(),
+            time = time
+        )
+    }
+
+    fun getMessage(){
+        chatRepository.getMessage()
     }
 }

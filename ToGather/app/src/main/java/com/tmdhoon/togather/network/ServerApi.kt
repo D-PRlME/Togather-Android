@@ -157,4 +157,12 @@ interface ServerApi {
         @Header("Authorization") accessToken: String,
         @Body createRoomRequest: CreateRoomRequest,
     ) : Call<CreateRoomResponse>
+
+    // 채팅 조회
+    @GET("chats/{room-id}")
+    fun getChat(
+        @Header("Authorization") accessToken: String,
+        @Path("room-id") roomId : Long,
+        @Query("time") time : String,
+    ) : Call<ChattingResponse>
 }

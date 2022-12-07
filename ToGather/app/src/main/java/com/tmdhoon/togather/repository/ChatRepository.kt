@@ -1,15 +1,18 @@
 package com.tmdhoon.togather.repository
 
-import android.util.Log
+import com.tmdhoon.togather.dto.response.ChattingResponse
 import com.tmdhoon.togather.dto.response.data.Chat
 import com.tmdhoon.togather.dto.response.data.User
+import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.network.SocketProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.ChatViewModel
 import io.socket.client.Manager
-import io.socket.client.Socket
 import io.socket.engineio.client.Transport
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ChatRepository(
     private val chatViewModel : ChatViewModel,
@@ -18,6 +21,8 @@ class ChatRepository(
     private val socket by lazy {
         SocketProvider.getSocket()
     }
+
+    private var chatList : ArrayList<Chat> = ArrayList()
 
     fun connectSocket() {
         socket.io().on(Manager.EVENT_TRANSPORT) { args ->
@@ -39,21 +44,27 @@ class ChatRepository(
     fun sendMessage(
         obj : JSONObject,
     ){
-        socket.emit("chat", obj)
+        socket.emit("chat2", obj)
+    }
+
+    fun getMessage(){
         socket.on("chat"){args->
             val message = JSONObject(args[0].toString())
-            chatViewModel.chat.postValue(Chat(
+            val user = JSONObject(message.getString("user"))
+            chatList.add(Chat(
                 room_id = message.getInt("room_id"),
                 user = User(
-                    user_id = message.getInt("user_id"),
-                    user_name = message.getString("user_name"),
-                    profile_image_url = message.getString("profile_image_url"),
+                    user_id = user.getLong("user_id"),
+                    user_name = user.getString("user_name"),
+                    profile_image_url = user.getString("profile_image_url")
                 ),
                 is_mine = message.getBoolean("is_mine"),
                 message = message.getString("message"),
-                send_at = message.getString("send_at"),
-                send_date = message.getString("send_data")
-            ))
+                sent_at = message.getString("sent_at"),
+                sent_date = message.getString("sent_date")
+                )
+            )
+            chatViewModel.chatList.postValue(chatList)
         }
     }
 
@@ -61,6 +72,25 @@ class ChatRepository(
         socket.disconnect()
     }
 
+    fun getChattingList(
+        roomId : Long,
+        time : String,
+    ){
+        ApiProvider.retrofit.getChat(
+            accessToken = "Bearer $ACCESS_TOKEN",
+            roomId = roomId,
+            time = time,
+        ).enqueue(object : Callback<ChattingResponse> {
+            override fun onResponse(
+                call: Call<ChattingResponse>,
+                response: Response<ChattingResponse>
+            ) {
+                chatList = response.body()!!.chat_list
+                chatViewModel.chatList.value = chatList
+            }
 
-
+            override fun onFailure(call: Call<ChattingResponse>, t: Throwable) {
+            }
+        })
+    }
 }
