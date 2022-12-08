@@ -73,10 +73,10 @@ class MainAdapter (
         }
 
         holder.binding.clMainListProfile.setOnClickListener {
-            this.context.startActivity(
-                Intent(this.context, DetailUserActivity::class.java)
-                .putExtra("userId", postList[position].user.user_id)
-            )
+            val intent = Intent(context, DetailUserActivity::class.java)
+            intent.putExtra("userId", postList[position].user.user_id)
+            Log.d("TEST", postList[position].user.user_id.toString())
+            context.startActivity(intent)
         }
     }
 

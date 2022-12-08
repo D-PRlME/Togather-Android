@@ -19,13 +19,12 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>(R.layout.acti
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBackButton()
-        userInfo()
+        fetchUserInfo()
         binding.mainViewModel = mainViewModel
     }
 
-    private fun userInfo() {
-        mainViewModel.userInfo(intent.getIntExtra("userId", 0))
-        Log.d("TEST", "userInfo")
+    private fun fetchUserInfo() {
+        mainViewModel.userInfo(intent.getLongExtra("userId", 0).toInt())
     }
 
     private fun initBackButton() {
