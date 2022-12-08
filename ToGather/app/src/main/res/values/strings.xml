@@ -36,6 +36,7 @@
 
     <string name="account_edit_save">저장</string>
     <string name="account_edit_delete">계정 삭제</string>
+    <string name="account_edit_position">포지션</string>
     <string name="account_edit_change_img">이미지 변경</string>
 
     <string name="change_pw_title">비밀번호 변경</string>
@@ -59,5 +60,12 @@
     <string name="my_post_my_post">내 게시글 보기</string>
     <string name="chat_send">전송</string>
     <string name="create_room_bad_request">잘못된 요청</string>
+
+    <string name="position_android">Android</string>
+    <string name="position_iOS">iOS</string>
+    <string name="position_pm">Pm</string>
+    <string name="position_front">Front-end</string>
+    <string name="position_designer">Designer</string>
+    <string name="position_backend">Back-end</string>
 
 </resources>
