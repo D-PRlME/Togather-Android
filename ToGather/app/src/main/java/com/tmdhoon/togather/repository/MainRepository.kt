@@ -39,7 +39,6 @@ class MainRepository(private val mainViewModel: MainViewModel) {
     }
 
     fun userInfo(userId : Int){
-        Log.d("TEST", userId.toString())
         ApiProvider.retrofit.userInfo("Bearer $ACCESS_TOKEN", userId).enqueue(object : Callback<UserInfoResponse>{
             override fun onResponse(
                 call: Call<UserInfoResponse>,

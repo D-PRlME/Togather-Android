@@ -1,6 +1,8 @@
 package com.tmdhoon.togather.repository
 
+import android.util.Log
 import com.tmdhoon.togather.dto.response.ChattingResponse
+import com.tmdhoon.togather.dto.response.RoomListResponse
 import com.tmdhoon.togather.dto.response.data.Chat
 import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.network.ApiProvider
@@ -22,7 +24,7 @@ class ChatRepository(
         SocketProvider.getSocket()
     }
 
-    private var chatList : ArrayList<Chat> = ArrayList()
+    private var chatList : ArrayList<Chat>? = ArrayList()
 
     fun connectSocket() {
         socket.io().on(Manager.EVENT_TRANSPORT) { args ->
@@ -51,7 +53,7 @@ class ChatRepository(
         socket.on("chat"){args->
             val message = JSONObject(args[0].toString())
             val user = JSONObject(message.getString("user"))
-            chatList.add(Chat(
+            chatList?.add(Chat(
                 room_id = message.getInt("room_id"),
                 user = User(
                     user_id = user.getLong("user_id"),
@@ -91,6 +93,26 @@ class ChatRepository(
 
             override fun onFailure(call: Call<ChattingResponse>, t: Throwable) {
             }
+        })
+    }
+
+    fun getRoomList(){
+        ApiProvider.retrofit.getRoomList(
+            accessToken = "Bearer $ACCESS_TOKEN",
+        ).enqueue(object : Callback<RoomListResponse>{
+            override fun onResponse(
+                call: Call<RoomListResponse>,
+                response: Response<RoomListResponse>,
+            ) {
+                chatViewModel.roomList.value = response
+            }
+
+            override fun onFailure(
+                call: Call<RoomListResponse>,
+                t: Throwable,
+            ) {
+            }
+
         })
     }
 }
