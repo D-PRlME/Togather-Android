@@ -2,6 +2,7 @@ package com.tmdhoon.togather.view.fragment
 
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ import com.tmdhoon.togather.dto.response.data.Tags
 import com.tmdhoon.togather.remote.MainTagListAdapter
 import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.view.ChatActivity
+import com.tmdhoon.togather.view.MainActivity
 import com.tmdhoon.togather.viewmodel.DetailViewModel
 
 
@@ -274,23 +276,17 @@ class DetailFragment : BottomSheetDialogFragment() {
 
     private fun observeCreateRoomResponse() {
         detailViewModel.createRoomResponse.observe(viewLifecycleOwner) {
-            Log.d("TEST", it.errorBody()!!.string())
             when (it.code()) {
-                201 -> {
-                    startIntent(
-                        context = requireContext(),
-                        to = ChatActivity::class.java,
-                    )
-                }
+                201 -> dismiss()
+
                 404 -> {
                     printToast(
                         context = requireContext(),
                         message = getString(R.string.create_room_bad_request)
                     )
                 }
-                409 -> {
-                    dismiss()
-                }
+                409 -> dismiss()
+
             }
         }
     }
