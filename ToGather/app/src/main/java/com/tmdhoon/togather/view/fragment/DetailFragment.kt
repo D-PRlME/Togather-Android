@@ -21,6 +21,7 @@ import com.tmdhoon.togather.dto.response.data.Tags
 import com.tmdhoon.togather.remote.MainTagListAdapter
 import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.view.ChatActivity
+import com.tmdhoon.togather.view.DetailUserActivity
 import com.tmdhoon.togather.view.MainActivity
 import com.tmdhoon.togather.viewmodel.DetailViewModel
 
@@ -42,12 +43,9 @@ class DetailFragment : BottomSheetDialogFragment() {
         )
     }
 
-    private val userName by lazy {
-        getPref(pref, "userName", "")
-    }
-
     private var postId: Int = 0
     private var likeCount: Int = 0
+    private var userId: Long = 0
     private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
@@ -79,6 +77,7 @@ class DetailFragment : BottomSheetDialogFragment() {
         observeCreateRoomResponse()
         getPostDetail()
         refresh()
+        fetchUserInfo()
         initContactButton()
 
         return binding.root
@@ -219,6 +218,7 @@ class DetailFragment : BottomSheetDialogFragment() {
         detailViewModel.detailResponse.observe(viewLifecycleOwner) {
             when (it.code()) {
                 200 -> {
+                    userId = it.body()!!.user.user_id
                     postId = getPref(
                         preferences = pref,
                         key = "postId",
@@ -288,6 +288,14 @@ class DetailFragment : BottomSheetDialogFragment() {
                 409 -> dismiss()
 
             }
+        }
+    }
+
+    private fun fetchUserInfo() {
+        binding.clDetailProfile.setOnClickListener {
+            val intent = Intent(this.context, DetailUserActivity::class.java)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
         }
     }
 }

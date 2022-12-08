@@ -29,7 +29,6 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>(R.layout.acti
 
     private fun initBackButton() {
         binding.imgDetailUserBack.setOnClickListener {
-            startIntent(this, MainActivity::class.java)
             finish()
         }
     }
