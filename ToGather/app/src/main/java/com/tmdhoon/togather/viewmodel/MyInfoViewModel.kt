@@ -24,7 +24,7 @@ class MyInfoViewModel : ViewModel() {
         myInfoRepository.myInfo()
     }
 
-    fun editAccount(name : String, url : String, introduce : String, positon : List<String>){
+    fun editAccount(name : String, url : String, introduce : String, positon : ArrayList<String>){
         myInfoRepository.editAccount(name, url, introduce, positon)
     }
 
