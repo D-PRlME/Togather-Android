@@ -8,7 +8,6 @@ fun initPref(context: Context, mode: Int): SharedPreferences {
     return context.getSharedPreferences("user", MODE_PRIVATE)
 }
 
-
 fun putPref(editor: SharedPreferences.Editor, key: String, value: Any?) {
     when(value){
         is String -> editor.putString(key, value).apply()

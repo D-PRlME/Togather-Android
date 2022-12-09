@@ -39,6 +39,7 @@
             style="@style/Theme.ToGather.EditText"
             android:layout_marginTop="12dp"
             android:hint="@string/tag_search"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintStart_toStartOf="@id/tv_tag_all_tag"
             app:layout_constraintTop_toBottomOf="@id/tv_tag_all_tag"/>
 

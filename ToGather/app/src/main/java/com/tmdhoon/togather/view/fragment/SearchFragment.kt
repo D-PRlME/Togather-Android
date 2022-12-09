@@ -46,8 +46,18 @@ class SearchFragment : Fragment() {
         binding.searchFragment = this
         refresh()
         observeSearchTitleResponse()
+        initAllTagButton()
 
         return binding.root
+    }
+
+    private fun initAllTagButton() {
+        binding.btSearchTag.setOnClickListener {
+            TagFragment().show(
+                parentFragmentManager,
+                TagFragment().tag,
+            )
+        }
     }
 
     private fun refresh() {

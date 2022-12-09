@@ -1,10 +1,12 @@
 package com.tmdhoon.togather.view.fragment
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
+import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,10 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentPostBinding
 import com.tmdhoon.togather.dto.request.data.Tags
-import com.tmdhoon.togather.util.getPref
-import com.tmdhoon.togather.util.initPref
-import com.tmdhoon.togather.util.printToast
-import com.tmdhoon.togather.util.putPref
+import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.viewmodel.PostViewModel
 
 class PostFragment : BottomSheetDialogFragment() {
@@ -31,9 +30,7 @@ class PostFragment : BottomSheetDialogFragment() {
         PostViewModel()
     }
 
-    private val tagList: ArrayList<Tags> by lazy {
-        ArrayList()
-    }
+    var tagList : ArrayList<String> = ArrayList()
 
     private val pref: SharedPreferences by lazy {
         initPref(
@@ -53,7 +50,7 @@ class PostFragment : BottomSheetDialogFragment() {
             container,
             false,
         )
-
+        Log.d("TEST", tagList.toString())
         initCloseButton()
         initPostButton()
         initTagButton()
@@ -73,6 +70,11 @@ class PostFragment : BottomSheetDialogFragment() {
         ).apply {
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("TEST", "onDetach")
+    }
 
     private fun initailizeEditPost() {
         if (getPref(
@@ -129,13 +131,13 @@ class PostFragment : BottomSheetDialogFragment() {
                 ) {
                     postViewModel.editPost(
                         title = binding.etPostTitle.text.toString(),
-                        tags = tagList,
                         content = binding.etPostContent.text.toString(),
                         postId = getPref(
                             preferences = pref,
                             key = "postId",
                             value = 0,
-                        ) as Int
+                        ) as Int,
+                        tagList = tagList,
                     )
                 }
             }else {
@@ -143,10 +145,11 @@ class PostFragment : BottomSheetDialogFragment() {
                     binding.etPostTitle.text.isNotEmpty()
                     && binding.etPostContent.text.isNotEmpty()
                 ) {
+                    Log.d("TEST", "tagList $tagList")
                     postViewModel.post(
                         title = binding.etPostTitle.text.toString(),
-                        tags = tagList,
                         content = binding.etPostContent.text.toString(),
+                        tagList = tagList,
                     )
                 }
             }
@@ -161,7 +164,6 @@ class PostFragment : BottomSheetDialogFragment() {
                         context = view?.context,
                         message = "글이 성공적으로 수정되었습니다!",
                     )
-                    tagList.clear()
                     dismiss()
                 }
                 400 ->{
@@ -182,7 +184,6 @@ class PostFragment : BottomSheetDialogFragment() {
                         context = view?.context,
                         message = "글이 정상적으로 등록되었습니다!",
                     )
-                    tagList.clear()
                     dismiss()
                 }
                 400 -> {

@@ -3,15 +3,19 @@ package com.tmdhoon.togather.view.fragment
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentMyinfoBinding
+import com.tmdhoon.togather.remote.PositionAdapter
 import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.view.AuthChangePwActivity
 import com.tmdhoon.togather.view.LoginActivity
@@ -38,7 +42,7 @@ class MyInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         initDataBinding(inflater, container)
         initRequest()
@@ -61,9 +65,13 @@ class MyInfoFragment : Fragment() {
     }
 
     private fun observeMyInfo(){
-        myInfoViewModel.myInfoResponse.observe(viewLifecycleOwner, Observer {
+        myInfoViewModel.myInfoResponse.observe(viewLifecycleOwner) {
             putPref(initPref(this.requireContext(), MODE_PRIVATE).edit(), "email", it.body()!!.email)
-        })
+            binding.rvMyInfoPosition.run {
+                adapter = PositionAdapter(it.body()!!.positions)
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            }
+        }
     }
 
     private fun initEditInfoButton(){
@@ -79,7 +87,8 @@ class MyInfoFragment : Fragment() {
     }
 
     fun showMyPost(){
-        MyPostFragment().show(parentFragmentManager, MyPostFragment().tag)
+        val myPostFragment = MyPostFragment()
+        myPostFragment.show(parentFragmentManager, myPostFragment.tag)
     }
 
     fun logout(){
@@ -87,15 +96,14 @@ class MyInfoFragment : Fragment() {
     }
 
     private fun observeLogout(){
-        logoutViewModel.logoutResponse.observe(viewLifecycleOwner, Observer {
+        logoutViewModel.logoutResponse.observe(viewLifecycleOwner){
             when(it.code()){
                 204 -> {
                     printToast(this.requireContext(), "로그아웃 되었습니다")
                     startIntent(this.requireContext(), LoginActivity::class.java)
                     requireActivity().finish()
-                    ACCESS_TOKEN = ""
                 }
             }
-        })
+        }
     }
 }

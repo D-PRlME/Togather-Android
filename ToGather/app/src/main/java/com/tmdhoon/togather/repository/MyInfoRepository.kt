@@ -39,7 +39,7 @@ class MyInfoRepository(
         name : String,
         url : String,
         introduce : String,
-        position : List<String>,
+        position : ArrayList<String>,
     ){
         ApiProvider.retrofit.editAccount(
             accessToken = "Bearer $ACCESS_TOKEN",
