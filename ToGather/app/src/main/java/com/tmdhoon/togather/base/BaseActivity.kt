@@ -18,5 +18,4 @@ abstract class BaseActivity<T : ViewDataBinding>(
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
     }
-
 }

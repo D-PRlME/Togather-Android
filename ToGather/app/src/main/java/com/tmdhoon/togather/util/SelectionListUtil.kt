@@ -1,5 +1,7 @@
 package com.tmdhoon.togather.util
 
+import com.tmdhoon.togather.dto.request.data.Tags
+
 val arrayList = arrayListOf<String>()
 val selectedList = arrayListOf(
     false,

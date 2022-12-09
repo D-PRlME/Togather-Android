@@ -15,7 +15,7 @@ class PostRepository(
 
     fun post(
         title : String,
-        tags : ArrayList<Tags>,
+        tags : ArrayList<String>,
         content : String,
     ){
         ApiProvider.retrofit.post(
@@ -44,7 +44,7 @@ class PostRepository(
 
     fun editPost(
         title : String,
-        tags : ArrayList<Tags>,
+        tags : ArrayList<String>,
         content : String,
         postId : Long,
     ){
