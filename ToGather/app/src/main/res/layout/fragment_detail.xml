@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="DetailViewModel"
+            type="com.tmdhoon.togather.viewmodel.DetailViewModel" />
+
+        <variable
+            name="DetailFragment"
+            type="com.tmdhoon.togather.view.fragment.DetailFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="844dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_post_close"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/image_close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_detail_title"
+                    style="@style/Theme.ToGather.TextView_Title"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="18dp"
+                    android:gravity="start"
+                    android:text="@{DetailViewModel.detailResponse.body().title}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_post_close" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="12dp"
+                    android:id="@+id/cl_detail_profile"
+                    app:layout_constraintStart_toStartOf="@id/tv_detail_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cimg_detail_profile_image"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/Theme.ToGather.Circular_Image"
+                        loadImage="@{DetailViewModel.detailResponse.body().user.profile_image_url}"
+                        android:src="@drawable/ic_launcher_background" />
+
+                    <TextView
+                        android:id="@+id/tv_detail_profile_name"
+                        style="@style/Theme.ToGather.TextView_Focus_Out"
+                        android:layout_marginStart="8dp"
+                        android:text="@{DetailViewModel.detailResponse.body().user.user_name}"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@id/cimg_detail_profile_image"
+                        app:layout_constraintStart_toEndOf="@id/cimg_detail_profile_image"
+                        app:layout_constraintTop_toTopOf="@id/cimg_detail_profile_image" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/Theme.ToGather.TextView_Focus_Out"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{DetailViewModel.detailResponse.body().created_at}"
+                    app:layout_constraintBottom_toBottomOf="@id/cl_detail_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cl_detail_profile" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_detail_line"
+                    style="@style/Theme.ToGather.ConstraintLayout_Line"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_detail_profile" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_detail_tag"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_detail_line"
+                    tools:listitem="@layout/item_main_tag_list" />
+
+                <TextView
+                    android:id="@+id/tv_detail_content"
+                    style="@style/Theme.ToGather.TextView_Tag"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="start"
+                    android:text="@{DetailViewModel.detailResponse.body().content}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_detail_tag" />
+
+                <Button
+                    android:id="@+id/bt_detail_delete"
+                    style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/button_red_radius"
+                    android:onClick="@{()->DetailFragment.deletePost()}"
+                    android:text="@string/detail_delete"
+                    app:layout_constraintBottom_toBottomOf="@+id/bt_detail_edit"
+                    app:layout_constraintStart_toEndOf="@id/bt_detail_edit"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_edit" />
+
+                <Button
+                    android:id="@+id/bt_detail_edit"
+                    style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="@{()->DetailFragment.editPost()}"
+                    android:text="@string/detail_edit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/bt_detail_like"
+                    style="@style/Theme.ToGather.Button_White_Short"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->DetailFragment.like()}"
+                    android:paddingStart="32dp"
+                    android:text="@{String.valueOf(DetailViewModel.detailResponse.body().like_count)}"
+                    app:layout_constraintBottom_toTopOf="@+id/bt_detail_contact"
+                    app:layout_constraintEnd_toEndOf="@+id/bt_detail_contact" />
+
+                <Button
+                    android:id="@+id/bt_detail_contact"
+                    style="@style/Theme.ToGather.Button_Yellow_Short"
+                    android:layout_width="118dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/detail_contact"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_delete"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_delete" />
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_contact"
+                    android:translationZ="40dp"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_contact"
+                    app:layout_constraintStart_toStartOf="@id/bt_detail_contact"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_contact" />
+
+                <ImageView
+                    android:id="@+id/img_detail_like"
+                    android:layout_width="20dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="80dp"
+                    app:layout_constraintBottom_toBottomOf="@id/bt_detail_like"
+                    app:layout_constraintEnd_toEndOf="@id/bt_detail_like"
+                    app:layout_constraintTop_toTopOf="@id/bt_detail_like" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

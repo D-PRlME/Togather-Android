@@ -6,6 +6,7 @@ import com.tmdhoon.togather.dto.request.EmailRequest
 import com.tmdhoon.togather.dto.response.LoginResponse
 import com.tmdhoon.togather.dto.response.RegisterRequest
 import com.tmdhoon.togather.network.ApiProvider
+import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.util.TAG
 import com.tmdhoon.togather.viewmodel.RegisterViewModel
 import retrofit2.Call
@@ -19,11 +20,9 @@ class RegisterRepository(private val registerViewModel: RegisterViewModel) {
         ApiProvider.retrofit.duplicate(emailRequest).enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 registerViewModel.duplicateResponse.value = response
-
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-
             }
         })
     }

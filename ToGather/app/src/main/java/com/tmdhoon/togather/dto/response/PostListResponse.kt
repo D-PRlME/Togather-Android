@@ -2,6 +2,6 @@ package com.tmdhoon.togather.dto.response
 
 import com.tmdhoon.togather.dto.response.data.PostList
 
-data class MainResponse(
+data class PostListResponse(
     val post_list : ArrayList<PostList>,
 )

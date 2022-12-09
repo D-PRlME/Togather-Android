@@ -86,7 +86,7 @@ class VerifyEmailActivity : AppCompatActivity() {
                         getPref(pref, "pw", "").toString(),
                         getPref(pref, "name", "").toString(),
                     )
-                    putPref(editor, "VerifyEmail", true)
+                    putPref(editor, getPref(pref, "email", "").toString(), true)
                 }
                 401 -> printToast(this, "인증코드가 잘못되었습니다!")
 

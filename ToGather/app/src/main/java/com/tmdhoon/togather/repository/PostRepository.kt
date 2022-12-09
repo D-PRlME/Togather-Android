@@ -9,21 +9,66 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PostRepository(private val postViewModel : PostViewModel) {
+class PostRepository(
+    private val postViewModel : PostViewModel,
+    ) {
 
-    fun post(title : String, tags : ArrayList<Tags>, content : String, link : String){
-        val postRequest = PostRequest(title, tags, content, link)
-        ApiProvider.retrofit.post("Bearer ${ACCESS_TOKEN}", postRequest).enqueue(object :
+    fun post(
+        title : String,
+        tags : ArrayList<String>,
+        content : String,
+    ){
+        ApiProvider.retrofit.post(
+            accessToken = "Bearer $ACCESS_TOKEN",
+            postRequest = PostRequest(
+                title = title,
+                tags = tags,
+                content = content,
+            ),
+        ).enqueue(object :
             Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>,
+            ) {
                 postViewModel.postResponse.value = response
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-
+            override fun onFailure(
+                call: Call<Void>,
+                t: Throwable,
+            ) {
             }
-
         })
     }
 
+    fun editPost(
+        title : String,
+        tags : ArrayList<String>,
+        content : String,
+        postId : Long,
+    ){
+        ApiProvider.retrofit.editPost(
+            accessToken = "Bearer $ACCESS_TOKEN",
+            postId = postId,
+            postRequest = PostRequest(
+                title = title,
+                tags = tags,
+                content = content,
+            ),
+        ).enqueue(object : Callback<Void>{
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>,
+            ) {
+                postViewModel.editResponse.value = response
+            }
+
+            override fun onFailure(
+                call: Call<Void>,
+                t: Throwable,
+            ) {
+            }
+        })
+    }
 }

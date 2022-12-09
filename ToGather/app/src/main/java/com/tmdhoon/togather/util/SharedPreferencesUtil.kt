@@ -1,12 +1,12 @@
 package com.tmdhoon.togather.util
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 
 fun initPref(context: Context, mode: Int): SharedPreferences {
-    return context.getSharedPreferences("user", mode)
+    return context.getSharedPreferences("user", MODE_PRIVATE)
 }
-
 
 fun putPref(editor: SharedPreferences.Editor, key: String, value: Any?) {
     when(value){

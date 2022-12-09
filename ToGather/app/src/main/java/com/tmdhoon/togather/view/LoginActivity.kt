@@ -70,7 +70,6 @@ class LoginActivity : AppCompatActivity() {
                     startIntent(this, MainActivity::class.java)
                     finish()
                     putPref(initPref(this, MODE_PRIVATE).edit(), "code", 200)
-                    Log.d("TEST", getPref(initPref(this, MODE_PRIVATE), "code", 0).toString())
                 }
                 400 -> printToast(this, "아이디, 비밀번호를 확인해주세요!")
                 403 -> printToast(this, "비밀번호가 다릅니다!")

@@ -2,7 +2,9 @@ package com.tmdhoon.togather.repository
 
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
+import com.tmdhoon.togather.dto.request.CodeRequest
 import com.tmdhoon.togather.dto.request.EmailRequest
+import com.tmdhoon.togather.dto.request.NewPwRequest
 import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.util.TAG
@@ -17,7 +19,6 @@ class ChangePwRepository(private val changePwViewModel: ChangePwViewModel) {
         ApiProvider.retrofit.changePwVerifyEmail("Bearer $ACCESS_TOKEN", emailRequest).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 changePwViewModel.changePwVerifyEmailResponse.value = response
-                Log.d(TAG, response.code().toString())
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
@@ -25,4 +26,19 @@ class ChangePwRepository(private val changePwViewModel: ChangePwViewModel) {
             }
         })
     }
+
+    fun newPassword(pw : String){
+        val newPwRequest = NewPwRequest(pw)
+        ApiProvider.retrofit.newPassword("Bearer $ACCESS_TOKEN", newPwRequest).enqueue(object : Callback<Void>{
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                changePwViewModel.newPwResponse.value = response
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+
+            }
+
+        })
+    }
+
 }

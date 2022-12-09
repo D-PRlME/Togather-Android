@@ -54,14 +54,27 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_info_position"
+            tools:listitem="@layout/list_user_position"
+            android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:orientation="horizontal"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="26dp"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constrainLayout2"
+            android:layout_marginTop="8dp"
             style="@style/Theme.ToGather.ConstraintLayout_Line"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="56dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_my_info_position" />
 
         <Button
             android:id="@+id/bt_mypage_edit_info"
@@ -85,6 +98,7 @@
             android:id="@+id/bt_mypage_check_my_post"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_check_my_post"
+            android:onClick="@{()->MyInfoFragment.showMyPost()}"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="@id/bt_mypage_change_pw"
             app:layout_constraintStart_toStartOf="@id/bt_mypage_change_pw"
@@ -102,6 +116,7 @@
             android:id="@+id/bt_mypage_logout"
             style="@style/Theme.ToGather.Button_MyPage"
             android:text="@string/mypage_logout"
+            android:onClick="@{()->MyInfoFragment.logout()}"
             app:layout_constraintEnd_toEndOf="@id/bt_mypage_developers"
             app:layout_constraintStart_toStartOf="@id/bt_mypage_developers"
             app:layout_constraintTop_toBottomOf="@id/bt_mypage_developers" />

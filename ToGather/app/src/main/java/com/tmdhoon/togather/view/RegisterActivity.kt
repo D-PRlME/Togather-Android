@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,7 +51,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
             binding.btRegisterNext.setTextColor(Color.BLACK)
         }else{
             binding.btRegisterNext.setBackgroundResource(R.drawable.button_white)
-            binding.btRegisterNext.setTextColor(R.color.all_background_focusOut)
+            binding.btRegisterNext.setTextColor(ContextCompat.getColor(this, R.color.all_background_focusOut))
         }
     }
 
@@ -81,7 +82,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
             override fun afterTextChanged(s: Editable?) {
                 checkNull()
             }
-
         })
     }
 
@@ -101,10 +101,10 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
             val pw = binding.etRegisterPw.text.toString()
             val name = binding.etRegisterName.text.toString()
             if (email.isNotEmpty() && pw.isNotEmpty() && name.isNotEmpty()) {
-                if (getPref(pref, "VerifyEmail", false) as Boolean) {
+                if (getPref(pref, getPref(pref, "email", "").toString(), false) as Boolean) {
                     registerViewModel.register(email, pw, name)
                     initPreferences(email, pw, name)
-                    putPref(editor, "VerifyEmail", false)
+                    putPref(editor, getPref(pref, "email", "").toString(), false)
                 } else {
                     registerViewModel.duplicate(email)
                     initPreferences(email, pw, name)
@@ -141,7 +141,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
             when (it.code()) {
                 201 -> {
                     startIntent(this, SuccessActivity::class.java)
-                    ACCESS_TOKEN = it.body()!!.access_token
                     finish()
                 }
                 400 -> printToast(this, "항목을 확인해주세요!")

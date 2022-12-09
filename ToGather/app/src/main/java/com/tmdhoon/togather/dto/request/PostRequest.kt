@@ -4,7 +4,6 @@ import com.tmdhoon.togather.dto.request.data.Tags
 
 data class PostRequest(
     val title : String,
-    val tags : ArrayList<Tags>,
+    val tags : ArrayList<String>,
     val content : String,
-    val link : String,
 )

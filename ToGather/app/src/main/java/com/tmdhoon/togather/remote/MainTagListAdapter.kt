@@ -7,17 +7,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.ItemMainTagListBinding
-import com.tmdhoon.togather.dto.response.data.TagLists
 import com.tmdhoon.togather.dto.response.data.Tags
-import com.tmdhoon.togather.util.TAG
 
-class MainTagListAdapter(private val tagList: ArrayList<TagLists>) :
+class MainTagListAdapter(
+    private val tagList: ArrayList<Tags>) :
     RecyclerView.Adapter<MainTagListAdapter.MainTagViewHolder>() {
 
     class MainTagViewHolder(val binding: ItemMainTagListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(tags: TagLists) {
-            binding.tag = tags
+        fun bind(tags: Tags) {
+            binding.tags = tags
         }
     }
 
@@ -37,7 +36,6 @@ class MainTagListAdapter(private val tagList: ArrayList<TagLists>) :
     }
 
     override fun getItemCount(): Int {
-        Log.d(TAG, tagList.size.toString())
         return tagList.size
     }
 }

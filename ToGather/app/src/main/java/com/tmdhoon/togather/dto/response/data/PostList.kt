@@ -5,8 +5,8 @@ data class PostList(
     val post_id : Int,
     val title : String,
     val user : User,
+    val tags : ArrayList<Tags>,
     val created_at : String,
-    val tags : ArrayList<TagLists>,
-    val is_finished : Boolean,
+    val is_complete : Boolean,
     val like_count : Int,
 )

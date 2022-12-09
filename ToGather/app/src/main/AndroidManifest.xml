@@ -15,40 +15,26 @@
         android:theme="@style/Theme.ToGather"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.ChatActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".view.DetailUserActivity"
+            android:exported="false"/>
+        <activity
             android:name=".view.NewPwActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".view.AuthChangePwActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".view.ChangePwActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".view.SuccessActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".view.RegisterActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".view.MainActivity"
             android:exported="false" />

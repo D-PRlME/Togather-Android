@@ -13,16 +13,8 @@
     <string name="menu_search">검색</string>
     <string name="menu_mypage">나</string>
 
-    <string name="tag_flutter">Flutter</string>
-    <string name="tag_kotlin">Kotlin</string>
-    <string name="tag_java">Java</string>
-    <string name="tag_node_js">Node.Js</string>
-    <string name="tag_spring_boot">Spring\nBoot</string>
-    <string name="tag_react">React</string>
-    <string name="tag_swift">Swift</string>
     <string name="tag_all_tag">모든 태그 보기</string>
     <string name="tag_search">검색</string>
-
 
     <string name="post_title">제목</string>
     <string name="post_link">연락받을 링크</string>
@@ -44,11 +36,36 @@
 
     <string name="account_edit_save">저장</string>
     <string name="account_edit_delete">계정 삭제</string>
+    <string name="account_edit_position">포지션</string>
     <string name="account_edit_change_img">이미지 변경</string>
+
     <string name="change_pw_title">비밀번호 변경</string>
     <string name="change_pw_des">인증번호를 받기 위한 이메일 주소가 필요합니다</string>
+
     <string name="auth_change_pw_des">계정에 입력된 이메일로 전송된 n자리 인증 번호를 입력해 주세요. 인증 번호는 5분 후에 만료됩니다</string>
     <string name="new_pw_des">바꿀 새 비밀번호를 입력해 주세요</string>
 
+    <string name="delete_user_title">계정 삭제</string>
+    <string name="delete_user_des">계정을 삭제하려면 비밀번호를 입력해 주세요.</string>
+    <string name="delete_user_dialog_title">정말 계정을 삭제하시겠습니까?</string>
+    <string name="delete_user_dialog_des">모든 입력한 정보, 작성한 글이 서버에서 삭제되며 이 작업은 되돌릴 수 없습니다.</string>
+    <string name="delete_user_dialog_confirm">진행</string>
+    <string name="delete_user_dialog_cancel">취소</string>
+
+    <string name="detail_contact">연락하기</string>
+    <string name="detail_delete">삭제</string>
+    <string name="detail_edit">수정</string>
+    <string name="detail_do_edit">수정하기</string>
+
+    <string name="my_post_my_post">내 게시글 보기</string>
+    <string name="chat_send">전송</string>
+    <string name="create_room_bad_request">잘못된 요청</string>
+
+    <string name="position_android">Android</string>
+    <string name="position_iOS">iOS</string>
+    <string name="position_pm">Pm</string>
+    <string name="position_front">Front-end</string>
+    <string name="position_designer">Designer</string>
+    <string name="position_backend">Back-end</string>
 
 </resources>

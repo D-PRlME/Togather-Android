@@ -1,91 +1,214 @@
 package com.tmdhoon.togather.view.fragment
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdhoon.togather.R
-import com.tmdhoon.togather.databinding.BottomSheetPostBinding
+import com.tmdhoon.togather.databinding.FragmentPostBinding
 import com.tmdhoon.togather.dto.request.data.Tags
-import com.tmdhoon.togather.util.printToast
+import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.viewmodel.PostViewModel
 
 class PostFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding : BottomSheetPostBinding
+    private lateinit var binding: FragmentPostBinding
 
-    private val postViewModel : PostViewModel by lazy {
+    private val postViewModel: PostViewModel by lazy {
         PostViewModel()
     }
 
-    private val tagList : ArrayList<Tags> by lazy {
-        ArrayList()
+    var tagList : ArrayList<String> = ArrayList()
+
+    private val pref: SharedPreferences by lazy {
+        initPref(
+            context = requireContext(),
+            mode = MODE_PRIVATE,
+        )
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        initDataBinding(inflater, container)
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_post,
+            container,
+            false,
+        )
+        Log.d("TEST", tagList.toString())
         initCloseButton()
         initPostButton()
         initTagButton()
-        initPostObserve()
+        observePostResponse()
+        initailizeEditPost()
+        observeEditPostResponse()
 
         return binding.root
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomSheetDialog(requireContext(), theme).apply {
+    override fun onCreateDialog(
+        savedInstanceState: Bundle?,
+    ): Dialog =
+        BottomSheetDialog(
+            requireContext(),
+            theme,
+        ).apply {
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-        return dialog
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("TEST", "onDetach")
     }
 
-    private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet_post, container, false)
-    }
+    private fun initailizeEditPost() {
+        if (getPref(
+                preferences = pref,
+                key = "isEdited",
+                value = false,
+            ) as Boolean
+        ) {
+            binding.run {
+                setCursor(
+                    view = etPostTitle,
+                    length = etPostTitle.length()
+                )
 
-    private fun initPostObserve() {
-        postViewModel.postResponse.observe(this, Observer {
-            when(it.code()){
-                201 ->{
-                    printToast(view?.context, "글이 정상적으로 등록되었습니다!")
-                    binding.etPostMain.text = null
-                    binding.etPostTitle.text = null
-                    binding.etPostLink.text = null
-                    tagList.clear()
-                }
-                400 -> {
-                    printToast(view?.context, "값이 잘못되었습니다!")
-                }
+                setCursor(
+                    view = etPostContent,
+                    length = etPostContent.length()
+                )
+
+                etPostTitle.text =
+                    Editable.Factory.getInstance().newEditable(
+                        getPref(
+                            preferences = pref,
+                            key = "title",
+                            value = "",
+                        ).toString()
+                    )
+
+                etPostContent.text =
+                    Editable.Factory.getInstance().newEditable(
+                        getPref(
+                            preferences = pref,
+                            key = "content",
+                            value = "",
+                        ).toString()
+                    )
+                btPostPost.text = getString(
+                    R.string.detail_do_edit
+                )
             }
-        })
-    }
-
-    private fun initTagButton() {
-        binding.btPostTag.setOnClickListener {
-            val bottomSheetFragment = TagFragment()
-            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
     }
 
     private fun initPostButton() {
         binding.btPostPost.setOnClickListener {
-            val title = binding.etPostTitle.text.toString()
-            val link = binding.etPostLink.text.toString()
-            val main = binding.etPostMain.text.toString()
-            if(title != "" && link != "" && main != ""){
-                postViewModel.post(title, tagList, link, main)
+            if(getPref(
+                    preferences = pref,
+                    key = "isEdited",
+                    value = false,
+                ) as Boolean){
+                if (
+                    binding.etPostTitle.text.isNotEmpty()
+                    && binding.etPostContent.text.isNotEmpty()
+                ) {
+                    postViewModel.editPost(
+                        title = binding.etPostTitle.text.toString(),
+                        content = binding.etPostContent.text.toString(),
+                        postId = getPref(
+                            preferences = pref,
+                            key = "postId",
+                            value = 0,
+                        ) as Int,
+                        tagList = tagList,
+                    )
+                }
+            }else {
+                if (
+                    binding.etPostTitle.text.isNotEmpty()
+                    && binding.etPostContent.text.isNotEmpty()
+                ) {
+                    Log.d("TEST", "tagList $tagList")
+                    postViewModel.post(
+                        title = binding.etPostTitle.text.toString(),
+                        content = binding.etPostContent.text.toString(),
+                        tagList = tagList,
+                    )
+                }
             }
+        }
+    }
+
+    private fun observeEditPostResponse(){
+        postViewModel.editResponse.observe(viewLifecycleOwner){
+            when(it.code()){
+                204->{
+                    printToast(
+                        context = view?.context,
+                        message = "글이 성공적으로 수정되었습니다!",
+                    )
+                    dismiss()
+                }
+                400 ->{
+                    printToast(
+                        context = view?.context,
+                        message = "값이 잘못되었습니다!",
+                    )
+                }
+            }
+        }
+    }
+
+    private fun observePostResponse() {
+        postViewModel.postResponse.observe(viewLifecycleOwner) {
+            when (it.code()) {
+                201 -> {
+                    printToast(
+                        context = view?.context,
+                        message = "글이 정상적으로 등록되었습니다!",
+                    )
+                    dismiss()
+                }
+                400 -> {
+                    printToast(
+                        context = view?.context,
+                        message = "값이 잘못되었습니다!",
+                    )
+                }
+            }
+        }
+    }
+
+    fun setCursor(
+        view: EditText,
+        length: Int,
+    ) {
+        view.setSelection(length)
+    }
+
+    private fun initTagButton() {
+        binding.btPostTag.setOnClickListener {
+            TagFragment().show(
+                parentFragmentManager,
+                TagFragment().tag,
+            )
         }
     }
 
