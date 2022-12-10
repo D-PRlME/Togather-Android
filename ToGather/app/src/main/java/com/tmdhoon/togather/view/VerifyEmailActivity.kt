@@ -65,7 +65,6 @@ class VerifyEmailActivity : AppCompatActivity() {
     private fun initNextButton() {
         val code = binding.etVerifyEmailCode.text
         binding.btVerifyEmailNext.setOnClickListener {
-            Log.d("TEST", "clicked")
             if (code.isNotBlank()) {
                 registerViewModel.verifyCode(
                     getPref(pref, "email", "").toString(),
@@ -99,6 +98,7 @@ class VerifyEmailActivity : AppCompatActivity() {
             when (it.code()) {
                 201 -> {
                     startIntent(this, SuccessActivity::class.java)
+                    ACCESS_TOKEN = it.body()!!.access_token
                     finish()
                 }
                 400 -> {
