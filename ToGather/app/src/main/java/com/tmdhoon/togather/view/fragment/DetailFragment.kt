@@ -39,7 +39,6 @@ class DetailFragment : BottomSheetDialogFragment() {
     private val pref: SharedPreferences by lazy {
         initPref(
             context = requireContext(),
-            mode = MODE_PRIVATE,
         )
     }
 

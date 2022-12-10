@@ -20,6 +20,7 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentPostBinding
 import com.tmdhoon.togather.dto.request.data.Tags
 import com.tmdhoon.togather.util.*
+import com.tmdhoon.togather.viewmodel.MainViewModel
 import com.tmdhoon.togather.viewmodel.PostViewModel
 
 class PostFragment : BottomSheetDialogFragment() {
@@ -27,7 +28,14 @@ class PostFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentPostBinding
 
     private val postViewModel: PostViewModel by lazy {
-        PostViewModel()
+        PostViewModel(initPref(
+            context = requireContext(),
+            mode = MODE_PRIVATE
+        ))
+    }
+
+    private val mainViewModel : MainViewModel by lazy {
+        MainViewModel()
     }
 
     var tagList : ArrayList<String> = ArrayList()
@@ -50,7 +58,6 @@ class PostFragment : BottomSheetDialogFragment() {
             container,
             false,
         )
-        Log.d("TEST", tagList.toString())
         initCloseButton()
         initPostButton()
         initTagButton()
@@ -73,7 +80,6 @@ class PostFragment : BottomSheetDialogFragment() {
 
     override fun onDetach() {
         super.onDetach()
-        Log.d("TEST", "onDetach")
     }
 
     private fun initailizeEditPost() {
@@ -145,11 +151,9 @@ class PostFragment : BottomSheetDialogFragment() {
                     binding.etPostTitle.text.isNotEmpty()
                     && binding.etPostContent.text.isNotEmpty()
                 ) {
-                    Log.d("TEST", "tagList $tagList")
                     postViewModel.post(
                         title = binding.etPostTitle.text.toString(),
                         content = binding.etPostContent.text.toString(),
-                        tagList = tagList,
                     )
                 }
             }
@@ -178,6 +182,7 @@ class PostFragment : BottomSheetDialogFragment() {
 
     private fun observePostResponse() {
         postViewModel.postResponse.observe(viewLifecycleOwner) {
+
             when (it.code()) {
                 201 -> {
                     printToast(
@@ -187,6 +192,7 @@ class PostFragment : BottomSheetDialogFragment() {
                     dismiss()
                 }
                 400 -> {
+                    Log.d("TEST", it.errorBody()!!.string())
                     printToast(
                         context = view?.context,
                         message = "값이 잘못되었습니다!",
@@ -205,10 +211,7 @@ class PostFragment : BottomSheetDialogFragment() {
 
     private fun initTagButton() {
         binding.btPostTag.setOnClickListener {
-            TagFragment().show(
-                parentFragmentManager,
-                TagFragment().tag,
-            )
+            createTagFragment(requireContext(), mainViewModel, viewLifecycleOwner, postViewModel)
         }
     }
 

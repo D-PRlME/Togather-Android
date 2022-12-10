@@ -25,7 +25,7 @@ import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 class DeleteUserFragment : BottomSheetDialogFragment() {
 
     private val pref : SharedPreferences by lazy {
-        initPref(this.requireContext(), MODE_PRIVATE)
+        initPref(this.requireContext())
     }
 
     private lateinit var binding: FragmentDeleteUserBinding

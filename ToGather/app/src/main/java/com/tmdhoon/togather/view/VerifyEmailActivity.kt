@@ -25,7 +25,7 @@ class VerifyEmailActivity : AppCompatActivity() {
     }
 
     private val pref : SharedPreferences by lazy {
-        initPref(this, MODE_PRIVATE)
+        initPref(this)
     }
 
     private val editor : SharedPreferences.Editor by lazy {

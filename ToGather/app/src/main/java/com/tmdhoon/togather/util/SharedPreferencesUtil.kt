@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 
-fun initPref(context: Context, mode: Int): SharedPreferences {
+fun initPref(context: Context): SharedPreferences {
     return context.getSharedPreferences("user", MODE_PRIVATE)
 }
 
