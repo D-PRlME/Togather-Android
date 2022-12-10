@@ -3,25 +3,25 @@ package com.tmdhoon.togather.view.fragment
 import android.app.Activity
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import android.renderscript.ScriptGroup.Input
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
-import com.tmdhoon.togather.databinding.FragmentHomeBinding
 import com.tmdhoon.togather.databinding.FragmentSearchBinding
 import com.tmdhoon.togather.remoteimport.MainAdapter
-import com.tmdhoon.togather.repository.SearchRepository
+import com.tmdhoon.togather.util.createTagFragment
+import com.tmdhoon.togather.util.hideKeyBoard
+import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.viewmodel.MainViewModel
+import com.tmdhoon.togather.viewmodel.PostViewModel
 import com.tmdhoon.togather.viewmodel.SearchViewModel
-import java.lang.reflect.TypeVariable
 
 class SearchFragment : Fragment() {
 
@@ -29,6 +29,17 @@ class SearchFragment : Fragment() {
 
     private val searchViewModel: SearchViewModel by lazy {
         SearchViewModel()
+    }
+
+    private val mainViewModel : MainViewModel by lazy {
+        MainViewModel()
+    }
+
+    private val postViewModel : PostViewModel by lazy {
+        PostViewModel(initPref(
+            context = requireContext(),
+            mode = MODE_PRIVATE
+        ))
     }
 
     override fun onCreateView(
@@ -53,9 +64,11 @@ class SearchFragment : Fragment() {
 
     private fun initAllTagButton() {
         binding.btSearchTag.setOnClickListener {
-            TagFragment().show(
-                parentFragmentManager,
-                TagFragment().tag,
+            createTagFragment(
+                context = requireContext(),
+                mainViewModel = mainViewModel,
+                viewLifecycleOwner = viewLifecycleOwner,
+                postViewModel = postViewModel,
             )
         }
     }
@@ -73,6 +86,7 @@ class SearchFragment : Fragment() {
 
     fun searchTitle() {
         if (binding.etSearchSearch.text.isNotEmpty()) {
+            hideKeyBoard(requireContext(), binding.root)
             searchViewModel.searchPostTitle(
                 title = binding.etSearchSearch.text.toString(),
             )

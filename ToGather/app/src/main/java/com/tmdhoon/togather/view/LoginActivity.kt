@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     printToast(this, "로그인에 성공하였습니다!")
                     startIntent(this, MainActivity::class.java)
                     finish()
-                    putPref(initPref(this, MODE_PRIVATE).edit(), "code", 200)
+                    putPref(initPref(this).edit(), "code", 200)
                 }
                 400 -> printToast(this, "아이디, 비밀번호를 확인해주세요!")
                 403 -> printToast(this, "비밀번호가 다릅니다!")
@@ -84,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
             val pw = binding.etLoginPw.text.toString()
 
             if (email.isNotEmpty() && pw.isNotEmpty()) {
+                hideKeyBoard(applicationContext, binding.root)
                 loginViewModel.login(email, pw)
             }
         }

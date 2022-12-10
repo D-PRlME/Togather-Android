@@ -1,43 +1,23 @@
 package com.tmdhoon.togather.view
 
 import android.os.Bundle
-import android.os.LocaleList
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.base.BaseActivity
 import com.tmdhoon.togather.databinding.ActivityChatBinding
 import com.tmdhoon.togather.dto.response.data.Chat
-import com.tmdhoon.togather.dto.response.data.User
 import com.tmdhoon.togather.remote.ChatAdapter
-import com.tmdhoon.togather.util.getPref
+import com.tmdhoon.togather.util.hideKeyBoard
 import com.tmdhoon.togather.util.initPref
 import com.tmdhoon.togather.viewmodel.ChatViewModel
-
-import org.json.JSONObject
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalTime
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
-
-    private val pref by lazy {
-        initPref(
-            context = this,
-            mode = MODE_PRIVATE,
-        )
-    }
-
     private val chatViewModel by lazy {
         ViewModelProvider(this).get(ChatViewModel::class.java)
-    }
-
-    private val userName by lazy {
-        getPref(pref, "userName", "")
     }
 
     private val dateFormat : SimpleDateFormat by lazy {
@@ -82,6 +62,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         binding.btChatSend.setOnClickListener {
             val message = binding.etChatMessage.text.toString()
             if (message.isNotEmpty()) {
+                hideKeyBoard(applicationContext, binding.root)
                 chatViewModel.sendMessage(message)
                 binding.etChatMessage.text = null
             }
