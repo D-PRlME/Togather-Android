@@ -59,7 +59,7 @@ class AuthChangePwActivity : BaseActivity<ActivityAuthChangePwBinding>(R.layout.
     }
 
     fun initNextButton(){
-        val email = getPref(initPref(this, MODE_PRIVATE), "email", "")
+        val email = getPref(initPref(this), "email", "")
         binding.btAuthChangePwNext.setOnClickListener {
             val code = binding.etAuthChangePwCode.text
             if(code.isNotEmpty()){

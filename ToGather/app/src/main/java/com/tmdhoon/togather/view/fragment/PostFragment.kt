@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -22,16 +23,18 @@ import com.tmdhoon.togather.dto.request.data.Tags
 import com.tmdhoon.togather.util.*
 import com.tmdhoon.togather.viewmodel.MainViewModel
 import com.tmdhoon.togather.viewmodel.PostViewModel
+import com.tmdhoon.togather.viewmodel.PostViewModelFactory
 
 class PostFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentPostBinding
 
+    private val postViewModelFactory by lazy {
+        PostViewModelFactory(requireContext())
+    }
+
     private val postViewModel: PostViewModel by lazy {
-        PostViewModel(initPref(
-            context = requireContext(),
-            mode = MODE_PRIVATE
-        ))
+        ViewModelProvider(this, postViewModelFactory)[PostViewModel::class.java]
     }
 
     private val mainViewModel : MainViewModel by lazy {
@@ -43,7 +46,6 @@ class PostFragment : BottomSheetDialogFragment() {
     private val pref: SharedPreferences by lazy {
         initPref(
             context = requireContext(),
-            mode = MODE_PRIVATE,
         )
     }
 
