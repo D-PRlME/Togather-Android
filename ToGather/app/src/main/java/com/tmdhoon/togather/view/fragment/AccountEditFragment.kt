@@ -72,7 +72,7 @@ class AccountEditFragment : BottomSheetDialogFragment() {
             selectedList[num] = false
         }else{
             positionButtonList[num].setBackgroundResource(R.drawable.button_yellow_short)
-            positionList.add(positionNameList[num])
+            positionList.add(positionNameList[num].uppercase())
             selectedList[num] = true
         }
     }
@@ -83,6 +83,7 @@ class AccountEditFragment : BottomSheetDialogFragment() {
             val url = ""
             val introduce = binding.etAccountEditIntroduce.text.toString()
             if(name.isNotEmpty() && introduce.isNotEmpty()){
+                Log.d("TEST", positionList.toString())
                 myInfoViewModel.editAccount(name, url, introduce, positionList)
             }
         }
