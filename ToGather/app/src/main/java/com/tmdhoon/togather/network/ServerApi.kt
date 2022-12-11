@@ -151,6 +151,13 @@ interface ServerApi {
         @Query("title") title : String,
     ) : Call<PostListResponse>
 
+    // 게시글 태그 검색
+    @GET("posts/tag")
+    fun searchPostTag(
+        @Header("Authorization") accessToken: String,
+        @Query("tag") tag : String,
+    ) : Call<PostListResponse>
+
     // 채팅방 생성
     @POST("chats/room")
     fun createRoom(
