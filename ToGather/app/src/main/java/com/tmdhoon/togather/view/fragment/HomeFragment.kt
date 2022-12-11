@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentHomeBinding
@@ -15,6 +16,8 @@ import com.tmdhoon.togather.remote.MainTagAdapter
 import com.tmdhoon.togather.remoteimport.MainAdapter
 import com.tmdhoon.togather.util.SUCCESS
 import com.tmdhoon.togather.viewmodel.MainViewModel
+import com.tmdhoon.togather.viewmodel.PostViewModel
+import com.tmdhoon.togather.viewmodel.PostViewModelFactory
 
 class HomeFragment : Fragment() {
 
@@ -32,6 +35,14 @@ class HomeFragment : Fragment() {
         MainViewModel()
     }
 
+    private val postViewModelFactory : PostViewModelFactory by lazy {
+        PostViewModelFactory(requireContext())
+    }
+
+    private val postViewModel : PostViewModel by lazy {
+        ViewModelProvider(this, postViewModelFactory)[PostViewModel::class.java]
+    }
+
     private val mainAdapter : MainAdapter by lazy {
         MainAdapter(
             postList = postList,
@@ -41,7 +52,7 @@ class HomeFragment : Fragment() {
     }
 
     private val mainTagAdapter : MainTagAdapter by lazy {
-        MainTagAdapter(tags)
+        MainTagAdapter(tags, postViewModel, requireContext())
     }
     
     override fun onCreateView(

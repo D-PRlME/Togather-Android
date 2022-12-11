@@ -16,7 +16,7 @@ import com.tmdhoon.togather.viewmodel.PostViewModel
 
 class TagAdapter(
     private val tagList : ArrayList<Tags>,
-    private val postFragment : PostFragment,
+    private val postViewModel : PostViewModel,
 ) :
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
 
@@ -39,12 +39,11 @@ class TagAdapter(
         holder.itemView.setOnClickListener {
             if(selectedList[position]){
                 it.setBackgroundColor(Color.WHITE)
-                postFragment.tagList.remove(tagList[position].name)
+                postViewModel.removeTag(tagList[position].name.uppercase())
+
             }else{
                 it.setBackgroundColor(Color.GRAY)
-                postFragment.tagList.add(tagList[position].name)
-                Log.d("TEST", postFragment.tagList.toString())
-
+                postViewModel.addTag(tagList[position].name.replace('.', '_').uppercase())
             }
             selectedList[position] = !selectedList[position]
         }

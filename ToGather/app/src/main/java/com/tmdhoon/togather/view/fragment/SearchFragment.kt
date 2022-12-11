@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,19 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentSearchBinding
+import com.tmdhoon.togather.remote.MainTagAdapter
+import com.tmdhoon.togather.remote.SearchTagAdapter
 import com.tmdhoon.togather.remoteimport.MainAdapter
 import com.tmdhoon.togather.util.createTagFragment
 import com.tmdhoon.togather.util.hideKeyBoard
 import com.tmdhoon.togather.util.initPref
 import com.tmdhoon.togather.viewmodel.MainViewModel
 import com.tmdhoon.togather.viewmodel.PostViewModel
+import com.tmdhoon.togather.viewmodel.PostViewModelFactory
 import com.tmdhoon.togather.viewmodel.SearchViewModel
 
 class SearchFragment : Fragment() {
@@ -31,15 +36,16 @@ class SearchFragment : Fragment() {
         SearchViewModel()
     }
 
-    private val mainViewModel : MainViewModel by lazy {
+    private val mainViewModel: MainViewModel by lazy {
         MainViewModel()
     }
 
-    private val postViewModel : PostViewModel by lazy {
-        PostViewModel(initPref(
-            context = requireContext(),
-            mode = MODE_PRIVATE
-        ))
+    private val postViewModelFactory by lazy {
+        PostViewModelFactory(requireContext())
+    }
+
+    private val postViewModel by lazy {
+        ViewModelProvider(this, postViewModelFactory)[PostViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -58,6 +64,8 @@ class SearchFragment : Fragment() {
         refresh()
         observeSearchTitleResponse()
         initAllTagButton()
+        initRecyclerView()
+        Log.d("TEST", postViewModel.getTag().toString())
 
         return binding.root
     }
@@ -76,20 +84,21 @@ class SearchFragment : Fragment() {
     private fun refresh() {
         binding.slSearchRefresh.run {
             setOnRefreshListener {
-                searchViewModel.searchPostTitle(
-                    title = binding.etSearchSearch.text.toString(),
-                )
                 isRefreshing = false
             }
         }
     }
 
     fun searchTitle() {
-        if (binding.etSearchSearch.text.isNotEmpty()) {
-            hideKeyBoard(requireContext(), binding.root)
-            searchViewModel.searchPostTitle(
-                title = binding.etSearchSearch.text.toString(),
-            )
+        if (postViewModel.roadTag().isEmpty()) {
+            if (binding.etSearchSearch.text.isNotEmpty()) {
+                hideKeyBoard(requireContext(), binding.root)
+                searchViewModel.searchPostTitle(
+                    title = binding.etSearchSearch.text.toString(),
+                )
+            }
+        }else{
+            searchViewModel.searchPostTag(postViewModel.roadTag())
         }
     }
 
@@ -108,5 +117,21 @@ class SearchFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun initRecyclerView() {
+        if (arrayListOf(postViewModel.roadTag()).size != 0) {
+            binding.rvSearchTag.run {
+                visibility = View.VISIBLE
+                adapter = SearchTagAdapter(arrayListOf(postViewModel.roadTag()), postViewModel)
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        postViewModel.saveTag("")
     }
 }
