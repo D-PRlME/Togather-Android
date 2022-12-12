@@ -81,5 +81,4 @@ class MainAdapter (
 
     override fun getItemCount(): Int =
         postList.size
-
 }

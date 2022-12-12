@@ -69,7 +69,7 @@ class PostViewModel(
         return tagList
     }
 
-    fun saveTag(tag : String,) {
+    fun saveTag(tag : String?) {
         putPref(pref.edit(), "tag", tag)
     }
 
