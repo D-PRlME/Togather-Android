@@ -263,13 +263,7 @@ class DetailFragment : BottomSheetDialogFragment() {
 
     private fun initContactButton() {
         binding.btDetailContact.setOnClickListener {
-            detailViewModel.createRoom(
-                getPref(
-                    preferences = pref,
-                    key = "userId",
-                    value = 16,
-                ) as Int
-            )
+            detailViewModel.createRoom(3)
         }
     }
 
@@ -277,7 +271,6 @@ class DetailFragment : BottomSheetDialogFragment() {
         detailViewModel.createRoomResponse.observe(viewLifecycleOwner) {
             when (it.code()) {
                 201 -> dismiss()
-
                 404 -> {
                     printToast(
                         context = requireContext(),

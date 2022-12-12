@@ -1,28 +1,22 @@
 package com.tmdhoon.togather.view.fragment
 
-import android.app.Activity
-import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentSearchBinding
-import com.tmdhoon.togather.remote.MainTagAdapter
 import com.tmdhoon.togather.remote.SearchTagAdapter
 import com.tmdhoon.togather.remoteimport.MainAdapter
 import com.tmdhoon.togather.util.createTagFragment
 import com.tmdhoon.togather.util.hideKeyBoard
 import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.viewmodel.MainViewModel
 import com.tmdhoon.togather.viewmodel.PostViewModel
 import com.tmdhoon.togather.viewmodel.PostViewModelFactory
@@ -106,13 +100,18 @@ class SearchFragment : Fragment() {
         searchViewModel.searchPostTitleResponse.observe(viewLifecycleOwner) {
             when (it.code()) {
                 200 -> {
+                    val linearLayoutManager = LinearLayoutManager(requireContext())
+                    linearLayoutManager.run {
+                        reverseLayout = true
+                        stackFromEnd = true
+                    }
                     binding.rvSearch.run {
                         adapter = MainAdapter(
                             postList = it.body()!!.post_list,
                             context = requireContext(),
                             parentFragmentManager = parentFragmentManager,
                         )
-                        layoutManager = LinearLayoutManager(requireContext())
+                        layoutManager = linearLayoutManager
                     }
                 }
             }
@@ -120,6 +119,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
+        binding.rvSearchTag.visibility = View.GONE
         if (arrayListOf(postViewModel.roadTag()).size != 0) {
             binding.rvSearchTag.run {
                 visibility = View.VISIBLE
@@ -132,6 +132,6 @@ class SearchFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        postViewModel.saveTag("")
+        initPref(requireContext()).edit().remove("tag")
     }
 }
