@@ -56,9 +56,14 @@ class MyPostFragment : BottomSheetDialogFragment() {
     }
 
     private fun initializeRecyclerView(myPostList : ArrayList<MyPostList>) {
+        val linearLayoutManager = LinearLayoutManager(requireContext())
+        linearLayoutManager.run {
+            stackFromEnd = true
+            reverseLayout = true
+        }
         binding.rvMyPostList.run {
             adapter = MyPostsAdapter(myPostList, requireContext(), parentFragmentManager)
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = linearLayoutManager
         }
     }
 }

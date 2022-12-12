@@ -124,9 +124,14 @@ class HomeFragment : Fragment() {
                     false,
                 )
             }
+            val linearLayoutManager = LinearLayoutManager(requireContext())
+            linearLayoutManager.run {
+                stackFromEnd = true
+                reverseLayout = true
+            }
             rvHomeRecyclerView.run {
                 adapter = mainAdapter
-                layoutManager = LinearLayoutManager(requireContext())
+                layoutManager = linearLayoutManager
             }
         }
     }
