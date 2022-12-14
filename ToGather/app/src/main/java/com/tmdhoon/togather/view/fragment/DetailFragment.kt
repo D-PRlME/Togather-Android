@@ -1,11 +1,9 @@
 package com.tmdhoon.togather.view.fragment
 
 import android.app.Dialog
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +17,11 @@ import com.tmdhoon.togather.R
 import com.tmdhoon.togather.databinding.FragmentDetailBinding
 import com.tmdhoon.togather.dto.response.data.Tags
 import com.tmdhoon.togather.remote.MainTagListAdapter
-import com.tmdhoon.togather.util.*
-import com.tmdhoon.togather.view.ChatActivity
+import com.tmdhoon.togather.util.getPref
+import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.printToast
+import com.tmdhoon.togather.util.putPref
 import com.tmdhoon.togather.view.DetailUserActivity
-import com.tmdhoon.togather.view.MainActivity
 import com.tmdhoon.togather.viewmodel.DetailViewModel
 
 
@@ -263,7 +262,7 @@ class DetailFragment : BottomSheetDialogFragment() {
 
     private fun initContactButton() {
         binding.btDetailContact.setOnClickListener {
-            detailViewModel.createRoom(3)
+            detailViewModel.createRoom()
         }
     }
 

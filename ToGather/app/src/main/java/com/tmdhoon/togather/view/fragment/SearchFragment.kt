@@ -119,7 +119,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.rvSearchTag.visibility = View.GONE
+        Log.d("TEST", arrayListOf(postViewModel.roadTag()).toString())
         if (arrayListOf(postViewModel.roadTag()).size != 0) {
             binding.rvSearchTag.run {
                 visibility = View.VISIBLE

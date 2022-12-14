@@ -184,7 +184,6 @@ class PostFragment : BottomSheetDialogFragment() {
 
     private fun observePostResponse() {
         postViewModel.postResponse.observe(viewLifecycleOwner) {
-
             when (it.code()) {
                 201 -> {
                     printToast(
