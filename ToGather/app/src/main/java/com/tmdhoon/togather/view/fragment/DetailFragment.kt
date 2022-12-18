@@ -262,7 +262,7 @@ class DetailFragment : BottomSheetDialogFragment() {
 
     private fun initContactButton() {
         binding.btDetailContact.setOnClickListener {
-            detailViewModel.createRoom()
+            detailViewModel.createRoom(3)
         }
     }
 
