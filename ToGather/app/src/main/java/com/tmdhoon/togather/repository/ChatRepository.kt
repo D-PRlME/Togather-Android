@@ -1,12 +1,11 @@
 package com.tmdhoon.togather.repository
 
-import android.util.Log
 import com.tmdhoon.togather.dto.response.ChattingResponse
 import com.tmdhoon.togather.dto.response.RoomListResponse
 import com.tmdhoon.togather.dto.response.data.Chat
 import com.tmdhoon.togather.dto.response.data.User
-import com.tmdhoon.togather.network.ApiProvider
 import com.tmdhoon.togather.network.SocketProvider
+import com.tmdhoon.togather.network.chatApi
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.ChatViewModel
 import io.socket.client.Manager
@@ -78,7 +77,7 @@ class ChatRepository(
         roomId : Long,
         time : String,
     ){
-        ApiProvider.retrofit.getChat(
+        chatApi.getChat(
             accessToken = "Bearer $ACCESS_TOKEN",
             roomId = roomId,
             time = time,
@@ -97,7 +96,7 @@ class ChatRepository(
     }
 
     fun getRoomList(){
-        ApiProvider.retrofit.getRoomList(
+        chatApi.getRoomList(
             accessToken = "Bearer $ACCESS_TOKEN",
         ).enqueue(object : Callback<RoomListResponse>{
             override fun onResponse(

@@ -1,8 +1,8 @@
 package com.tmdhoon.togather.repository
 
 import com.tmdhoon.togather.dto.request.PostRequest
-import com.tmdhoon.togather.dto.request.data.Tags
-import com.tmdhoon.togather.network.ApiProvider
+import com.tmdhoon.togather.network.myPostApi
+import com.tmdhoon.togather.network.postApi
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.PostViewModel
 import retrofit2.Call
@@ -18,7 +18,7 @@ class PostRepository(
         tags : ArrayList<String>,
         content : String,
     ){
-        ApiProvider.retrofit.post(
+        postApi.post(
             accessToken = "Bearer $ACCESS_TOKEN",
             postRequest = PostRequest(
                 title = title,
@@ -48,7 +48,7 @@ class PostRepository(
         content : String,
         postId : Long,
     ){
-        ApiProvider.retrofit.editPost(
+        myPostApi.editPost(
             accessToken = "Bearer $ACCESS_TOKEN",
             postId = postId,
             postRequest = PostRequest(

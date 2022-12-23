@@ -1,7 +1,7 @@
 package com.tmdhoon.togather.repository
 
 import com.tmdhoon.togather.dto.response.PostListResponse
-import com.tmdhoon.togather.network.ApiProvider
+import com.tmdhoon.togather.network.searchApi
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.SearchViewModel
 import retrofit2.Call
@@ -12,7 +12,7 @@ class SearchRepository(
     private val searchViewModel : SearchViewModel,
 ) {
     fun searchPost(title : String){
-       ApiProvider.retrofit.searchPostTitle(
+       searchApi.searchPostTitle(
            accessToken = "Bearer $ACCESS_TOKEN",
            title = title,
        ).enqueue(object : Callback<PostListResponse>{
@@ -32,7 +32,7 @@ class SearchRepository(
     }
 
     fun searchPostTag(tag : String){
-        ApiProvider.retrofit.searchPostTag(
+        searchApi.searchPostTag(
             accessToken = "Bearer $ACCESS_TOKEN",
             tag = tag,
         ).enqueue(object : Callback<PostListResponse>{

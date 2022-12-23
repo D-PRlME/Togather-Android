@@ -1,10 +1,11 @@
 package com.tmdhoon.togather.repository
 
-import android.util.Log
 import com.tmdhoon.togather.dto.request.CreateRoomRequest
 import com.tmdhoon.togather.dto.response.CreateRoomResponse
 import com.tmdhoon.togather.dto.response.DetailResponse
-import com.tmdhoon.togather.network.ApiProvider
+import com.tmdhoon.togather.network.chatApi
+import com.tmdhoon.togather.network.myPostApi
+import com.tmdhoon.togather.network.postApi
 import com.tmdhoon.togather.util.ACCESS_TOKEN
 import com.tmdhoon.togather.viewmodel.DetailViewModel
 import retrofit2.Call
@@ -16,7 +17,7 @@ class DetailRepository(
 ) {
 
     fun getPosts(postId: Long) =
-        ApiProvider.retrofit.getPosts(
+        postApi.getPosts(
             accessToken = "Bearer $ACCESS_TOKEN",
             postId = postId,
         )
@@ -37,7 +38,7 @@ class DetailRepository(
             })
 
     fun like(postId: Long) =
-        ApiProvider.retrofit.like(
+        postApi.like(
             accessToken = "Bearer $ACCESS_TOKEN",
             postId = postId,
         ).enqueue(object : Callback<Void> {
@@ -56,7 +57,7 @@ class DetailRepository(
         })
 
     fun unLike(postId: Long) =
-        ApiProvider.retrofit.unLike(
+        postApi.unLike(
             accessToken = "Bearer $ACCESS_TOKEN",
             postId = postId,
         )
@@ -76,7 +77,7 @@ class DetailRepository(
             })
 
     fun deletePost(postId: Long) =
-        ApiProvider.retrofit.deletePost(
+        myPostApi.deletePost(
             accessToken = "Bearer $ACCESS_TOKEN",
             postId = postId,
         ).enqueue(object : Callback<Void>{
@@ -95,7 +96,7 @@ class DetailRepository(
         })
 
     fun createRoom(createRoomRequest: CreateRoomRequest){
-        ApiProvider.retrofit.createRoom(
+        chatApi.createRoom(
             accessToken = "Bearer $ACCESS_TOKEN",
             createRoomRequest = createRoomRequest,
         ).enqueue(object : Callback<CreateRoomResponse>{
