@@ -49,18 +49,17 @@ class MainAdapter (
             putPref(
                 initPref(
                     context = context,
-                    mode = MODE_PRIVATE,
                 ).edit(),
                 "postId",
                 postList[position].post_id,
             )
             putPref(
-                editor = initPref(context, MODE_PRIVATE).edit(),
+                editor = initPref(context).edit(),
                 key = "userId",
                 value = postList[position].user.user_id
             )
             putPref(
-                editor = initPref(context, MODE_PRIVATE).edit(),
+                editor = initPref(context).edit(),
                 key = "userName",
                 value = postList[position].user.user_name,
             )
@@ -82,5 +81,4 @@ class MainAdapter (
 
     override fun getItemCount(): Int =
         postList.size
-
 }

@@ -1,16 +1,30 @@
 package com.tmdhoon.togather.viewmodel
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tmdhoon.togather.dto.request.data.Tags
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.reflect.TypeToken
 import com.tmdhoon.togather.repository.PostRepository
+import com.tmdhoon.togather.util.getPref
+import com.tmdhoon.togather.util.initPref
+import com.tmdhoon.togather.util.putPref
+import org.json.JSONArray
 import retrofit2.Response
 
-class PostViewModel : ViewModel() {
+class PostViewModel(
+    private val pref : SharedPreferences,
+) : ViewModel() {
 
     val postResponse: MutableLiveData<Response<Void>> = MutableLiveData()
     val editResponse: MutableLiveData<Response<Void>> = MutableLiveData()
+    val onClick : MutableLiveData<Boolean> = MutableLiveData()
+
+    private val tagList : ArrayList<String> by lazy {
+        ArrayList()
+    }
 
     private val postRepository by lazy {
         PostRepository(this)
@@ -19,11 +33,11 @@ class PostViewModel : ViewModel() {
     fun post(
         title: String,
         content: String,
-        tagList: ArrayList<String>
     ) {
+        Log.d("TEST", "getTag ${getTag()}")
         postRepository.post(
             title = title,
-            tags = tagList,
+            tags = getTag(),
             content = content,
         )
     }
@@ -41,4 +55,25 @@ class PostViewModel : ViewModel() {
             postId = postId.toLong(),
         )
     }
+
+
+    fun addTag(tag : String){
+        tagList.add(tag)
+    }
+
+    fun removeTag(tag : String){
+        tagList.remove(tag)
+    }
+
+    fun getTag() : ArrayList<String> {
+        return tagList
+    }
+
+    fun saveTag(tag : String?) {
+        putPref(pref.edit(), "tag", tag)
+    }
+
+    fun roadTag() : String =
+        getPref(pref, "tag", "") as String
+
 }

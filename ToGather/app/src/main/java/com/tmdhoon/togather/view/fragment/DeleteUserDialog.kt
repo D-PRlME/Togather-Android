@@ -21,7 +21,7 @@ import com.tmdhoon.togather.viewmodel.MyInfoViewModel
 class DeleteUserDialog : DialogFragment() {
 
     private val pref : SharedPreferences by lazy {
-        initPref(this.requireContext(), MODE_PRIVATE)
+        initPref(this.requireContext())
     }
 
     private val myInfoViewModel : MyInfoViewModel by lazy {

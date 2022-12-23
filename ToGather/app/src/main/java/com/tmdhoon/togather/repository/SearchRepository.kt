@@ -30,4 +30,22 @@ class SearchRepository(
            }
        })
     }
+
+    fun searchPostTag(tag : String){
+        ApiProvider.retrofit.searchPostTag(
+            accessToken = "Bearer $ACCESS_TOKEN",
+            tag = tag,
+        ).enqueue(object : Callback<PostListResponse>{
+            override fun onResponse(
+                call: Call<PostListResponse>,
+                response: Response<PostListResponse>
+            ) {
+                searchViewModel.searchPostTitleResponse.value = response
+            }
+
+            override fun onFailure(call: Call<PostListResponse>, t: Throwable) {
+
+            }
+        })
+    }
 }

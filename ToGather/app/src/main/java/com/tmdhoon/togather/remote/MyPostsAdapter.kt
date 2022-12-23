@@ -26,7 +26,6 @@ class MyPostsAdapter(
     private val pref : SharedPreferences by lazy {
         initPref(
             context = context,
-            mode = MODE_PRIVATE,
         )
     }
 

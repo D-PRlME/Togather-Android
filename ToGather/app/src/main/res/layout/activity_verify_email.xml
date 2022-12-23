@@ -20,6 +20,8 @@
         <TextView
             android:id="@+id/tv_verify_email_notify"
             style="@style/Theme.ToGather.TextView_Notify"
+            android:text="jsh0911@dsm.hs.kr로 전송된 6자리\n인증번호를 입력해 주세요.인증 번호는 5분 \n후에 만료됩니다"
+            android:textSize="20sp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"

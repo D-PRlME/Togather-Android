@@ -15,4 +15,8 @@ class SearchViewModel {
     fun searchPostTitle(title : String){
         searchRepository.searchPost(title)
     }
+
+    fun searchPostTag(tag : String){
+        searchRepository.searchPostTag(tag.replace('.', '_').uppercase())
+    }
 }
