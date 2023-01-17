@@ -1,2 +1,2 @@
 # Togather-Android
-ToGather 안드로이드 레포지토리
+ToGather 안드로이드 레포
